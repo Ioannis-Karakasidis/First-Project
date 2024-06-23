@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notizblock</title>
+    <link rel="icon" type="image/x-icon" href="./img/keeps.png" />
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./index4.css" />
+    <link rel="stylesheet" href="./slider-menu.css" />
+    <link rel="icon" type="image/x-icon" href="./img/keeps.png" />
+    <script src="include.js"></script>
+    <script src="./header.js"></script>
+    <script src="./index4.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body onload="includeHTML();showSavedItems();">
+    <div w3-include-html="header.html"></div>
+    <main>
+      <div w3-include-html="slider-menu.html"></div>
+      <div class="layout">
+        <div class="box" id="box-border">
+          <input type="text" id="title" onfocus="expand()" required />
+          <div class="hidden" id="box-hidden">
+            <textarea name="comments" id="text" required></textarea>
+            <div class="box-line">
+              <div class="line">
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/bell.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/partner.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/color-pallette.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/bild.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/archive.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/dots.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/return.png" alt="" />
+                  </button>
+                </div>
+                <div class="icon1">
+                  <button class="btn">
+                    <img src="./img/return1.png" alt="" />
+                  </button>
+                </div>
+                <div><button class="btn1" onclick="post()">POST</button></div>
+              </div>
+              <div>
+                <button class="btn1" onclick="expand2()">Schließen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="content" class="content4"></div>
+      </div>
+    </main>
+  </body>
+</html>

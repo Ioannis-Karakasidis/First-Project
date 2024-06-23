@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: lightgrey;
+      }
+
+      .post {
+        background-color: white;
+        width: 500px;
+        height: 150px;
+        border: 1px solid lightgrey;
+        padding: 8px;
+        margin-top: 32px;
+      }
+    </style>
+    <script>
+      let names = [];
+      let posts = [];
+      function posten() {
+        let name = document.getElementById("name").value;
+        let text = document.getElementById("message").value;
+        posts.push(text);
+        names.push(name);
+
+        let myposts = document.getElementById("myposts");
+        myposts.innerHTML = "";
+        for (let i = 0; i < posts.length; i++) {
+          myposts.innerHTML += `
+          <div class="post">
+            <b>${names[i]}</b><br>
+            ${posts[i]}
+            </div>
+            `;
+
+          document.getElementById("message").value = "";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text" id="name" placeholder="name" />
+    <input id="message" type="text" placeholder="message" />
+    <button onclick="posten()">posten</button>
+
+    <div id="myposts"></div>
+  </body>
+</html>

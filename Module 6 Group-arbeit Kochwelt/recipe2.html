@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Griechischer Salat</title>
+    <link rel="stylesheet" href="recipe2.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="icon" href="img/logo_small.png" />
+    <script src="rezept2script.js"></script>
+    <script src="./header.js"></script>
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="header.html"></div>
+    <div class="main">
+      <div>
+        <h1 class="headline"><b>Griechischer Salat</b></h1>
+        <div class="foto"></div>
+      </div>
+      <div class="container2">
+        <div class="pic1container">
+          <img class="pic1" src="./img/pic1.png" />
+          <span>20 Min.</span>
+        </div>
+        <div class="pic2container">
+          <img class="pic2" src="./img/pic2.png" />
+          <span>Simpel</span>
+        </div>
+        <div class="pic3container">
+          <img class="pic3" src="./img/pic3.png" />
+          <span>23.05.2024</span>
+        </div>
+      </div>
+      <div class="container3">
+        <div class="container3-1">
+          <span class="phrase">Zutaten für</span>
+          <input
+            class="main-input"
+            type="number"
+            id="input"
+            value="1"
+            max="20"
+            oninput="checkValue(this)"
+          />
+          <button onclick="calc()">Portionen</button>
+        </div>
+        <ul>
+          <li class="text border"><span id="tomatoes">1</span> reife Tomate</li>
+          <li class="border"><span id="cucumber">1/4</span> Gurke</li>
+          <li class="text border"><span id="onion">1/4</span> rote Zwiebel</li>
+          <li class="border"><span id="pepper">1/4</span> grüne Paprika</li>
+          <li class="text border"><span id="feta">50g</span> Feta-Käse</li>
+          <li class="border"><span id="olives">25g</span> Kalamata-Oliven</li>
+          <li class="text border">
+            <span id="capers">1/2 EL</span> Kapern (optional)
+          </li>
+          <li class="border">
+            <span id="oliveOil">1 EL</span> natives Olivenöl extra
+          </li>
+          <li class="text border">
+            <span id="vinegar">1/2 EL</span> Rotweinessig
+          </li>
+          <li class="border">
+            <span id="oregano">1/4 TL</span> getrockneter Oregano
+          </li>
+          <li class="text border">Salz und Pfeffer nach Geschmack</li>
+        </ul>
+        <span class="text2"><b>Zubereitung</b></span>
+        <div class="container3-2">
+          <div class="time">
+            <img src="./img/pic1.png" />
+            <span>ca. 20 Minuten</span>
+          </div>
+          <div class="time0">
+            <img src="./img/pic1.png" />
+            <span>Gesamtzeit ca. 20 Minuten</span>
+          </div>
+        </div>
+        <div class="description">
+          Schneiden Sie zunächst die Tomaten in mundgerechte Stücke, die Sie
+          optional vorher schälen können. Halbieren Sie dann die Gurke längs,
+          entfernen Sie die Kerne mit einem Löffel und schneiden Sie sie in
+          dicke Scheiben. Schälen Sie die rote Zwiebel und schneiden Sie sie in
+          dünne Ringe. Entkernen Sie die grüne Paprika und schneiden Sie sie in
+          Ringe oder Streifen. Geben Sie die geschnittenen Tomaten, Gurken,
+          Zwiebeln und Paprika in eine große Salatschüssel. Schneiden Sie den
+          Feta-Käse in Würfel oder zerbröckeln Sie ihn und fügen Sie ihn
+          zusammen mit den Kalamata-Oliven in die Schüssel hinzu; optional
+          können Sie auch Kapern hinzufügen. Mischen Sie in einer kleinen
+          Schüssel das Olivenöl, den Rotweinessig, den getrockneten Oregano
+          sowie Salz und Pfeffer. Gießen Sie das Dressing über den Salat und
+          mischen Sie alles vorsichtig, damit der Feta-Käse nicht zu sehr
+          zerbricht. Servieren Sie den Salat sofort oder stellen Sie ihn bis zum
+          Servieren in den Kühlschrank. Guten Appetit!
+        </div>
+        <div class="description2">
+          <span><b>Rezept erstellt von</b> </span>
+          <div class="description2-1">
+            <img class="profile" src="./img/profile.png" />
+            <span>Giannis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div w3-include-html="footer.html"></div>
+  </body>
+</html>

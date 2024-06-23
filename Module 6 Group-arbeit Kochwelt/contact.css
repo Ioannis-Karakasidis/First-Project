@@ -1,0 +1,144 @@
+html {
+    height: 100% !important;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: green;
+    border-radius: 20px;
+    border: 3px solid green;
+}
+
+.container {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+}
+
+.container input,
+.container textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: "Raleway", sans-serif;
+    width: 256px;
+}
+
+.container textarea {
+    height: 160px;
+}
+
+.container button {
+    padding: 10px;
+    border: none;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.container button:hover {
+    background-color: rgb(2, 175, 2);
+}
+
+.status {
+    margin-top: 24px;
+    font-size: 24px;
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius: 8px;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: auto;
+}
+
+.mainContainer p {
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.mainContainer a {
+    color: #008000;
+}
+
+.mainContainer a:hover {
+    text-decoration: none;
+    border-bottom: 3px solid #008000;
+    padding-bottom: 5px;
+    color: white;
+    background-color: #008000;
+
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 550px) {
+    .container {
+        margin-top: 25px;
+
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        margin-top: 16px;
+        box-shadow: none;
+    }
+
+    .mainContainer {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 5px;
+    }
+}

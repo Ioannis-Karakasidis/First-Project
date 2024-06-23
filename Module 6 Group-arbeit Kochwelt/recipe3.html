@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="img/logo_small.png">
+  <title>Veganer Schokokuchen</title>
+  <link rel="stylesheet" href="recipe3.css" />
+  <link rel="stylesheet" href="./header.css" />
+  <link rel="stylesheet" href="./footer.css" />
+  <script src="rezept2script.js"></script>
+  <script src="./header.js"></script>
+</head>
+
+<body onload="includeHTML()">
+  <div w3-include-html="header.html"></div>
+  <div class="main">
+    <div>
+      <h1 class="headline"><b>Veganer Schokokuchen</b></h1>
+      <div class="foto"></div>
+    </div>
+    <div class="container2">
+      <div class="pic1container">
+        <img class="pic1" src="./img/pic1.png" />
+        <span>10 Min.</span>
+      </div>
+      <div class="pic2container">
+        <img class="pic2" src="./img/pic2.png" />
+        <span>normal</span>
+      </div>
+      <div class="pic3container">
+        <img class="pic3" src="./img/pic3.png" />
+        <span>25.05.2024</span>
+      </div>
+    </div>
+    <div class="container3">
+      <div class="container3-1">
+        <span class="phrase">Zutaten für</span>
+        <input type="number" class="main-input" id="container3Input" value="1" max="20" oninput="checkValue(this)"/>
+        <button onclick="calc()">Portionen</button>
+      </div>
+      <ul>
+        <li class="text"><span id="flour">200</span> g Mehl</li>
+        <li><span id="bakingCocoa">35</span> g Backkakao</li>
+        <li class="text"><span id="sugar">180</span> g Zucker oder Erythrit (hier verwendet als kalorienreduzierte Variante)</li>
+        <li><span id="vanillaExtract">1</span> TL Vanilleextrakt</li>
+        <li class="text"><span id="bakingPowder">0.5</span> Pck. Backpulver</li>
+        <li><span id="water">240</span> ml Wasser</li>
+        <li class="text"><span id="sunflowerOil">100</span> ml Sonnenblumenöl</li>
+      </ul>
+      <span class="text2"><b>Zubereitung</b></span>
+      <div class="container3-2">
+        <div class="time">
+          <img src="./img/pic1.png" />
+          <span>ca. 10 Minuten</span>
+        </div>
+        <div class="time0">
+          <img src="./img/pic1.png" />
+          <span>Gesamtzeit ca. 45 Minuten</span>
+        </div>
+      </div>
+      <div class="description">
+        <br>
+        Fette eine runde Springform mit 20 cm Durchmesser leicht mit Öl ein und heize den Backofen auf 180 °C Ober-/Unterhitze vor.<br><br>
+        In einer Schüssel vermengst du kurz das Mehl, den Kakao, den Zucker oder Erythrit, das Vanillearoma und das Backpulver. Dann gibst du Wasser und Öl dazu und rührst alles gründlich um, bis ein herrlich glatter Teig entsteht. Fülle den Teig in die vorbereitete Form und backe den Kuchen für 35 bis 40 Minuten. Der verführerische Duft von Schokolade wird deine Küche erfüllen. Der Kuchen ist perfekt, wenn bei der Stäbchenprobe kein Teig am Holzstäbchen hängen bleibt.<br><br>
+        Tipp:<br>
+        Füge nach Belieben verschiedene Nüsse hinzu, um dem Kuchen eine besondere Note und extra Biss zu verleihen.
+        <br><br>
+        Veganer Kuchen schmeckt nicht? Das höre ich oft, doch ich habe viele vom Gegenteil überzeugt. Dieser Kuchen ist genauso schokoladig und lecker, aber völlig ohne tierische Produkte. Überzeuge dich selbst und probiere es unbedingt aus.<br><br>
+      </div>
+      <div class="description2">
+        <span><b>Rezept erstellt von</b> </span>
+        <div class="description2-1">
+          <img class="profile" src="img/tobias.jpg" />
+          <span>Tobias Kolosza</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div w3-include-html="footer.html"></div>
+</body>
+
+</html>

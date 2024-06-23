@@ -1,0 +1,451 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+}
+
+body::-webkit-scrollbar {
+    width: 12px; 
+}
+
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: green; 
+    border-radius: 20px; 
+    border: 3px solid green;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+h2 {
+    font-size: 32px;
+    text-align: center;
+}
+
+
+
+#topIndexContainer {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#indexContainer {
+    width: 1920px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    min-height: 100vh;
+}
+
+
+.section1 {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    gap: 50px;
+}
+.section1Right {
+    flex: 1;
+}
+.section1 img {
+    width: 650px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+.section1 p {
+    font-size: 32px;
+    font-weight: normal;
+    text-align: start;
+}
+.recipeBtn {
+    background-color: green;
+    color: white;
+    width: 250px;
+    height: 50px;
+    font-size: 32px;
+    border: none;
+    margin-top: 60px;
+}
+.recipeBtn:hover {
+    cursor: pointer;
+    background-color: rgb(2, 175, 2);
+}
+
+
+
+.section2 {
+    background-color: rgb(240, 240, 240);
+    padding-top: 50px;
+    padding-bottom: 70px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+.section2 h1 {
+    display: flex;
+    justify-content: center;
+}
+.section2 a {
+    text-decoration: none;
+    color: black;
+}
+.section2 img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.section2 img:hover {
+    box-shadow: 0px 0px 5px 1px green;
+}
+.section2 h2:hover {
+    color: green;
+}
+.recipes {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    padding-top: 30px;
+}
+.recipeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.section3 {
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.section3 h1 {
+    display: flex;
+    justify-content: center;
+}
+.vsQuestion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    gap: 30px;
+}
+.vsQuestion img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+.vsQuestion p {
+    flex: 1;
+    font-size: 32px;
+}
+
+
+
+
+/* RESPONSIVENESS */
+@media (max-width: 1580px) {
+    .section2 img {
+        width: 350px;
+        height: 350px;
+    }
+    .section3 img {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 1422px) {
+    .recipeBtn {
+        margin-top: 0;
+    }
+    .section1 img {
+        width: 600px;
+    }
+    .section2 img {
+        width: 300px;
+        height: 300px;
+    }
+    .vsQuestion img {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+
+
+@media (max-width: 1265px) {
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    .section1 p {
+        font-size: 24px;
+    }
+    .section3 p {
+        font-size: 24px;
+    }
+    .recipeBtn {
+        font-size: 24px;
+    }
+    .section1 img {
+        width: 500px;
+    }
+    .section2 img {
+        width: 250px;
+        height: 250px;
+    }
+    .section3 img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 1140px) {
+    .section2 img {
+        width: 250px;
+        height: 250px;
+    }
+    .vsQuestion img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 1125px) {
+    .section1 img {
+        width: 450px;
+    }
+    .section1 {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    .section2 {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+    .section3 {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .section2 img {
+        width: 200px;
+        height: 200px;
+    }
+    .vsQuestion img {
+        width: 200px;
+        height: 200px;
+    }
+    .section1 img {
+        width: 400px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 16px;
+    }
+    .section1 p {
+        font-size: 16px;
+    }
+    .section3 p {
+        font-size: 16px;
+    }
+    .recipeBtn {
+        font-size: 16px;
+    }
+    .section1 {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+    .section2 {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+    .section3 {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+}
+
+@media (max-width: 975px) {
+    .vsQuestion {
+        align-items: center;
+    }
+    .section1 {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .section2 {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .section3 {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 910px) {
+    .section1 {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .section2 {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .section3 {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
+@media (max-width: 870px) {
+    .recipeBtn {
+        margin-top: 30px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 16px;
+    }
+    .section1 img {
+        width: 300px;
+    }
+    .section1 p {
+        font-size: 16px;
+    }
+    .section3 p {
+        font-size: 16px;
+    }
+    .section2 img {
+        width: 150px;
+        height: 150px;
+    }
+    .vsQuestion img {
+        width: 150px;
+        height: 150px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+}
+
+@media (max-width: 681px) {
+    .section1 {
+        flex-direction: column;
+        align-items: center;
+    }
+    .section1 p {
+        max-width: 300px;
+        text-align: center;
+    }
+    .section1Right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .section3 {
+        display: flex;
+        flex-direction: column;
+    }
+    .vsQuestion {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .section3 p {
+        width: 500px;
+    }
+    h2 {
+        text-align: center;
+    }
+    .section2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .recipes {
+        display: flex;
+        flex-direction: column;
+    }
+    .section3 p {
+        max-width: 300px;
+        text-align: center;
+    }
+    h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .recipeBtn {
+        font-size: 12px;
+        width: 150px;
+    }
+    .section1 img {
+        width: 250px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    h2 {
+        font-size: 12px;
+    }
+    .section1 p {
+        font-size: 12px;
+    }
+    .section3 p {
+        font-size: 12px;
+        width: 300px; 
+    }
+   
+}
+
+@media (max-width: 365px) {
+    .section1 {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .section1 p {
+        width: 200px;
+    }
+    .recipeBtn {
+        font-size: 11px;
+        width: 100px;
+        height: 30px;
+        margin-top: 10px;
+    }
+    .section2 {
+        padding-bottom: 40px;
+    }
+    h2 {
+        
+        text-align: center;
+    }
+    .section3 p {
+        width: 200px;
+    }
+}

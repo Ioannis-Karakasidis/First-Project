@@ -1,0 +1,19 @@
+body {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+}
+
+.credits img {
+  margin: 35px 0 0 21px;
+  height: 24px;
+}
+.credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  background-color: white;
+  width: fit-content;
+}

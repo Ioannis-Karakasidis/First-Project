@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lieferedo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="./img/logo.png" />
+    <script src="script.js"></script>
+  </head>
+  <body onload="render();load();">
+    <header>
+      <nav>
+        <div>
+          <a href="index.html"
+            ><button><img src="./img/back.png" alt="" /></button
+            ><img src="./img/logo.png" /><span class="logo-title"
+              >Lieferedo</span
+            ></a
+          >
+        </div>
+        <div><span>Speisekarte</span></div>
+        <div class="align">
+          <button>
+            <img id="flag" src="./img/icons8-germany-24.png" alt="" />
+          </button>
+          <button onclick="showmenu()">
+            <img src="./img/icons8-menu-24.png" alt="" />
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="outer-layout">
+        <div id="outside" class="middle-peremeter">
+          <div class="background"></div>
+          <div class="layout">
+            <div class="outer-perimeter">
+              <div class="restaurant-logo"></div>
+            </div>
+            <div class="restaurant-description">
+              <div class="description">
+                <div class="design">
+                  <div><span class="phrase">Blissful Bites</span></div>
+                  <div class="box-icons">
+                    <div>
+                      <button class="about"><span>i</span></button>
+                    </div>
+                    <div>
+                      <button class="about">
+                        <img src="./img/heart (1).png" alt="" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="reviews">
+                  <img src="./img/icons8-star-20.png" alt="" /><span
+                    >4.9 (250+)</span
+                  >
+                </div>
+                <div class="minimum-order">
+                  <img src="./img/icons8-bag-16.png" alt="" /><span
+                    >Min. 5,90 €</span
+                  >
+                  •<img src="./img/icons8-bike-16.png" alt="" /><span
+                    >Kostenlos</span
+                  >
+                </div>
+                <div class="bonus-section">
+                  <div class="first-section">
+                    <img src="./img/icons8-percentage-24.png" alt="" />
+                    <span>Stempelkarten</span>
+                  </div>
+                  <div class="second-section">Mehr erfahren</div>
+                </div>
+              </div>
+            </div>
+            <div id="food" class="menu-box"></div>
+          </div>
+        </div>
+        <div class="basket" id="basketcontent">
+          <h2>Warenkorb</h2>
+          <div class="text" id="saveditems">
+            Wähle leckere Gerichte aus der karte und <br />bestelle Dein Menü
+          </div>
+          <div class="basket-totalamount" id="totalpreis"></div>
+          <div class="basket-description" id="basketdescription">
+            Leider kannst Du noch nicht bestellen.Blissful Bites <br />
+            Restaurant liefert erst ab einem Mindestbestellwert <br />
+            von 5,90 € (exkl. Lieferkosten)
+          </div>
+          <button onclick="clearbasket()" class="btn3">Korb Löschen</button>
+          <button class="order-button" onclick="order()">Bestellen</button>
+          <div class="messagedesign" id="showmessage"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <a href="credits.html" target="_blank"><span>Credits</span></a>
+    </footer>
+  </body>
+</html>

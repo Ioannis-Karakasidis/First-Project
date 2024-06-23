@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+
+.imagecontainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.imagecontainer img {
+  height: 250px;
+  display: block;
+}
+
+img:hover {
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+    rgba(0, 0, 0, 0.06) 0px 2px 1px 0px, rgba(0, 0, 0, 0.09) 0px 4px 2px 0px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px 0px, rgba(0, 0, 0, 0.09) 0px 16px 8px 0px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px 0px;
+}
+
+.secondarycontainer {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-image {
+  margin: 20px;
+  height: 800px;
+}
+
+.d-none {
+  display: none;
+}
+
+.line {
+  display: flex;
+}
+
+@media (max-width: 450px) {
+  .imagecontainer img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 757px) {
+  .main-container {
+    justify-content: center;
+  }
+  .main-image {
+    height: 200px;
+  }
+}

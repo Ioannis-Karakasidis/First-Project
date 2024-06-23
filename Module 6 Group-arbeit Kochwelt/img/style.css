@@ -1,0 +1,276 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+}
+h1 {
+    font-size: 32px;
+}
+h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 0;
+}
+h3 {
+    font-size: 16px;
+}
+
+
+
+.section1 {
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.section1 img {
+    width: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-right: 40px;
+}
+.recipeBtn {
+    background-color: green;
+    color: white;
+    width: 250px;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    margin-top: 75px;
+}
+.recipeBtn:hover {
+    cursor: pointer;
+    background-color: rgb(2, 175, 2);
+}
+
+
+
+.section2 {
+    background-color: rgb(240, 240, 240);
+    padding-top: 30px;
+    padding-bottom: 70px;
+}
+.section2 h1 {
+    display: flex;
+    justify-content: center;
+}
+.section2 h2 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.section2 a {
+    text-decoration: none;
+    color: black;
+}
+.section2 img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.section2 img:hover {
+    box-shadow: 0px 0px 5px 1px green;
+}
+.section2 h2:hover {
+    color: green;
+}
+.recipes {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+
+
+.section3 {
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.section3 h1 {
+    display: flex;
+    justify-content: center;
+}
+.vsQuestion {
+    display: flex;
+    justify-content: space-evenly;
+}
+.vsQuestion img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 5%;
+    margin-left: 25px;
+}
+.vsQuestion p {
+    width: 600px;
+}
+
+
+
+@media (max-width: 1138px) {
+    .recipeBtn {
+        margin-top: 30px;
+    }
+}
+@media (max-width: 1131px) {
+    .recipeBtn {
+        margin-top: 10px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+}
+@media (max-width: 990px) {
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    .section1 img {
+        width: 420px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+}
+@media (max-width: 900px) {
+    h1 {
+        font-size: 24px;
+    }
+    .section1 {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .recipes {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+}
+
+@media (max-width: 850px) {
+    .section1 {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    .recipes {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+}
+
+@media (max-width: 800px) {
+    .recipeBtn {
+        width: 120px;
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 16px;
+    }
+    .section1 img {
+        width: 300px;
+    }
+    .section2 img {
+        width: 150px;
+        height: 150px;
+    }
+    .vsQuestion img {
+        width: 150px;
+        height: 150px;
+    }
+    .vsQuestion {
+        align-items: center;
+    }
+    .vsQuestion p {
+        font-size: 13px;
+    }
+}
+@media (max-width: 670px) {
+    .section1 {
+        flex-direction: column;
+        align-items: center;
+    }
+    .section1Right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .section1 img {
+        margin-left: 50px;
+    }
+
+    .section3 {
+        display: flex;
+        flex-direction: column;
+    }
+    .vsQuestion {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .section3 p {
+        width: 500px;
+    }
+    h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .section2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .recipes {
+        display: flex;
+        flex-direction: column;
+    }
+    .section3 p {
+        width: 300px;
+    }
+    h2 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 350px) {
+    .section1 img {
+        width: 270px;
+    }
+    .recipeBtn {
+        font-size: 11px;
+        width: 100px;
+        height: 30px;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    h2 {
+        font-size: 13px;
+        text-align: center;
+    }
+    .section3 p {
+        width: 250px;
+    }
+}
+
+@media (max-width: 800px) {
+  
+}

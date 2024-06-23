@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="img/logo_small.png">
+    <title>Cheeseburger</title>
+    <link rel="stylesheet" href="recipe1.css" />
+    <link rel="stylesheet" href="./header.css" />
+    <link rel="stylesheet" href="./footer.css" />
+    <script src="header.js"></script>
+    <script src="rezept1script.js"></script>
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="header.html"></div>
+    <div class="main">
+      <div>
+        <h1 class="headline"><b>Cheeseburger</b></h1>
+        <div class="foto"></div>
+      </div>
+      <div class="container2">
+        <div class="pic1container">
+          <img class="pic1" src="./img/pic1.png" />
+          <span>30 Min.</span>
+        </div>
+        <div class="pic2container">
+          <img class="pic2" src="./img/pic2.png" />
+          <span>Simpel</span>
+        </div>
+        <div class="pic3container">
+          <img class="pic3" src="./img/pic3.png" />
+          <span>25.05.2024</span>
+        </div>
+      </div>
+      <div class="container3">
+        <div class="container3-1">
+          <span class="phrase">Zutaten für</span>
+          <input
+            class="main-input"
+            type="number"
+            id="container3Input"
+            value="1"
+            max="20"
+            oninput="checkValue(this)"
+          />
+          <button onclick="calc()">Portionen</button>
+        </div>
+        <ul>
+          <li class="text border"><span id="tomatoes">2 </span> Scheiben Tomate</li>
+          <li class="border"><span id="cucumber">2 </span> Scheiben Gurke</li>
+          <li class="text border"><span id="onion">1 </span>Scheiben Zwiebel (rot)</li>
+          <li class="border"><span id="cheddar">50 g</span> Cheddar</li>
+          <li class="text border"><span id="meat">200 g</span> Hackfleisch</li>
+          <li class="border"><span id="buns">1 </span>Burger Buns</li>
+          <li class="text border"><span id="ketchup"></span>Ketchup</li>
+          <li class="border"><span id="saltPepper"></span>Salz und Pfeffer</li>
+          <li class="text border"><span id="mustard"></span>Senf</li>
+        </ul>
+        <span class="text2"><b>Zubereitung</b></span>
+        <div class="container3-2">
+          <div class="time">
+            <img src="./img/pic1.png" />
+            <span>ca. 30 Minuten</span>
+          </div>
+          <div class="time0">
+            <img src="./img/pic1.png" />
+            <span>Gesamtzeit ca. 30 Minuten</span>
+          </div>
+        </div>
+        <div class="description">
+          Den Grill auf ca. 240 Grad vorheizen. Zwiebeln in Ringe schneiden, Käse reiben und bereitstellen. 
+          Tomaten und Gurken in Scheiben schneiden. Aus Ketchup und Senf zu gleichen Teilen eine Burgersauce herstellen.
+          Rinderhackfleisch mit Salz und Pfeffer würzen und gut vermengen. 
+          Daraus ca. 200 g schwere Kugeln formen und dabei ein wenig kneten. Hände oder Hackfleischpresse mit ein wenig Wasser befeuchten und 
+          daraus flache Patties formen. In der Mitte mit dem Handballen eine flache Kuhle eindrücken.
+          Jetzt die erste Burgerseite ca. 4 Minuten grillen, die zweite Seite ca. 2 Min grillen. Das fertig gegrillte Fleisch beiseite legen, 
+          darauf die Zwiebelringe geben und mit dem Käse bestreuen, damit dieser leicht schmilzt. 
+          Die Brötchen mit der Schnittseite auf den Warmhaltebereich des Grills legen und kurz rösten.
+          Jetzt die Böden der Burgerbrötchen mit der Burgersauce bestreichen. Dann mit Tomaten und Gurken belegen und darauf das Fleisch setzen. 
+          Abschließend die andere Hälfte des Burger Buns draufsetzen.
+        </div>
+        <div class="description2">
+          <span><b>Rezept erstellt von</b> </span>
+          <div class="description2-1">
+            <img
+              class="profile"
+              src="img/andrej.jpg"
+            />
+            <span>Andrej</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div w3-include-html="footer.html"></div>
+  </body>
+</html>

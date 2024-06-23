@@ -1,0 +1,456 @@
+html,
+body {
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.container {
+  background-image: url(./img/hero_bg.jpg);
+  background-position: bottom;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  padding-left: 160px;
+  padding-right: 160px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+}
+
+.link1 {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
+  font-weight: normal;
+}
+
+.links1:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+  padding-top: 60px;
+  align-items: center;
+}
+
+.headline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 100px auto;
+}
+
+.headline1 {
+  font-family: "Raleway", sans-serif;
+  font-size: 96px;
+  font-weight: bold;
+  color: white;
+  margin: auto;
+}
+
+.subheadline {
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  color: white;
+}
+
+.links {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.link2 {
+  background-color: #9f0908;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.phone {
+  width: 24px;
+  height: 24px;
+}
+
+.link2:hover {
+  background-color: rgb(199, 48, 48);
+}
+
+.pics {
+  display: flex;
+  vertical-align: middle;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.pics3 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.text {
+  font-size: 56px;
+  font-weight: bold;
+  color: black;
+  font-family: "Economica", sans-serif;
+}
+
+.image {
+  width: 128px;
+}
+
+.pics2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 40px;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+}
+
+.text1 {
+  color: #9f0908;
+  font-size: 80px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  margin-block: 0;
+}
+
+.order1 {
+  vertical-align: middle;
+  text-align: center;
+  padding: 30px 0 80px 0;
+}
+
+.container2 {
+  background-image: url(./img/section_our_menu_bg.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  padding: 60px;
+  margin-bottom: 50px;
+}
+
+.miso1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 80px;
+}
+
+.r1 {
+  width: 352px;
+  height: 352px;
+}
+
+.menuitem1 {
+  font-family: "Economica", sans-serif;
+  font-weight: bold;
+  font-size: 56px;
+}
+
+.chicken1 {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  color: #675e54;
+  padding-right: 303px;
+}
+
+.preis {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  color: #675e54;
+}
+
+.r2 {
+  width: 352px;
+  height: 352px;
+}
+
+.menuitem2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chicken2 {
+  display: flex;
+  justify-content: center;
+}
+
+.miso2 {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 80px;
+}
+
+.photo1 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 56px;
+}
+
+.photo2 {
+  padding-bottom: 56px;
+}
+
+.miso3 {
+  display: flex;
+  gap: 80px;
+}
+
+.subheadline1 {
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  color: black;
+}
+
+.adress {
+  text-align: center;
+}
+
+.map {
+  width: 100%;
+  height: 600px;
+  padding-top: 64px;
+}
+
+.footer {
+  background-color: #0a141e;
+  padding-top: 72px;
+  padding-bottom: 72px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+.logo3 {
+  height: 44px;
+}
+
+.logo2 {
+  width: 40px;
+  height: 40px;
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footer1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.marker {
+  width: 20px;
+}
+
+.flag {
+  width: 24px;
+  height: 24px;
+}
+
+.text2 {
+  color: #9f0908;
+  font-size: 80px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .miso1,
+  .miso2,
+  .miso3 {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+    padding-bottom: 50px;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .chicken {
+    display: flex;
+    justify-content: center;
+  }
+
+  .photo1,
+  .photo2,
+  .photo3 {
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .line {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .links {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .order,
+  .chicken1 {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-right: unset;
+  }
+
+  .pics2 {
+    flex-direction: column;
+  }
+
+  .container {
+    padding: unset;
+  }
+
+  .footer {
+    padding-right: unset;
+    padding-left: unset;
+  }
+
+  .footer1 {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logos {
+    justify-content: unset;
+  }
+
+  .band {
+    width: 400px;
+  }
+
+  .text2 {
+    padding-right: unset;
+  }
+}
+
+@media (max-width: 960px) {
+  .deutsch {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 650px) {
+  .text {
+    font-size: 15vw;
+  }
+}
+
+@media (max-width: 330px) {
+  .footer1 {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .text1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container2 {
+    padding: 30px 0 0 0;
+    margin: 0;
+  }
+
+  .adress {
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 380px) {
+  .r1 {
+    width: 100%;
+    height: auto;
+  }
+
+  .container2 {
+    padding: 10px;
+  }
+
+  .text1 {
+    font-size: 20vw;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .menuitem1 {
+    font-size: 16vw;
+  }
+}
+
+@media (max-width: 420px) {
+  .headline1 {
+    font-size: 10vw;
+  }
+
+  .subheadline {
+    font-size: 5vw;
+  }
+}
+
+@media (max-width: 290px) {
+  .chicken1,
+  .preis {
+    font-size: 10vw;
+  }
+
+  .menuitem1 {
+    font-size: 20vw;
+  }
+
+  .text2 {
+    font-size: 10vw;
+  }
+
+  .subheadline1 {
+    font-size: 10vw;
+  }
+}

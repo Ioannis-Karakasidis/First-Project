@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway", sans-serif;
+    font-style: normal;
+}
+
+body::-webkit-scrollbar {
+    width: 12px; 
+}
+
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: green; 
+    border-radius: 20px; 
+    border: 3px solid green;
+}
+
+#topMainContainer {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.mainContainer {
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    width: 1920px;
+}
+h1 {
+    font-size: 32px;
+}
+h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 0;
+}
+h3 {
+    font-size: 16px;
+}
+
+
+
+
+@media (max-width: 1110px) {
+    .mainContainer {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+@media (max-width: 1010px) {
+    .mainContainer {
+        margin-left: 75px;
+        margin-right: 75px;
+    }
+}
+
+@media (max-width: 975px) {
+    .mainContainer {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
+@media (max-width: 910px) {
+    .mainContainer {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+@media (max-width: 900px) {
+    .mainContainer {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 770px) {
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 16px;
+        font-weight: 800;
+    }
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    li {
+        font-size: 12px;
+    }
+    p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .mainContainer {
+        margin-left: 10px;
+        margin-right: 10px;
+        max-width: 90%;
+    }
+    ul {
+        max-width: 290px;
+    }
+    hr {
+        max-width: 90%;
+    }
+    h1 {
+        font-size: 18px;
+        max-width: 90%;
+    }
+    h2 {
+        max-width: 90%;
+        font-size: 14px;
+        font-weight: 800;
+    }
+    h3 {
+        font-size: 14px;
+        font-weight: 600;
+        max-width: 90%;
+    }
+    li {
+        font-size: 12px;
+        max-width: 90%;
+    }
+    p {
+        font-size: 12px;
+        max-width: 90%;
+    }
+    a {
+        max-width: 90%;
+    }
+}

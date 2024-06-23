@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Survey-Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="title">Survey-Form</h1>
+    <p id="description">Fill out the required information</p>
+    <form id="survey-form">
+      <fieldset id="border1">
+        <label id="name-label" for="name"
+          >Name:<input id="name" type="text" required placeholder="Name"
+        /></label>
+        <label id="email-label" for="email"
+          >Email:<input id="email" type="email" required placeholder="Email"
+        /></label>
+        <label id="number-label" for="number"
+          >Age:<input
+            id="number"
+            type="number"
+            required
+            min="1"
+            max="120"
+            placeholder="Age"
+        /></label>
+        <label id="2title"
+          >Which option best describes your current role?</label
+        >
+        <select id="dropdown">
+          <option value="">select one</option>
+          <option value="1">Student</option>
+          <option value="2">Fulltime Job</option>
+          <option value="3">Fulltime Learner</option>
+          <option value="4">Prefer not to say</option>
+          <option value="5">Other</option>
+        </select>
+        <label>Would you recommend freeCodeCamp to your friend?</label>
+        <label id="def" for="definitely">
+          <input
+            type="radio"
+            class="inline"
+            id="definitely"
+            name="recommend"
+            value="Definitely"
+            checked
+          />Definitely</label
+        >
+        <label id="may" for="maybe">
+          <input
+            type="radio"
+            class="inline"
+            id="maybe"
+            name="recommend"
+            value="Maybe"
+          />Maybe
+        </label>
+        <label id="not" for="not sure">
+          <input
+            type="radio"
+            class="inline"
+            id="not sure"
+            name="recommend"
+            value="Not sure"
+          />Not sure
+        </label>
+        <label>What is your favorite feature of freeCodeCamp?</label>
+        <select>
+          <option value="">Select an option</option>
+          <option value="1">Challenges</option>
+          <option value="2">Projects</option>
+          <option value="3">Community</option>
+          <option value="4">Open Source</option>
+        </select>
+        <label id="title3">What would you like to see improved?</label>
+        <label for="feature1">
+          <input
+            type="checkbox"
+            id="feature1"
+            name="feature"
+            value="Front-end Projects"
+            required
+          />
+          Front-end Projects</label
+        >
+        <label for="feature2">
+          <input
+            type="checkbox"
+            id="feature2"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Back-end Projects</label
+        >
+        <label for="feature3">
+          <input
+            type="checkbox"
+            id="feature3"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Data Visualization</label
+        >
+        <label for="feature4">
+          <input
+            type="checkbox"
+            id="feature4"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Challenges</label
+        >
+        <label for="feature5">
+          <input
+            type="checkbox"
+            id="feature5"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Open Source Community</label
+        >
+        <label for="feature6">
+          <input
+            type="checkbox"
+            id="feature6"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Gitter helps rooms</label
+        >
+        <label for="feature7">
+          <input
+            type="checkbox"
+            id="feature7"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Videos</label
+        >
+        <label for="feature8">
+          <input
+            type="checkbox"
+            id="feature8"
+            name="feature"
+            value="Front-end Projects"
+          />
+          City Meetups</label
+        >
+        <label for="feature9">
+          <input
+            type="checkbox"
+            id="feature9"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Wiki</label
+        >
+        <label for="feature10">
+          <input
+            type="checkbox"
+            id="feature10"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Forum</label
+        >
+        <label for="feature11">
+          <input
+            type="checkbox"
+            id="feature11"
+            name="feature"
+            value="Front-end Projects"
+          />
+          Additional Courses</label
+        >
+        <label>Any comments or suggestions?</label>
+        <textarea
+          cols="57"
+          rows="5"
+          placeholder="Enter your comment here..."
+          required
+        ></textarea>
+        <input id="submit" type="submit" name="submit" value="submit " />
+      </fieldset>
+    </form>
+  </body>
+</html>

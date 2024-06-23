@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Währungsrechner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="navbar">
+      <img src="/Project 5/img/menu.png" alt="" />
+      Währungsrechner
+    </div>
+
+    <div id="input-container">
+      <img class="flag" src="/Project 5/img/eu.png" alt="" />
+      <input id="euroField" type="number" />
+      <span class="currency">EUR</span>
+    </div>
+
+    <div class="container-center">
+      <button
+        onclick="switchTokens(); calc();"
+        type="button"
+        id="switchCurrency"
+      >
+        <img src="/Project 5/img/arrows.png" />
+      </button>
+    </div>
+    ,
+
+    <div id="input-container2">
+      <img class="flag" src="/Project 5/img/usa.png" alt="" />
+      <input id="usd" type="number" />
+      <span class="currency2">USD</span>
+    </div>
+    <div class="container-center">
+      <button onclick="calc()" id="calculate">Berechnen</button>
+    </div>
+  </body>
+</html>

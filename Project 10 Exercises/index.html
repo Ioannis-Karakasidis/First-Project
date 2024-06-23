@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let images = ["1.webp", "2.webp"];
+      let currentimage = 0;
+
+      function start() {
+        let miliseconds = +document.getElementById("seconds").value * 1000;
+        if (miliseconds > 10000) {
+          alert("bitte kleinere zahl eingeben");
+        } else {
+          if (miliseconds < 1000) {
+            alert("bitte mindestens 1 sekunde eingeben");
+          } else {
+            showImage(currentimage);
+            currentimage++;
+
+            if (currentimage == 2) {
+              currentimage = 0;
+            }
+
+            setTimeout(start, miliseconds);
+          }
+
+          function showImage(i) {
+            document.getElementById("image").src = images[i];
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <input type="number" id="seconds" placeholder="sekunde" />
+    <button onclick="start()">start</button>
+    <img id="image" src="/Project 10/1.webp" />
+  </body>
+</html>

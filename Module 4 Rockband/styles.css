@@ -1,0 +1,325 @@
+body,
+html {
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.header-image {
+  background-image: url(./img/header.png);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header img {
+  width: 100px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 16px;
+  padding: 30px 30px 0 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.navlink {
+  color: white;
+  font-family: "PT Sans", sans-serif;
+  text-decoration: none;
+  margin-left: 16px;
+}
+
+.navlink:hover {
+  color: #af884d;
+}
+
+.navimage {
+  width: auto;
+  height: 24px;
+  margin-left: 16px;
+}
+
+.navimage:hover {
+  filter: drop-shadow(0px 0px 3px #af884d);
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.headline {
+  font-family: "Viga", sans-serif;
+  color: white;
+  margin: 0;
+  font-size: 80px;
+  text-align: center;
+}
+
+.subline {
+  font-family: "Viga", sans-serif;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+.boxheadline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 216px;
+}
+
+.button {
+  font-family: "PT Sans", sans-serif;
+  background-color: #af884d;
+  color: white;
+  padding: 16px;
+  margin-top: 144px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #a18e72;
+}
+
+.boxheadline1 {
+  padding-bottom: 125px;
+}
+
+.box {
+  text-align: center;
+}
+
+.text {
+  color: #af884d;
+  font-weight: bold;
+}
+
+.container {
+  background-color: rgb(15, 15, 31);
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px 50px 0px;
+}
+
+.photo1 {
+  padding-right: 20px;
+}
+
+.pic1 {
+  width: 385px;
+}
+
+.placement {
+  display: flex;
+}
+
+.buy-ticket-section {
+  background-color: #272727;
+  display: flex;
+  align-items: center;
+}
+
+.band {
+  height: 280px;
+  object-fit: cover;
+}
+
+.festival-info {
+  padding: 40px;
+  height: 200px;
+  flex: 1;
+  color: white;
+}
+
+.festival-info h2 {
+  margin-block-start: 0;
+}
+
+.seperator {
+  background-color: white;
+  width: 1px;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.text3 {
+  background-color: #af884d;
+  color: white;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.text3:hover {
+  background-color: rgb(211, 190, 148);
+}
+
+.photo2 {
+  padding-right: 30px;
+}
+
+.text4 {
+  color: rgb(146, 103, 16);
+  text-align: center;
+  padding: 50px;
+}
+
+.photo5 {
+  background-image: url(./img/bottom.png);
+  background-size: cover;
+  background-position: bottom;
+  height: 100vh;
+}
+
+.footer-left1 {
+  color: white;
+  display: flex;
+  justify-content: flex;
+  align-items: center;
+  margin-block: 0;
+  margin-top: 50px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  background-color: black;
+  display: flex;
+  padding: 80px 0 80px 0;
+}
+
+.half-width {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  height: 38px;
+  width: 200px;
+  border-width: 0;
+}
+
+.button3 {
+  color: white;
+  text-decoration: none;
+  background-color: #af884d;
+  border-width: 0;
+  height: 40px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+.logos1 {
+  padding: 0 30px 20px 0;
+  width: 30px;
+}
+
+.button2 {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1250px) {
+  .headline {
+    font-size: 10vw;
+  }
+
+  .subline {
+    font-size: 5vw;
+  }
+
+  .placement {
+    flex-direction: column;
+  }
+
+  .buy-ticket-section {
+    flex-direction: column;
+  }
+
+  .seperator {
+    display: none;
+  }
+
+  .button2 {
+    padding: 40px 0 40px 0;
+  }
+
+  .pic1 {
+    width: 50vw;
+  }
+
+  .logos {
+    display: flex;
+  }
+
+  .logos1 {
+    padding: 0;
+  }
+
+  form {
+    display: none;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navlink {
+    display: none;
+  }
+
+  .footer-left1 {
+    padding-bottom: 20px;
+  }
+
+  .navimage {
+    display: none;
+  }
+}
+
+@media (max-width: 180px) {
+  .logos1 {
+    font-size: 5vw;
+  }
+
+  .button {
+    font-size: 5vw;
+  }
+
+  header img {
+    display: none;
+  }
+}

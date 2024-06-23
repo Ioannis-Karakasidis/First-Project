@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+  padding: 8px;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.menu-area {
+  display: flex;
+  width: 20%;
+  margin-right: 20px;
+}
+
+.menu-image {
+  height: 12px;
+  padding: 15px;
+}
+
+.menu-image:hover {
+  cursor: pointer;
+  padding: 15px;
+  background-color: #ccc;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.search-icon {
+  height: 18px;
+}
+
+.search-area {
+  display: flex;
+  align-items: center;
+  width: 60%;
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+nav input {
+  width: 100%;
+  height: 46px;
+}
+
+.button-icons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.search-button1 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  margin-left: 2px;
+}
+
+.search-button1:hover {
+  padding: 10px;
+  background-color: #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.arrow-image {
+  border-radius: unset;
+}
+
+.icons {
+  height: 24px;
+  border-radius: 20px;
+}
+
+.profile-icon {
+  background: none;
+  border: none;
+  padding: 5px;
+}
+
+.profile-icon:hover {
+  background-color: #ccc;
+  padding: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.profile-area {
+  display: flex;
+  align-items: center;
+  width: 10%;
+  justify-content: flex-end;
+  margin-left: 50px;
+  margin-right: 20px;
+}
+
+.icon {
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+.icon:hover {
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 565px) {
+  nav input {
+    display: none;
+  }
+
+  .input-area {
+    justify-content: flex-end;
+  }
+
+  .search-area {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 410px) {
+  .logo-area {
+    display: none;
+  }
+}

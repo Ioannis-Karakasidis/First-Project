@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo_small.png">
+    <title>Kochwelt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="header.css">
+    <script src="script.js"></script>
+    <script src="header.js"></script>
+</head>
+
+<body onload="includeHTML()">
+    
+    <div w3-include-html="header.html"></div>
+
+    <div id="topIndexContainer">
+        <div id="indexContainer">
+        <section class="section1">
+            <img src="img/salad-5904093_1280.jpg" alt="Bild_Salat">
+            <div class="section1Right">
+                <h1>Griechischer Salat</h1>
+                <p>Nach original griechischem Rezept. Perfekt als Sommergericht. Schmeckt besonders gut zu Baguette und Rotwein.</p>
+                <a href="recipe2.html"><button class="recipeBtn">Rezept öffnen</button></a>
+            </div>
+        </section>
+
+        <section class="section2">
+            <h1>Lust auf was Neues?</h1>
+            <div class="recipes">
+                <a href="recipe1.html">
+                    <div class="recipeContainer">
+                        <img src="img/hamburger.jpg" alt="Bild_Hamburger">
+                        <h2>Cheeseburger</h2>
+                    </div>
+                </a>
+                <a href="recipe2.html">
+                    <div class="recipeContainer">
+                        <img src="img/salad-5904093_1280.jpg" alt="Bild_Salat">
+                        <h2>Griechischer Salat</h2>
+                    </div>
+                </a>
+                <a href="recipe3.html">
+                    <div class="recipeContainer">
+                        <img src="img/schokokuchen.jpg" alt="Bild_Kuchen">
+                        <h2>Veganer Schokokuchen</h2>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section3">
+            <h1>Fritteuse vs. Heißluft-Fritteuse</h1>
+            <div class="vsQuestion">
+                <p>
+                    In einer herkömmlichen Fritteuse werden die Kartoffelspalten oder anderes Frittiergut in Öl getaucht, 
+                    welches elektrisch oder mit einem Tauchsieder auf hohe Temperaturen erhitzt wurde, in der Regel auf 175°C bis 190°C.
+                <br>
+                <br>
+                    Eine Heißluftfritteuse arbeitet mittels Zirkulation sehr hoch erhitzter Luft bei hohen Geschwindigkeiten. 
+                    Trotz ihres Namens kann sie nicht unbedingt nur Lebensmittel frittieren, sondern auch auch grillen, 
+                    garen und sogar backen. So sind unterschiedlichste, auch gefrorene, Speisen ganz leicht zubereitet wie im Ofen, 
+                    aber dank der kompakten Fritteusengröße sogar schneller.
+                </p>
+                <img src="img/fry.jpg" alt="Bild_Wok">
+            </div>
+        </section>
+        </div>
+    </div>  
+    <div w3-include-html="footer.html"></div>
+
+</body>
+
+</html>

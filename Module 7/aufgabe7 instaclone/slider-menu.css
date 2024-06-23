@@ -1,0 +1,147 @@
+.menu {
+  width: 250px;
+  height: 100vh;
+  border-right: 1px solid #ccc;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 8px 12px 20px 12px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+}
+
+.first-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.second-section {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  display: flex;
+  gap: 50px;
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  background-color: #ccc;
+  padding: 12px;
+  border-radius: 25px;
+  color: black;
+}
+
+.smallpicture {
+  display: flex;
+  gap: 58px;
+  padding: 12px 12px 12px 14px;
+}
+
+.smallpicture:hover {
+  padding: 12px 12px 12px 14px;
+  background-color: #ccc;
+  border-radius: 25px;
+}
+
+.logo {
+  font-size: 25px;
+}
+
+.logo-link {
+  margin: 10px 0 32px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-icon {
+  display: none;
+}
+
+.logo-hidden {
+  display: none;
+}
+
+@media (max-width: 1365px) {
+  .menu {
+    width: 70px;
+  }
+  .logo {
+    display: none;
+  }
+  .logo-hidden {
+    display: flex;
+    height: 23px;
+  }
+}
+
+@media (max-width: 766px) {
+  .menu {
+    height: 6vh;
+    width: 100vw;
+    border-bottom: 1px solid #ccc;
+  }
+  a,
+  .smallpicture,
+  .second-section {
+    display: none;
+  }
+  .first-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search-icon {
+    display: unset;
+    position: absolute;
+    height: 17px;
+    top: 27px;
+    margin-left: 5px;
+  }
+
+  .hidden {
+    display: block;
+    max-width: 268px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .heart {
+    display: unset;
+  }
+  .comment {
+    display: none;
+  }
+
+  .logo-link {
+    margin: 0;
+    display: flex;
+  }
+
+  .logo {
+    display: flex;
+  }
+  .logo-hidden {
+    display: none;
+  }
+  .reverse-icons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+}
+
+@media (max-height: 700px) {
+  .menu {
+    height: 9vh;
+  }
+}

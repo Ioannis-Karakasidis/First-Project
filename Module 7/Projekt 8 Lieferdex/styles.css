@@ -1,0 +1,425 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: orange;
+  border-radius: 20px;
+  border: 3px solid orange;
+}
+
+nav {
+  padding: 12px 16px;
+  background-color: white;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-box-shadow: 0 8px 8px -2px rgba(27, 35, 36, 0.08);
+  box-shadow: 0 8px 8px -2px rgba(27, 35, 36, 0.08);
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+nav a {
+  text-decoration: none;
+  display: flex;
+  gap: 2px;
+}
+
+.logo-title {
+  font-size: 24px;
+}
+
+.align {
+  display: flex;
+  gap: 15px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.phrase {
+  font-size: 24px;
+}
+
+.minimum-order {
+  display: flex;
+  max-width: 209px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.reviews {
+  display: flex;
+  gap: 15px;
+}
+
+.background {
+  background-image: url(./img/burger-3946012_1280.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 480px;
+  width: 100%;
+}
+
+.restaurant-description {
+  height: 200px;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #edeeee;
+  -webkit-box-shadow: 0 8px 8px -2px rgba(27, 35, 36, 0.08);
+  box-shadow: 0 8px 8px -2px rgba(27, 35, 36, 0.08);
+}
+
+.description {
+  max-width: 928px;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 24px 0 16px;
+}
+
+.design {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box-icons {
+  display: flex;
+  width: 110px;
+  justify-content: space-between;
+}
+
+.box-icons span,
+.box-icons img {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.about {
+  border: none;
+  background: none;
+  width: 50px;
+  height: 50px;
+  background-color: #cccccc70;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.about:hover {
+  background-color: #ccc;
+}
+
+.bonus-section {
+  max-width: 100%;
+  height: 48px;
+  border: 1px solid #dbd9d7;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.bonus-section:hover {
+  box-shadow: 0 0px 34px 0 rgba(27, 35, 36, 0.68);
+  cursor: pointer;
+}
+
+.bonus-section img {
+  background-color: orange;
+  border-radius: 20px;
+  margin-left: 5px;
+}
+
+.first-section {
+  width: 142px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.first-section span {
+  padding-top: 3px;
+}
+
+.second-section {
+  padding-right: 20px;
+}
+
+.menu-items {
+  max-width: 928px;
+  height: auto;
+  width: 100%;
+}
+
+.menu-item {
+  border: 1px solid #e1dfde;
+  border-radius: 10px;
+  margin: 32px auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.menu-itempadding {
+  padding: 0 0 16px 16px;
+  display: flex;
+  max-width: 910px;
+  width: 100%;
+}
+
+.hidden-section {
+  width: 100%;
+  background-color: #cccccc85;
+}
+
+.btn1 {
+  border: none;
+  background: none;
+}
+
+.hidden-sectioninnerpart {
+  width: 69%;
+  margin: 0 auto 23px auto;
+}
+
+.hidden-section form {
+  display: flex;
+}
+
+.hidden-sectionspace {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hidden-sectionspacepart1 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.hidden-sectionspacepart2 {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 26px 0 0 0;
+}
+
+.box-amount {
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.totalpricedesign {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0400ffd9;
+  color: white;
+}
+
+.menu-itempadding h2,
+.menu-itempadding div {
+  margin-bottom: 7.5px;
+  max-width: 912px;
+  width: 100%;
+}
+
+.category-image {
+  max-width: 928px;
+  height: auto;
+  width: 100%;
+}
+
+.btn2 {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  margin: 0 0 0 14px;
+}
+
+.menu-box {
+  max-width: 928px;
+  margin: 0 auto 0 auto;
+  width: 100%;
+}
+
+.menu-itempadding button {
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  height: 40px;
+  width: 48px;
+}
+
+.outer-layout {
+  display: flex;
+}
+
+.middle-peremeter {
+  width: 100%;
+}
+
+.basket {
+  max-width: 344px;
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  right: 0;
+  height: 100vh;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.basket h2 {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  height: 49px;
+  width: 100%;
+}
+
+.text {
+  margin: 10px 0 10px 0;
+  text-align: center;
+}
+
+.basket-description {
+  font-size: 13px;
+  text-align: center;
+  height: 60px;
+}
+
+.order-button {
+  background-color: #005aff;
+  color: white;
+  width: 159px;
+  height: 57px;
+  margin: 20px auto 20px auto;
+}
+
+.outer-perimeter {
+  max-width: 928px;
+  width: 100%;
+  margin: 0 auto 0 auto;
+}
+
+.restaurant-logo {
+  background-image: url(./img/23254597_christmas_2012_new_2857.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+}
+
+.d-none {
+  display: none;
+}
+
+.line {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.line div {
+  width: 77px;
+  display: flex;
+  justify-content: center;
+}
+
+.basket-totalamount {
+  text-align: center;
+  height: 60px;
+}
+
+main {
+  margin-bottom: 10px;
+}
+
+footer {
+  background-color: #ccc;
+  padding: 30px 0 30px 0;
+}
+
+footer a {
+  display: flex;
+  max-width: 928px;
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+}
+
+.messagedesign {
+  text-align: center;
+}
+
+.btn3 {
+  background-color: #005aff;
+  color: white;
+  width: 158px;
+  height: 50px;
+}
+
+@media (max-width: 1300px) {
+  .menu-itempadding {
+    padding: 0 0 16px 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .menu-itempadding {
+    padding: 0 0 16px 16px;
+  }
+}
+@media (max-width: 968px) {
+  .menu-itempadding {
+    padding: 0 0 16px 0;
+  }
+}
+
+@media (max-width: 1025px) {
+  .basket {
+    display: none;
+  }
+  .middle-peremeter {
+    width: 100%;
+  }
+}
+
+@media (max-width: 970px) {
+  .layout {
+    margin: 0 10px 0 10px;
+    max-width: 913px;
+  }
+}
+
+@media (max-width: 365px) {
+  .logo-title {
+    display: none;
+  }
+}

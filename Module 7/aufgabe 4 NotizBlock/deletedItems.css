@@ -1,0 +1,6 @@
+.deleted-items {
+  display: flex;
+  gap: 10px;
+  flex-flow: row wrap;
+  margin: 10px 5px auto 10px;
+}
