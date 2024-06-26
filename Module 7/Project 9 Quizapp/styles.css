@@ -1,0 +1,42 @@
+body {
+  background-color: #f4edff;
+}
+.container {
+  background-color: #f4edff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 94vh;
+}
+
+.custom-height-54 {
+  height: 66%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.link3 {
+  width: 226px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 6px;
+}
+
+.link3:hover {
+  border-left: 6px solid white;
+  padding-left: 0;
+}
+
+.background {
+  background-image: url(./QuizappBlue/bgb.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.textzenter {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}

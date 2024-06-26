@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Html Questions</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body onload="includeHTML();">
+    <div w3-include-html="nav.html"></div>
+    <div class="container">
+      <div
+        class="card mb-3"
+        style="max-width: 839px; height: 516px; width: 100%; border-radius: 0"
+      >
+        <div class="row g-0 h-100 border-radiu">
+          <div
+            class="col-md-4 bg-primary d-flex flex-column align-items-center"
+            style="max-width: 226px"
+            w3-include-html="cardpart1.html"
+          ></div>
+
+          <div class="col-md-8" style="width: 73%; background-color: #f7f7f7">
+            <h3 class="text-center mt-3">Wer hat HTML erfunden?</h3>
+            <div class="card">
+              <div class="card-body">This is some text within a card body.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
