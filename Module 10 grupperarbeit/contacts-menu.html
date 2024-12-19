@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="/img/Capa2.png" />
+    <link rel="stylesheet" href="/styles/navbar.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/styles/Add-Contact.css" />
+    <link rel="stylesheet" href="/styles/contacts-menu.css" />
+    <link rel="stylesheet" href="/styles/contact-template.css" />
+    <script src="scripts/contactfunctions.js"></script>
+    <script src="scripts/Validation.js"></script>
+    <script src="../script.js"></script>
+    <script src="/scripts/contact-menu.js"></script>
+    <script src="/db.js"></script>
+    <script src="scripts/validationtlds.js"></script>
+  </head>
+
+  <body onload="includeHTML();showcontacts();">
+    <div w3-include-html="../navbar.html"></div>
+    <div class="content">
+      <div class="contact-menu-wrapper">
+        <div class="contact-content-wrapper">
+          <div class="contact-menu-content">
+            <div class="contact-header-section">
+              <button
+                class="add-contact-button"
+                onclick="opencontactstemplate()"
+              >
+                <span class="add-contact-button-whiteletters"
+                  >Add new contact</span
+                ><img src="/img/person_add.png" alt="" />
+              </button>
+            </div>
+          </div>
+          <div id="contactmenu" class="contactmenu-design"></div>
+          <div class="add-contact-mobile">
+            <button
+              class="add-contact-button-mobile"
+              onclick="opencontactstemplate()"
+            >
+              <img src="/img/person_add.png" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="boxalignment">
+        <div class="phrase">
+          <span class="phrase_1">Contacts</span>
+          <div class="seperator"></div>
+          <span class="phrase_2">Better with a team</span>
+        </div>
+        <div
+          id="contacttemplate"
+          class="contacttemplatedesing d-none"
+          w3-include-html="./contact-template.html"
+        ></div>
+      </div>
+    </div>
+    <div
+      id="overlayaddcontact"
+      class="d-none"
+      w3-include-html="../add-contact.html"
+    ></div>
+    <div class="d-none logooverlay" id="successfullcontactlogoverlay">
+      Contact succesfully created
+    </div>
+
+    <script src="/scripts/add-contact.js"></script>
+    <script type="module" src="../scripts/navbar.js"></script>
+  </body>
+</html>

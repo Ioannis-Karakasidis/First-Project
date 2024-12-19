@@ -1,0 +1,251 @@
+.boxtemplate {
+  max-width: 445px;
+  width: 100%;
+  height: fit-content;
+  background-color: #ffffff;
+  padding: 48px 40px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 4px 0px #00000029;
+  border-radius: 30px;
+}
+
+.layout {
+  max-width: 445px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerprofile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerprofile button {
+  border: none;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.due-date-containerprofile {
+  display: flex;
+  width: 100%;
+  gap: 10px !important;
+  flex-direction: column;
+}
+
+.priority-container {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.priority-indicator {
+  display: flex;
+  gap: 10px;
+  padding: 4px 18px 4px 18px;
+}
+
+.scrollbar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.assigned-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtask {
+  display: flex;
+  gap: 16px;
+}
+
+.subtask-title {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.button-containers {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.userboxprofile {
+  max-width: 116px;
+  width: 100%;
+  background-color: #0038ff;
+  color: white;
+  padding: 4px 24px 4px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titlebox {
+  max-width: 445px;
+  width: 100%;
+  display: flex;
+  overflow-wrap: anywhere;
+  flex-direction: column;
+}
+
+.titlebox span {
+  font-size: 61px;
+}
+
+.description {
+  max-width: 445px;
+  width: 100%;
+}
+
+.description span {
+  font-weight: 400;
+  font-size: 23px;
+}
+
+.duedate {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.align {
+  display: flex;
+  gap: 16px;
+  padding-left: 12px;
+}
+
+.progressbar {
+  max-width: 108px;
+  width: 100%;
+  height: 8px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+}
+
+.progressbar-inside {
+  background-color: #4589ff;
+  height: 8px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.button1 {
+  border: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.mainline {
+  height: 21px;
+  background-color: #d1d1d1;
+  width: 1px;
+}
+
+@media (max-height: 263px) {
+  .boxtemplate {
+    max-width: 252px;
+    padding: 16px;
+    border-radius: 24px;
+    height: 230px;
+    gap: 10px;
+  }
+  .userbox {
+    max-width: 113px;
+    padding: 4px 16px 4px 16px;
+  }
+  .task-title {
+    font-size: 16px;
+  }
+  .titlebox {
+    max-width: 220px;
+  }
+  .titlebox span {
+    font-size: 16px;
+  }
+  .description {
+    max-width: 220px;
+  }
+  .description span {
+    font-size: 16px;
+  }
+  .due-date-container {
+    display: none;
+  }
+  .button-container {
+    display: none;
+  }
+  .subtasks-container {
+    display: none;
+  }
+  .button-container {
+    display: none;
+  }
+  .d-none {
+    display: flex;
+  }
+  .align span {
+    display: none;
+  }
+  .align img {
+    display: flex;
+  }
+  .assignedtitle {
+    display: none;
+  }
+  .assigned-container {
+    flex-direction: row;
+    gap: unset;
+    position: relative;
+    top: 42px;
+  }
+  .prio {
+    display: none;
+  }
+  .priotitle {
+    display: none;
+  }
+  .prioicondiv {
+    position: absolute;
+    right: 6px;
+    bottom: 25px;
+  }
+  .outsidebox {
+    width: 84%;
+    display: flex;
+    position: absolute;
+    bottom: 83px;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 475px) {
+
+  .scrollbar {
+    height: unset;
+    max-height: 400px;
+    overflow: scroll;
+    scrollbar-width: none;
+  }
+}

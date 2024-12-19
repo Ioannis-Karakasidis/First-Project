@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="/img/Capa2.png" />
+    <link rel="stylesheet" href="/styles/board.css" />
+    <link rel="stylesheet" href="styles/add-task.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js"></script>
+    <script src="/scripts/add-task.js"></script>
+    <script src="/scripts/board.js" defer></script>
+    <script src="scripts/board-templates.js"></script>
+    <script src="scripts/draganddrop.js"></script>
+    <script src="scripts/loadtasksinboard.js"></script>
+    <script src="scripts/contact-menu.js"></script>
+    <script src="scripts/contactfunctions.js"></script>
+    <script src="/scripts/technical-task.js"></script>
+    <script src="scripts/Validation.js"></script>
+    <script src="scripts/addsubtask.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="scripts/savefunction.js"></script>
+    <script src="scripts/filteringnumbers.js"></script>
+    <script src="scripts/board-templates2.js"></script>
+    <script src="scripts/selectbuttonsboard.js"></script>
+    <script src="scripts/editfunctions.js"></script>
+    <script src="scripts/add-tasktemplates.js"></script>
+    <script src="scripts/selectbuttons.js"></script>
+    <script src="scripts/mobiledraganddrop.js"></script>
+    <script src="scripts/add-task2.js"></script>
+  </head>
+  <body
+    onload="loadtasks();initializeFormCheck();selectbutton_2();handleButtonClick('Medium');"
+  >
+    <div w3-include-html="../navbar.html"></div>
+    <div class="content">
+      <div class="box">
+        <header class="board-header">
+          <h2>Board</h2>
+          <div class="input-container">
+            <div class="search-wrapper">
+              <input
+                id="searchInput"
+                class="search-input"
+                id="input-search"
+                type="text"
+                placeholder="Find Task"
+              />
+              <span class="separator"></span>
+              <button>
+                <img class="search-icon" src="/img/search.png" alt="" />
+              </button>
+            </div>
+            <button class="task-button" id="add-tasktemplate">
+              <div class="button-items">
+                <span class="button-text">Add Task</span>
+                <img class="button-image" src="/img/plus.png" alt="add-logo" />
+              </div>
+            </button>
+          </div>
+        </header>
+
+        <div class="center">
+          <div class="content2">
+            <div class="folder-group">
+              <div class="folder-complete">
+                <div class="task-status">
+                  <div class="status-item">
+                    <span class="status-text">To Do</span>
+                    <button id="buttonicon1">
+                      <img
+                        id="pic1"
+                        class="status-item-png"
+                        src="/img/status-item.png"
+                        alt="status-item"
+                        style="cursor: pointer"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="drag-drop-content">
+                  <div
+                    class="folder"
+                    id="todo-folder"
+                    ondrop="drop(event)"
+                    ondragover="allowDrop(event)"
+                  >
+                    <div class="article" id="article"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="folder-complete">
+                <div class="task-status">
+                  <div class="status-item">
+                    <span class="status-text">In progress</span>
+                    <button id="buttonicon2">
+                      <img
+                        id="pic2"
+                        class="status-item-png"
+                        src="/img/status-item.png"
+                        alt="status-item"
+                        style="cursor: pointer"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="drag-drop-content">
+                  <div
+                    class="folder"
+                    id="inprogress-folder"
+                    ondrop="drop(event)"
+                    ondragover="allowDrop(event)"
+                  >
+                    <div class="article" id="article"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="folder-group">
+              <div class="folder-complete">
+                <div class="task-status">
+                  <div class="status-item">
+                    <span class="status-text">Await feedback</span>
+                    <button id="buttonicon3">
+                      <img
+                        id="pic3"
+                        class="status-item-png"
+                        src="/img/status-item.png"
+                        alt="status-item"
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="drag-drop-content">
+                  <div
+                    class="folder"
+                    id="awaiting-feedback-folder"
+                    ondrop="drop(event)"
+                    ondragover="allowDrop(event)"
+                  >
+                    <div class="article" id="article"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="folder-complete">
+                <div class="task-status">
+                  <div class="status-item">
+                    <span class="status-text">Done</span>
+                  </div>
+                </div>
+                <div class="drag-drop-content">
+                  <div
+                    class="folder"
+                    id="done-folder"
+                    ondrop="drop(event)"
+                    ondragover="allowDrop(event)"
+                  >
+                    <div class="article" id="article"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-none"
+      id="overlay-addtask"
+      w3-include-html="overlay.html"
+    ></div>
+    <div
+      class="d-none"
+      id="overlayprofile-template"
+      w3-include-html="profile-template.html"
+    ></div>
+    <div
+      class="d-none"
+      id="overlaytechinical-task-template"
+      w3-include-html="techinical-task-template.html"
+    ></div>
+    <div id="overlaysuccesstask"></div>
+    <script type="module" src="../scripts/navbar.js"></script>
+    <script src="scripts/board2.js"></script>
+    <script>
+      includeHTML();
+    </script>
+  </body>
+</html>

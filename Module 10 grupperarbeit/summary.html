@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <script defer type="module" src="./scripts/navbar.js"></script>
+    <link rel="icon" href="/img/Capa2.png" />
+    <link rel="stylesheet" href="/styles/summary.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="../script.js"></script>
+</head>
+<body onload="includeHTML()">
+    <div w3-include-html="../navbar.html"></div>
+    <div class="content-responsiv-all">
+        <div id="welcomeWrapper" class="welcome-wrapper-mobile">
+            <div class="welcome-mobile">
+                <span id="welcomeText-mobile"></span>
+                <p id="loggedUserName-mobile"></p>
+            </div>
+        </div>
+        <div class="content-responsiv">
+            <div class="summary-headline">
+                <h1>Join 360</h1>
+                <div class="seperator">
+                </div>
+                <div class="summary-headline-content">
+                    <span>Key Metrics at a Glance</span>
+                </div>
+                <div class="seperator-responsive">
+                </div>
+            </div>
+            <div class="summary-all">
+                <div class="summary-content">
+                    <div class="summary-container">
+                        <a href="board.html">
+                            <div class="summary-current-tasks">
+                                <img src="/img/todo.png" class="img-original-todo">
+                                <img src="/img/todowhite.png" class="img-white-todo">
+                                <div class="sum-tasks">
+                                    <span id="todo-task-count">0</span>
+                                    <p>To-do</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="board.html">
+                            <div class="summary-current-tasks">
+                                <img src="/img/done.png" class="img-original-done">
+                                <img src="img/doneWhite.png" class="img-white-done">
+                                <div class="sum-tasks">
+                                    <span id="done-task-count">0</span>
+                                    <p>Done</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <a href="board.html">
+                        <div class="summary-current-date">
+                            <div class="sum-tasks-date">
+                                <img src="/img/urgentsum.png">
+                                <div class="date-done">
+                                    <span id="urgent-task-count">0</span>
+                                    <p>Urgent</p>
+                                </div>
+                            </div>
+                            <div class="seperator-urgent"></div>
+                            <div class="current-date">
+                                <span id="due-date">No Date</span><br>
+                                <p>Upcoming Deadline</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="board.html">
+                        <div class="summary-progress">
+                            <div class="summary-current-progress">
+                                <div class="sum-tasks">
+                                    <span id="total-task-count">0</span>
+                                    <p>Tasks in<br> Board</p>
+                                </div>
+                            </div>
+                            <div class="summary-current-progress">
+                                <div class="sum-tasks">
+                                    <span id="inprogress-task-count">0</span>
+                                    <p>Tasks in<br> Progress</p>
+                                </div>
+                            </div>
+                            <div class="summary-current-progress">
+                                <div class="sum-tasks">
+                                    <span id="review-task-count">0</span>
+                                    <p>Awaiting<br> Feedback</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="welcome">
+                    <span id="welcomeText"></span>
+                    <p id="loggedUserName"></p>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="../scripts/summary.js"></script>
+</body>
+</html>

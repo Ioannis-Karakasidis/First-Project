@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/sign-up.css" />
+  <link rel="icon" href="/img/Capa2.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Sign Up</title>
+</head>
+<body>
+  <div id="overlayDiv" class="messageDiv-overlay" style="display: none;">
+    <div id="signUpMessage" class="messageDiv"></div>
+  </div>
+  <div class="content-limitation">
+    <header>
+      <img class="logo" src="./img/logo.png" alt="" />
+  </div>
+  </header>
+  </div>
+  <div class="content-wrapper">
+  <div class="content-limitation">
+    <div class="container">
+      <h2>Sign Up</h2>
+      <a href="./index.html">
+        <img class="arrow-logo" src="./img/arrow.png" alt="arrow-logo">
+      </a>
+      <div class="blue-line"></div>
+      <form>
+        <div class="input-fields">
+          <div class="email">
+            <input id="rName" type="text" placeholder="Name" required />
+            <img class="person-icon" src="./img/person.png" alt="person-logo" />
+            <span id="nameError" class="error-message"></span> <!-- New error span -->
+          </div>
+          <div class="email">
+            <input id="rEmail" type="email" placeholder="Email" required />
+            <img class="email-icon" src="./img/email.png" alt="email-logo" />
+          </div>
+          <span id="emailError" class="error-message">Invalid email address!</span>
+          <div>
+            <input class="password-media" id="rPassword" type="password" placeholder="Password" required />
+            <img class="password-icon" src="./img/password.png" alt="password-logo" />
+          </div>
+          <span id="passwordError" class="error-message">Password must be at least 6 characters!</span>
+          <div>
+            <input class="password-confirm-media" type="password" id="rConfirmPassword" placeholder="Confirm Password" required />
+            <img class="confrim-password-logo" src="./img/password.png" alt="confirm-password-logo" />
+          </div>
+          <span id="confirmPasswordError" class="error-message">Passwords do not match!</span>
+        </div>    
+        <div class="checkbox-wrapper-29">
+          <label class="checkbox">
+            <input type="checkbox" id="checkPrivacy" class="checkbox__input" required />
+            <span class="checkbox__label"></span>
+            <p class="checkbox-text">
+                I accept the <a class="sign-up-a" href="privacy-log.html">Privacy policy</a>
+            </p>
+        </label>
+        <div class="login-guest-buttons">
+          <button id="submitSignUp" class="sign-up-button-footer" type="button">Sign Up</button>
+        </div>
+      </form>
+
+    </div>
+    <span id="checkboxError" class="checkboxError">Privacy policy must be accepted!</span>    
+  </div>
+    <div class="legal-links">
+      <a href="/privacy.html" target="_blank">Privacy Policy</a>
+      <a href="/legal-notice-log.html" target="_blank">Legal notice</a>
+    </div>
+  </div>
+  </div>
+  <script src="./db.js"></script>
+  <script type="module" src="./scripts/signup-auth.js"></script>
+</body>
+
+</html>
