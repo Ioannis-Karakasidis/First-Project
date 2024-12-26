@@ -1,20 +1,10 @@
-class MovableObject {
-  x = 120;
-  y = 200;
-  img;
-  height = 150;
-  width = 100;
-  imageCache = {};
-  currentimage = 0;
+class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;
   speedY = 0;
   acceleration = 1;
   energy = 100;
-  loadImage(path, x, y) {
-    this.img = new Image();
-    (this.img.src = path), x, y;
-  }
+  lasthit = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -22,7 +12,7 @@ class MovableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 60);
+    }, 1000 / 25);
   }
 
   death() {
@@ -33,25 +23,15 @@ class MovableObject {
   }
 
   isAboveGround() {
-    return this.y < 170;
-  }
-
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
+    if (this instanceof ThrowableObject) {
+      return true;
+    } else {
+      return this.y < 170;
+    }
   }
 
   moveLeft() {
     this.x -= this.speed;
-  }
-
-  movableObjectborders() {
-    this.ctx.beginPath();
-    this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-    this.ctx.stroke();
   }
 
   moveRight() {
@@ -71,22 +51,18 @@ class MovableObject {
     );
   }
 
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  }
-
-  drawframe(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
-      ctx.beginPath();
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
+  isHURT() {
+    let timepassed = new Date().getTime() - this.lasthit;
+    timepassed = timepassed / 1000;
+    return timepassed < 1;
   }
 
   hit() {
-    this.energy -= 5;
+    this.energy -= 20;
     if (this.energy < 0) {
       this.energy = 0;
+    } else {
+      this.lasthit = new Date().getTime();
     }
     console.log(this.energy);
   }
@@ -96,7 +72,7 @@ class MovableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentimage % this.IMAGES_WALKING.length;
+    let i = this.currentimage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentimage++;

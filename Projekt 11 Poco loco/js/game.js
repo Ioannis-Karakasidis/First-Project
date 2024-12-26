@@ -24,6 +24,8 @@ document.addEventListener("keydown", (e) => {
   } else if (code === 32) {
     keyboard.SPACE = true;
     console.log(keyboard.SPACE);
+  } else if (code === 68) {
+    keyboard.D = true;
   }
 });
 
@@ -44,5 +46,8 @@ document.addEventListener("keyup", (e) => {
   } else if (code === 32) {
     keyboard.SPACE = false;
     console.log(keyboard.SPACE);
+  } else if (code === 68) {
+    keyboard.D = false;
+    console.log(keyboard.D);
   }
 });

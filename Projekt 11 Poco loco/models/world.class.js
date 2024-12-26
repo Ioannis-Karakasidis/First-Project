@@ -5,24 +5,41 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-
+  statusbar = new Statusbar();
+  throwableobject = [];
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
+  }
+
+  run() {
+    setInterval(() => {
+      this.checkCollisions();
+      this.checkthrowobjects();
+    }, 200);
+  }
+
+  checkthrowobjects() {
+    if (this.keyboard.D) {
+      let bottle = new ThrowableObject(
+        this.character.x + 40,
+        this.character.y + 40
+      );
+      this.throwableobject.push(bottle);
+    }
   }
 
   checkCollisions() {
-    setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-        }
-      });
-    }, 50);
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusbar.setpercentage(this.character.energy);
+      }
+    });
   }
 
   setWorld() {
@@ -33,9 +50,13 @@ class World {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusbar);
+    this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.Cloud);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.throwableobject);
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -48,9 +69,9 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
+
     mo.draw(this.ctx);
     mo.drawframe(this.ctx);
-    mo.isColliding(mo);
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
