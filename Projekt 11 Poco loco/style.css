@@ -1,11 +1,23 @@
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background-image: url("img/380294_desert landscape with cactus trees and rocks_ _xl-1024-v1-0.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 
-canvas {
-  width: 720px;
-  height: 480px;
-  background-color: black;
+.box {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 16px);
+  justify-content: center;
+}
+
+@media (max-width: 752px) {
+  .box {
+    width: 100%;
+  }
 }

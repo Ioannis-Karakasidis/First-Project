@@ -3,8 +3,9 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 1;
-  energy = 100;
   lasthit = 0;
+  endgamebosshealthbar = new Enemybosshealthbar();
+  charactersarray = new Characterarrays();
 
   applyGravity() {
     setInterval(() => {
@@ -59,6 +60,7 @@ class MovableObject extends DrawableObject {
 
   hit() {
     this.energy -= 20;
+    this.percentage;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -67,14 +69,28 @@ class MovableObject extends DrawableObject {
     console.log(this.energy);
   }
 
+  bosshit() {
+    this.percentage -= 20;
+    if (this.percentage < 0) {
+      this.percentage = 0;
+    } else {
+      this.lasthit = new Date().getTime();
+    }
+
+    console.log(this.percentage);
+  }
+
   isDead() {
     return this.energy == 0;
   }
 
-  playAnimation(images) {
-    let i = this.currentimage % images.length;
-    let path = images[i];
-    this.img = this.imageCache[path];
-    this.currentimage++;
+  isDeadboss() {
+    return this.percentage == 0;
+  }
+
+  animate() {
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 75);
   }
 }

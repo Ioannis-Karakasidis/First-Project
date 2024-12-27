@@ -1,12 +1,18 @@
 class World {
   character = new Character();
+  enemyboss = new Endboss();
+  bottle = new ThrowableObject();
   level = level1;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
   statusbar = new Statusbar();
+  coinsstatusbar = new Coinsstatusbar();
+  bottlestatusbar = new Bottlestatusbar();
+  enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -37,7 +43,26 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusbar.setpercentage(this.character.energy);
+        this.statusbar.setpercentage(
+          this.character.energy,
+          this.statusbar.IMAGES
+        );
+      }
+    });
+
+    this.throwableobject.forEach((bottle) => {
+      if (this.enemyboss.isColliding(bottle)) {
+        this.enemyboss.bosshit();
+        this.enemybosshealthbar.setpercentage(
+          this.enemyboss.percentage,
+          this.enemybosshealthbar.IMAGES
+        );
+        if (this.percentage == 0) {
+          setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+            console.log("hello");
+          }, 250);
+        }
       }
     });
   }
@@ -52,6 +77,9 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
+    this.addToMap(this.coinsstatusbar);
+    this.addToMap(this.bottlestatusbar);
+    this.addToMap(this.enemybosshealthbar);
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.Cloud);
