@@ -43,27 +43,22 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusbar.setpercentage(
-          this.character.energy,
-          this.statusbar.IMAGES
-        );
+        this.statusbar.setpercentage(this.character.energy);
       }
-    });
 
-    this.throwableobject.forEach((bottle) => {
-      if (this.enemyboss.isColliding(bottle)) {
-        this.enemyboss.bosshit();
-        this.enemybosshealthbar.setpercentage(
-          this.enemyboss.percentage,
-          this.enemybosshealthbar.IMAGES
-        );
-        if (this.percentage == 0) {
-          setInterval(() => {
-            this.playAnimation(this.IMAGES_DEAD);
-            console.log("hello");
-          }, 250);
+      this.throwableobject.forEach((bottle) => {
+        if (enemy.isColliding(bottle)) {
+          if (enemy.constructor.name === "Chicken") {
+            setInterval(() => {
+              enemy.playAnimation(enemy.DEAD_CHICKEN);
+            }, 1000 / 75);
+            enemy.death();
+          } else if (enemy.constructor.name === "Endboss") {
+            enemy.hit();
+            enemy.setpercentage(enemy.energy);
+          }
         }
-      }
+      });
     });
   }
 

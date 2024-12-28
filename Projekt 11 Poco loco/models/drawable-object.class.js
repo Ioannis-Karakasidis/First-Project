@@ -25,11 +25,10 @@ class DrawableObject {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  setpercentage(percentage, IMAGES) {
+  setpercentage(percentage) {
     this.percentage = percentage;
     console.log(this.percentage);
-    console.log(IMAGES);
-    let path = IMAGES[this.resolveImageIndex()];
+    let path = this.IMAGES[this.resolveImageIndex()];
     console.log([this.resolveImageIndex()]);
     this.img = this.imageCache[path];
     console.log(this.img);

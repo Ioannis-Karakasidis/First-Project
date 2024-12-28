@@ -4,7 +4,6 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 1;
   lasthit = 0;
-  endgamebosshealthbar = new Enemybosshealthbar();
   charactersarray = new Characterarrays();
 
   applyGravity() {
