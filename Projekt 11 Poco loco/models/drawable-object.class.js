@@ -9,9 +9,9 @@ class DrawableObject {
   energy = 100;
   percentage = 100;
 
-  loadImage(path, x, y) {
+  loadImage(path, x, y, width, height) {
     this.img = new Image();
-    (this.img.src = path), x, y;
+    (this.img.src = path), x, y, width, height;
   }
 
   playAnimation(images) {

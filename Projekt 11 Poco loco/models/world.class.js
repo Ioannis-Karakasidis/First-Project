@@ -12,6 +12,8 @@ class World {
   bottlestatusbar = new Bottlestatusbar();
   enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
+  intervals = [];
+  overlayImage = null;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -22,18 +24,23 @@ class World {
     this.run();
   }
 
+  setWorld() {
+    this.character.world = this;
+  }
+
   run() {
-    setInterval(() => {
+    const throwobjects = setInterval(() => {
       this.checkCollisions();
       this.checkthrowobjects();
     }, 200);
+    this.intervals.push(throwobjects);
   }
 
   checkthrowobjects() {
     if (this.keyboard.D) {
       let bottle = new ThrowableObject(
         this.character.x + 40,
-        this.character.y + 40
+        this.character.y + 60
       );
       this.throwableobject.push(bottle);
     }
@@ -48,14 +55,35 @@ class World {
 
       this.throwableobject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
+          console.log(this.enemybosshealthbar);
+
           if (enemy.constructor.name === "Chicken") {
-            setInterval(() => {
+            const chickendeath = setInterval(() => {
               enemy.playAnimation(enemy.DEAD_CHICKEN);
             }, 1000 / 75);
+            this.intervals.push(chickendeath);
+
             enemy.death();
           } else if (enemy.constructor.name === "Endboss") {
             enemy.hit();
-            enemy.setpercentage(enemy.energy);
+            console.log(enemy);
+
+            this.enemybosshealthbar.setpercentage(enemy.energy);
+            if (enemy.energy == 0) {
+              const bossdeath = setInterval(() => {
+                enemy.playAnimation(enemy.IMAGES_DEAD);
+              }, 200);
+              this.intervals.push(bossdeath);
+
+              setTimeout(() => {
+                enemy.death();
+                this.setOverlayImage(enemy.Win); // Set the overlay image
+                console.log("Overlay image set:", this.overlayImage); // Debug log
+                enemy.win_audio.play();
+                this.clearAllIntervals(); // Corrected function call
+                this.drawOverlay(); // Draw the overlay immediately
+              }, 500);
+            }
           }
         }
       });
@@ -64,6 +92,9 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.level.enemies.forEach((enemy) => {
+      enemy.world = this; // Pass reference to World instance to each enemy
+    });
   }
 
   draw() {
@@ -81,6 +112,11 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableobject);
     this.ctx.translate(-this.camera_x, 0);
+
+    if (this.overlayImage) {
+      console.log("Drawing overlay"); // Debug log
+      this.drawOverlay();
+    }
 
     let self = this;
     requestAnimationFrame(function () {
@@ -112,8 +148,25 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  setOverlayImage(imagePath) {
+    this.overlayImage = imagePath;
+  }
+
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
+  }
+
+  drawOverlay() {
+    const img = new Image();
+    img.src = this.overlayImage;
+    img.onload = () => {
+      this.ctx.drawImage(img, 70, 200, 720, 480);
+      console.log("Overlay drawn"); // Debug log
+    };
+  }
+
+  clearAllIntervals() {
+    this.intervals.forEach(clearInterval);
   }
 }

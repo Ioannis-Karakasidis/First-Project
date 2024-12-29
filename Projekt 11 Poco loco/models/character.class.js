@@ -5,11 +5,10 @@ class Character extends MovableObject {
   characterarrays = new Characterarrays();
   world;
   walking_sound = new Audio("audio/528953_3302313-lq.mp3");
+  intervals = [];
 
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
-    console.log(this.characterarrays);
-
     this.loadImages(this.characterarrays.IMAGES_WALKING);
     this.loadImages(this.characterarrays.IMAGES_JUMPING);
     this.loadImages(this.characterarrays.IMAGES_DEATH);
@@ -60,7 +59,6 @@ class Character extends MovableObject {
     setInterval(() => {
       this.updateMovementAndCamera();
     }, 50);
-
     setInterval(() => {
       this.updateCharacterAnimation();
     }, 40);

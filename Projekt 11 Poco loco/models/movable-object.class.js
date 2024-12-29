@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
   charactersarray = new Characterarrays();
 
   applyGravity() {
-    setInterval(() => {
+    const gravity = setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;

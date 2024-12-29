@@ -16,8 +16,12 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  percentage = 100;
+  Win = ["img/9_intro_outro_screens/win/won_2.png"];
+  GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
+  win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
+  gameover_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
 
+  energy = 100;
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
@@ -35,6 +39,11 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_WALKING);
       } else if (this.percentage == 0) {
         this.bosshit();
+        this.set;
+
+        setInterval(() => {
+          this.playAnimation(this.IMAGES_DEAD);
+        }, 40);
       }
     }, 250);
   }
