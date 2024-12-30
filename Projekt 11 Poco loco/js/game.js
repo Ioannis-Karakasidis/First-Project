@@ -1,10 +1,50 @@
 let canvas;
 let world;
+let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
-  console.log("My character is", world.character);
+}
+
+function throwSalsaBottles() {
+  world.throwSalsaBottle();
+}
+
+function jump() {
+  world.character.jump();
+}
+
+function moveLeft() {
+  if (world.character.x > 0) {
+    world.character.handleMoveLeft();
+  }
+}
+
+function moveRight() {
+  if (world.character.x < world.level.level_end_x) {
+    world.character.handleMoveRight();
+  }
+}
+
+function drawgame() {
+  if (world) {
+    world.showIntro = false; // Ensure the intro is not shown
+    world.drawgame();
+    document.getElementById("start").style.display = "none";
+  }
+}
+
+function checkOrientation() {
+  if (window.innerHeight > window.innerWidth) {
+    world.drawIntro(world.rotatephoto);
+    document.querySelector(".buttonscontainer").style.display = "none";
+  } else {
+    console.log("Landscape mode");
+    world.draw();
+    document.querySelector("h1").style.display = "none";
+    document.querySelector(".buttonscontainer").style.display = "none";
+  }
 }
 
 document.addEventListener("keydown", (e) => {
@@ -51,3 +91,9 @@ document.addEventListener("keyup", (e) => {
     console.log(keyboard.D);
   }
 });
+
+// Check orientation on load
+window.addEventListener("load", checkOrientation);
+
+// Check orientation on resize
+window.addEventListener("resize", checkOrientation);

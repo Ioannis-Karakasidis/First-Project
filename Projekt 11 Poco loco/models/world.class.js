@@ -1,5 +1,4 @@
 class World {
-  character = new Character();
   enemyboss = new Endboss();
   bottle = new ThrowableObject();
   level = level1;
@@ -14,11 +13,15 @@ class World {
   throwableobject = [];
   intervals = [];
   overlayImage = null;
+  rotatephoto = "img/rotate.png";
+  introImage = "img/9_intro_outro_screens/start/startscreen_1.png"; // Path to the intro image
+  showIntro = true; // Flag to control whether to show the intro image
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.character = new Character(this); // Initialize character with world instance
     this.draw();
     this.setWorld();
     this.run();
@@ -38,12 +41,18 @@ class World {
 
   checkthrowobjects() {
     if (this.keyboard.D) {
-      let bottle = new ThrowableObject(
-        this.character.x + 40,
-        this.character.y + 60
-      );
-      this.throwableobject.push(bottle);
+      this.throwSalsaBottle();
     }
+  }
+
+  throwSalsaBottle() {
+    let bottle = new ThrowableObject(
+      this.character.x + 40,
+      this.character.y + 60
+    );
+    console.log("Throwing salsa bottle");
+
+    this.throwableobject.push(bottle);
   }
 
   checkCollisions() {
@@ -52,7 +61,6 @@ class World {
         this.character.hit();
         this.statusbar.setpercentage(this.character.energy);
       }
-
       this.throwableobject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           console.log(this.enemybosshealthbar);
@@ -62,27 +70,23 @@ class World {
               enemy.playAnimation(enemy.DEAD_CHICKEN);
             }, 1000 / 75);
             this.intervals.push(chickendeath);
-
             enemy.death();
           } else if (enemy.constructor.name === "Endboss") {
             enemy.hit();
             console.log(enemy);
-
             this.enemybosshealthbar.setpercentage(enemy.energy);
             if (enemy.energy == 0) {
               const bossdeath = setInterval(() => {
                 enemy.playAnimation(enemy.IMAGES_DEAD);
               }, 200);
               this.intervals.push(bossdeath);
-
               setTimeout(() => {
                 enemy.death();
                 this.setOverlayImage(enemy.Win); // Set the overlay image
                 console.log("Overlay image set:", this.overlayImage); // Debug log
                 enemy.win_audio.play();
-                this.clearAllIntervals(); // Corrected function call
-                this.drawOverlay(); // Draw the overlay immediately
               }, 500);
+              this.ctx.clearRect(0, 0, 720, 480);
             }
           }
         }
@@ -98,7 +102,15 @@ class World {
   }
 
   draw() {
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (this.showIntro) {
+      this.drawIntro(this.introImage);
+    } else {
+      this.drawgame();
+    }
+  }
+
+  drawgame() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
@@ -112,12 +124,6 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableobject);
     this.ctx.translate(-this.camera_x, 0);
-
-    if (this.overlayImage) {
-      console.log("Drawing overlay"); // Debug log
-      this.drawOverlay();
-    }
-
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
@@ -157,6 +163,15 @@ class World {
     this.ctx.restore();
   }
 
+  drawIntro(image) {
+    const img = new Image();
+    img.src = image;
+    img.onload = () => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    };
+  }
+
   drawOverlay() {
     const img = new Image();
     img.src = this.overlayImage;
@@ -167,6 +182,12 @@ class World {
   }
 
   clearAllIntervals() {
-    this.intervals.forEach(clearInterval);
+    console.log("Clearing intervals:", this.intervals); // Debug log
+    this.intervals.forEach((interval) => {
+      clearInterval(interval);
+      console.log("Interval cleared:", interval); // Debug log
+    });
+    this.intervals = [];
+    console.log("All intervals cleared"); // Debug log
   }
 }

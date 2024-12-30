@@ -25,10 +25,39 @@
     <script src="levels/leve1.js"></script>
     <script src="js/game.js"></script>
   </head>
-  <body onload="init()">
+  <body onload="init();checkOrientation()">
     <div class="box">
       <h1>El pollo loco</h1>
-      <canvas id="canvas" width="720" height="480"> </canvas>
+      <div class="boxalign">
+        <canvas id="canvas" width="720" height="480"> </canvas>
+        <button id="start" class="btn" onclick="drawgame()">Start Game</button>
+      </div>
+      <div class="buttonscontainer">
+        <div class="alignment">
+          <div class="upbutton">
+            <button onclick="jump()">
+              <img src="img/upbutton.png" alt="" />
+            </button>
+          </div>
+          <button onclick="moveLeft()">
+            <img src="img/leftbutton.png" alt="" />
+          </button>
+          <button><img src="img/downbutton.png" alt="" /><span></span></button>
+          <button onclick="moveRight()">
+            <img src="img/rightbutton.png" alt="" /><span></span>
+          </button>
+        </div>
+        <div class="buttonscontainer_2">
+          <div class="throw-button-container">
+            <button onclick="throwSalsaBottles()"><span>D</span></button
+            ><span>To throw salsa bottles</span>
+          </div>
+          <div class="jump-button-container">
+            <button onclick="jump()"><span>SPACE</span></button
+            ><span>To jump</span>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
