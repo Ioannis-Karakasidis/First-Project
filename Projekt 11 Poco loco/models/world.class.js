@@ -15,10 +15,12 @@ class World {
   intervals = [];
   overlayImage = null;
   rotatephoto = "img/rotate.png";
-
-  constructor(canvas, keyboard) {
+  gameOver = false; // Add a flag to indicate when the game is over
+  initf;
+  constructor(canvas, keyboard, initf) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.initf = initf;
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
@@ -82,18 +84,21 @@ class World {
               const bossdeath = setInterval(() => {
                 enemy.playAnimation(enemy.IMAGES_DEAD);
               }, 200);
-              this.intervals.push(bossdeath);
               setTimeout(() => {
                 enemy.death();
-                this.clearAllIntervals(this.character.intervals);
+              }, 1000);
+              setTimeout(() => {
                 enemy.win_audio.play();
-              }, 500);
-              this.ctx.clearRect(0, 0, 720, 480);
+              }, 2000);
             }
           }
         }
       });
     });
+  }
+
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   setWorld() {
@@ -184,12 +189,6 @@ class World {
   }
 
   clearAllIntervals() {
-    console.log("Clearing intervals:", this.intervals); // Debug log
-    this.intervals.forEach((interval) => {
-      clearInterval(interval);
-      console.log("Interval cleared:", interval); // Debug log
-    });
-    this.intervals = [];
-    console.log("All intervals cleared"); // Debug log
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
 }

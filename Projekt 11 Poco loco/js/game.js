@@ -4,7 +4,7 @@ let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
 function init() {
   canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard);
+  world = new World(canvas, keyboard, init);
 }
 
 function throwSalsaBottles() {
@@ -33,13 +33,21 @@ function drawgame() {
   this.init();
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
-      document.getElementById("outro").src =
+      document.getElementById("outroimg").src =
         "img/9_intro_outro_screens/win/win_2.png";
       document.querySelector(".outro").style.position = "relative";
     } else if (world.character.energy == 0) {
-      document.getElementById("outro").src =
+      document.getElementById("outroimg").src =
         "img/9_intro_outro_screens/game_over/game_over.png";
+      world.clearAllIntervals();
       document.querySelector(".outro").style.position = "relative";
+      setTimeout(() => {
+        document.querySelector(".outro").style.zIndex = "-1"; // Corrected property name
+        world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        document.querySelector(".intro").style.display = "flex"; // Corrected property name
+        document.getElementById("start").style.display = "flex";
+      }, 1000);
     }
   }, 1000);
 
