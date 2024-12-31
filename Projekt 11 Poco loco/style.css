@@ -5,26 +5,27 @@ body {
   align-items: center;
   background-image: url("img/380294_desert landscape with cactus trees and rocks_ _xl-1024-v1-0.png");
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: 100% 100%;
 }
 
 canvas {
   width: 100%;
+  position: absolute;
 }
 
 .btn {
   position: absolute;
-  right: 34%;
-  top: 50%;
+  right: 41%;
+  top: 51%;
   border: none;
   background-color: #ffd50e;
   border-radius: 50% 50%;
-  height: 14%;
-  width: 8%;
+  height: 5%;
+  width: 4%;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 button:hover {
@@ -88,6 +89,29 @@ button {
 
 button span {
   font-size: 24px;
+}
+
+.intro {
+  width: 720px;
+  height: 480px;
+  position: absolute;
+  z-index: 2;
+}
+
+.outro {
+  width: 720px;
+  height: 480px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.intro img {
+  width: 720px;
+  height: 480px;
+}
+
+.outro img {
+  width: 720px;
+  height: 480px;
 }
 
 button img {

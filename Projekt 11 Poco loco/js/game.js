@@ -28,22 +28,31 @@ function moveRight() {
 }
 
 function drawgame() {
-  if (world) {
-    world.showIntro = false; // Ensure the intro is not shown
-    world.drawgame();
-    document.getElementById("start").style.display = "none";
-  }
+  document.querySelector(".intro").style.display = "none";
+  document.getElementById("start").style.display = "none";
+  this.init();
+  setInterval(() => {
+    if (world.enemybosshealthbar.percentage == 0) {
+      document.getElementById("outro").src =
+        "img/9_intro_outro_screens/win/win_2.png";
+      document.querySelector(".outro").style.position = "relative";
+    } else if (world.character.energy == 0) {
+      document.getElementById("outro").src =
+        "img/9_intro_outro_screens/game_over/game_over.png";
+      document.querySelector(".outro").style.position = "relative";
+    }
+  }, 1000);
+
+  world.drawgame();
 }
 
 function checkOrientation() {
-  if (window.innerHeight > window.innerWidth) {
-    world.drawIntro(world.rotatephoto);
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    console.log("Portrait mode");
+    document.getElementById("start").style.display = "none";
     document.querySelector(".buttonscontainer").style.display = "none";
   } else {
     console.log("Landscape mode");
-    world.draw();
-    document.querySelector("h1").style.display = "none";
-    document.querySelector(".buttonscontainer").style.display = "none";
   }
 }
 

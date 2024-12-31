@@ -1,4 +1,5 @@
 class World {
+  character = new Character(); // Initialize character with world instance
   enemyboss = new Endboss();
   bottle = new ThrowableObject();
   level = level1;
@@ -14,14 +15,11 @@ class World {
   intervals = [];
   overlayImage = null;
   rotatephoto = "img/rotate.png";
-  introImage = "img/9_intro_outro_screens/start/startscreen_1.png"; // Path to the intro image
-  showIntro = true; // Flag to control whether to show the intro image
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.character = new Character(this); // Initialize character with world instance
     this.draw();
     this.setWorld();
     this.run();
@@ -64,12 +62,17 @@ class World {
       this.throwableobject.forEach((bottle) => {
         if (enemy.isColliding(bottle)) {
           console.log(this.enemybosshealthbar);
+          console.log(enemy.constructor.name);
 
           if (enemy.constructor.name === "Chicken") {
             const chickendeath = setInterval(() => {
               enemy.playAnimation(enemy.DEAD_CHICKEN);
             }, 1000 / 75);
-            this.intervals.push(chickendeath);
+            enemy.death();
+          } else if (enemy.constructor.name === "Smallchicken") {
+            setInterval(() => {
+              enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
+            }, 1000 / 75);
             enemy.death();
           } else if (enemy.constructor.name === "Endboss") {
             enemy.hit();
@@ -82,8 +85,7 @@ class World {
               this.intervals.push(bossdeath);
               setTimeout(() => {
                 enemy.death();
-                this.setOverlayImage(enemy.Win); // Set the overlay image
-                console.log("Overlay image set:", this.overlayImage); // Debug log
+                this.clearAllIntervals(this.character.intervals);
                 enemy.win_audio.play();
               }, 500);
               this.ctx.clearRect(0, 0, 720, 480);
