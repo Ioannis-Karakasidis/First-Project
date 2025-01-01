@@ -33,24 +33,36 @@ function drawgame() {
   this.init();
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
-      document.getElementById("outroimg").src =
-        "img/9_intro_outro_screens/win/win_2.png";
-      document.querySelector(".outro").style.position = "relative";
+      winscreen();
     } else if (world.character.energy == 0) {
-      document.getElementById("outroimg").src =
-        "img/9_intro_outro_screens/game_over/game_over.png";
-      world.clearAllIntervals();
-      document.querySelector(".outro").style.position = "relative";
+      gameoverpart1();
       setTimeout(() => {
-        document.querySelector(".outro").style.zIndex = "-1"; // Corrected property name
-        world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        document.querySelector(".intro").style.display = "flex"; // Corrected property name
-        document.getElementById("start").style.display = "flex";
+        gameoverpart2();
       }, 1000);
     }
   }, 1000);
+}
 
+function gameoverpart2() {
+  document.querySelector(".outro").style.zIndex = "-1";
+  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.querySelector(".intro").style.display = "flex";
+  document.getElementById("start").style.display = "flex";
+  world.drawgame();
+}
+
+function gameoverpart1() {
+  document.getElementById("outroimg").src =
+    "img/9_intro_outro_screens/game_over/game_over.png";
+  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.querySelector(".outro").style.position = "relative";
+}
+
+function winscreen() {
+  document.getElementById("outroimg").src =
+    "img/9_intro_outro_screens/win/win_2.png";
+  document.querySelector(".outro").style.position = "relative";
+  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   world.drawgame();
 }
 
@@ -67,47 +79,91 @@ function checkOrientation() {
 document.addEventListener("keydown", (e) => {
   let code = e.keyCode;
   if (code === 37) {
-    keyboard.LEFT = true;
-    console.log(keyboard.LEFT);
+    leftkeydown();
   } else if (code === 38) {
-    keyboard.UP = true;
-    console.log(keyboard.UP);
+    upkeydown();
   } else if (code === 39) {
-    keyboard.RIGHT = true;
-    console.log(keyboard.RIGHT);
+    rightkeydown();
   } else if (code === 40) {
-    keyboard.DOWN = true;
-    console.log(keyboard.DOWN);
+    downkeydown();
   } else if (code === 32) {
-    keyboard.SPACE = true;
-    console.log(keyboard.SPACE);
+    spacekeydown();
   } else if (code === 68) {
     keyboard.D = true;
   }
 });
 
+function spacekeydown() {
+  keyboard.SPACE = true;
+  console.log(keyboard.SPACE);
+}
+
+function downkeydown() {
+  keyboard.DOWN = true;
+  console.log(keyboard.DOWN);
+}
+
+function leftkeydown() {
+  keyboard.LEFT = true;
+  console.log(keyboard.LEFT);
+}
+
+function upkeydown() {
+  keyboard.UP = true;
+  console.log(keyboard.UP);
+}
+
+function rightkeydown() {
+  keyboard.RIGHT = true;
+  console.log(keyboard.RIGHT);
+}
+
 document.addEventListener("keyup", (e) => {
   let code = e.keyCode;
   if (code === 37) {
-    keyboard.LEFT = false;
-    console.log(keyboard.LEFT);
+    leftkeyup();
   } else if (code === 38) {
-    keyboard.UP = false;
-    console.log(keyboard.UP);
+    upkeyup();
   } else if (code === 39) {
-    keyboard.RIGHT = false;
-    console.log(keyboard.RIGHT);
+    rightkeyup();
   } else if (code === 40) {
-    keyboard.DOWN = false;
-    console.log(keyboard.DOWN);
+    downkeyup();
   } else if (code === 32) {
-    keyboard.SPACE = false;
-    console.log(keyboard.SPACE);
+    spacekeyup();
   } else if (code === 68) {
-    keyboard.D = false;
-    console.log(keyboard.D);
+    dkeyup();
   }
 });
+
+function dkeyup() {
+  keyboard.D = false;
+  console.log(keyboard.D);
+}
+
+function spacekeyup() {
+  keyboard.SPACE = false;
+  console.log(keyboard.SPACE);
+}
+
+function downkeyup() {
+  keyboard.DOWN = false;
+  console.log(keyboard.DOWN);
+}
+
+function leftkeyup() {
+  keyboard.LEFT = false;
+  console.log(keyboard.LEFT);
+}
+
+function rightkeyup() {
+  keyboard.RIGHT = false;
+  console.log(keyboard.RIGHT);
+}
+
+function upkeyup() {
+  keyboard.UP = false;
+  console.log(keyboard.UP);
+}
 
 // Check orientation on load
 window.addEventListener("load", checkOrientation);

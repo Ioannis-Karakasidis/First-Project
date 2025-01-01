@@ -107,7 +107,6 @@ class World {
               setTimeout(() => {
                 enemy.win_audio.play();
                 this.clearAllIntervals();
-                this.clearCanvas();
               }, 2000);
             }
           }
