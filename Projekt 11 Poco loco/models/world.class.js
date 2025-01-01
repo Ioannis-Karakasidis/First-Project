@@ -17,6 +17,7 @@ class World {
   rotatephoto = "img/rotate.png";
   gameOver = false; // Add a flag to indicate when the game is over
   initf;
+  coins = new Coinsstatusbar();
   constructor(canvas, keyboard, initf) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -56,6 +57,22 @@ class World {
   }
 
   checkCollisions() {
+    this.level.coins = this.level.coins.filter((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.coinsstatusbar.setpercentage(this.coinsstatusbar.percentage + 20); // Update the coins status bar
+        return false;
+      }
+      return true; // Keep the coin in the array
+    });
+    this.level.bottles = this.level.bottles.filter((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        this.bottlestatusbar.setpercentage(
+          this.bottlestatusbar.percentage + 20
+        );
+        return false; // Remove the bottle from the array
+      }
+      return true; // Keep the bottle in the array
+    });
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
@@ -89,6 +106,8 @@ class World {
               }, 1000);
               setTimeout(() => {
                 enemy.win_audio.play();
+                this.clearAllIntervals();
+                this.clearCanvas();
               }, 2000);
             }
           }
@@ -127,6 +146,8 @@ class World {
     this.addToMap(this.enemybosshealthbar);
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
+    this.addObjectsToMap(this.level.coins);
+    this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.Cloud);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableobject);
