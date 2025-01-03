@@ -19,7 +19,7 @@ class Endboss extends MovableObject {
   Win = ["img/9_intro_outro_screens/win/won_2.png"];
   GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
   win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
-  gameover_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
+  gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
 
   energy = 100;
   constructor() {

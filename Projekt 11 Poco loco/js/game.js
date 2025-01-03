@@ -30,6 +30,8 @@ function moveRight() {
 function restartgame() {
   document.querySelector(".outro").style.zIndex = "-1";
   document.querySelector(".gameovercontainer").classList.add("d-none");
+  world.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  init();
 }
 
 function drawgame() {

@@ -5,7 +5,8 @@ class Character extends MovableObject {
   characterarrays = new Characterarrays();
   world;
   walking_sound = new Audio("audio/528953_3302313-lq.mp3");
-
+  jumping_sound = new Audio("audio/mixkit-video-game-spin-jump-2648.wav");
+  hurt_sound = new Audio("audio/mixkit-man-in-pain-2197.wav");
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
@@ -67,7 +68,7 @@ class Character extends MovableObject {
     const movement = setInterval(() => {
       0;
       this.updateMovementAndCamera();
-    }, 50);
+    }, 80);
     const animationmovement = setInterval(() => {
       this.updateCharacterAnimation();
     }, 40);
