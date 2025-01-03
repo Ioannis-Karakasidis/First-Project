@@ -15,7 +15,6 @@ class World {
   intervals = [];
   overlayImage = null;
   rotatephoto = "img/rotate.png";
-  gameOver = false; // Add a flag to indicate when the game is over
   coins = new Coinsstatusbar();
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -82,12 +81,41 @@ class World {
 
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isCollidingTop(enemy)) {
+        this.enemykill(enemy);
+      } else if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusbar.setpercentage(this.character.energy);
       }
       this.throwbottles(enemy);
     });
+  }
+
+  enemykill(enemy) {
+    enemy.hit();
+    if (enemy.constructor.name === "Chicken") {
+      setInterval(() => {
+        enemy.playAnimation(enemy.DEAD_CHICKEN);
+      }, 1000 / 75);
+    } else {
+      setInterval(() => {
+        enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
+      }, 1000 / 75);
+    }
+    enemy.death();
+  }
+
+  characterkillenemy(enemy) {
+    if (
+      this.character.isColliding(enemy) &&
+      this.character.y + this.character.height <= enemy.y + enemy.height / 2
+    ) {
+      enemy.hit();
+      setInterval(() => {
+        enemy.playAnimation(enemy.DEAD_CHICKEN);
+      }, 1000 / 75);
+      enemy.death();
+    }
   }
 
   throwbottles(enemy) {

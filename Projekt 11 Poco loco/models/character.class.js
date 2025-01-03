@@ -69,7 +69,7 @@ class Character extends MovableObject {
       0;
       this.updateMovementAndCamera();
     }, 80);
-    const animationmovement = setInterval(() => {
+    setInterval(() => {
       this.updateCharacterAnimation();
     }, 40);
   }

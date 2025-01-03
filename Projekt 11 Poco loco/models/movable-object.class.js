@@ -12,7 +12,16 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 1000 / 75);
+    }, 40);
+  }
+
+  isCollidingTop(mo) {
+    return (
+      this.y + this.height >= mo.y &&
+      this.y + this.height <= mo.y + mo.height &&
+      this.x + this.width > mo.x &&
+      this.x < mo.x + mo.width
+    );
   }
 
   death() {
@@ -65,7 +74,6 @@ class MovableObject extends DrawableObject {
     } else {
       this.lasthit = new Date().getTime();
     }
-    console.log(this.energy);
   }
 
   bosshit() {
@@ -75,8 +83,6 @@ class MovableObject extends DrawableObject {
     } else {
       this.lasthit = new Date().getTime();
     }
-
-    console.log(this.percentage);
   }
 
   isDead() {
