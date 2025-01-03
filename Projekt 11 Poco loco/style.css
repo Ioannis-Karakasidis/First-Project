@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Bangers";
+  src: url(fonts/Bangers-Regular.ttf);
+  font-weight: bold;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -6,11 +12,20 @@ body {
   background-image: url("img/380294_desert landscape with cactus trees and rocks_ _xl-1024-v1-0.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  font-family: "Bangers", serif;
 }
 
 canvas {
   width: 100%;
   position: absolute;
+}
+
+.Impressumdesign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 720px;
+  width: 100%;
 }
 
 .btn {
@@ -50,9 +65,48 @@ button:hover {
 .box {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 16px);
+  height: calc(100vh - 41px);
   justify-content: center;
   align-items: center;
+}
+
+.helpbutton {
+  position: absolute;
+  z-index: 99;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.helpbutton:hover {
+  border-radius: unset;
+  background-color: unset;
+  box-shadow: unset;
+}
+
+.help {
+  width: 20px;
+  height: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  text-align: center;
+}
+
+a {
+  color: black;
+  font-size: 24px;
+}
+
+a:hover {
+  color: white;
 }
 
 .buttonscontainer {
@@ -60,6 +114,13 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: column;
+}
+
+.closing button:hover {
+  box-shadow: unset;
+  border-radius: unset;
+  background-color: unset;
 }
 
 .alignment {
@@ -144,6 +205,29 @@ button span {
 button img {
   width: 40px;
   height: 40px;
+}
+
+.instructions {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.closing {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 15px;
+}
+
+.closing button {
+  color: white;
+  font-size: 24px;
+  padding-right: 20px;
+}
+
+.white {
+  color: white;
 }
 
 @media (max-width: 752px) {

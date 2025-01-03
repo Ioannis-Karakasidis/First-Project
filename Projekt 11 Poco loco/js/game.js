@@ -42,6 +42,21 @@ function drawgame() {
   checkgamestatus();
 }
 
+function showcontrolls() {
+  document.querySelector(".buttonscontainer").classList.remove("d-none");
+  document
+    .querySelector(".buttonscontainer")
+    .children[0].classList.add("closing");
+  document.querySelector(".buttonscontainer").style =
+    "flex-direction: column;justify-content: flex-start;gap: 190px;position: absolute;max-width: 720px; width: 100%;background-color: rgba(0, 0, 0, 0.5);height: 50%;top: 263px;z-index: 9999";
+}
+
+function closeoverlay() {
+  document.querySelector(".buttonscontainer").style = "";
+  document.querySelector(".buttonscontainer").classList.add("d-none");
+  document.querySelector(".closing:hover").classList.remove("closing:hover");
+}
+
 function checkgamestatus() {
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
@@ -73,7 +88,6 @@ function checkOrientation() {
   if (window.matchMedia("(orientation: portrait)").matches) {
     console.log("Portrait mode");
     document.getElementById("start").style.display = "none";
-    document.querySelector(".buttonscontainer").style.display = "none";
   } else {
     console.log("Landscape mode");
   }
