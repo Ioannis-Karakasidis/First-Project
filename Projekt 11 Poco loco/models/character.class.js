@@ -1,25 +1,32 @@
 class Character extends MovableObject {
   height = 280;
-  y = 180;
+  y = 150;
   speed = 10;
   characterarrays = new Characterarrays();
   world;
   walking_sound = new Audio("audio/528953_3302313-lq.mp3");
-  intervals = ["movement", "animationmovement"];
 
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
+    this.loadingimages();
+    this.initializecharacter();
+  }
+
+  loadingimages() {
     this.loadImages(this.characterarrays.IMAGES_WALKING);
     this.loadImages(this.characterarrays.IMAGES_JUMPING);
     this.loadImages(this.characterarrays.IMAGES_DEATH);
     this.loadImages(this.characterarrays.IMAGES_HURT);
+    this.loadImages(this.characterarrays.IMAGES_IDLE);
+    this.loadImages(this.characterarrays.IMAGES_LONG_IDLE);
+  }
+
+  initializecharacter() {
+    this.x = 120;
+    this.currentposition = 120;
+    this.lastMoveTime = Date.now();
     this.applyGravity();
     this.animate();
-    if (this.energy == 0) {
-      setInterval(() => {
-        this.playAnimation(this.IMAGES_DEATH);
-      }, 40);
-    }
   }
 
   handleMoveRight() {
@@ -56,12 +63,43 @@ class Character extends MovableObject {
   }
 
   animate() {
+    this.checkidleanimation();
     const movement = setInterval(() => {
+      0;
       this.updateMovementAndCamera();
     }, 50);
     const animationmovement = setInterval(() => {
       this.updateCharacterAnimation();
     }, 40);
+  }
+
+  checkidleanimation() {
+    setInterval(() => {
+      if (
+        this.x === this.currentPosition &&
+        Date.now() - this.lastMoveTime >= 50
+      ) {
+        this.sleepinganimation();
+      } else {
+        this.currentPosition = this.x;
+        this.lastMoveTime = Date.now();
+      }
+    }, 3000);
+  }
+
+  sleepinganimation() {
+    setInterval(() => {
+      this.playAnimation(this.characterarrays.IMAGES_IDLE);
+      console.log("playing");
+      if (
+        this.x === this.currentPosition &&
+        Date.now() - this.lastMoveTime >= 1500
+      ) {
+        setInterval(() => {
+          this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
+        }, 2500);
+      }
+    }, 1000);
   }
 
   updateCharacterAnimation() {

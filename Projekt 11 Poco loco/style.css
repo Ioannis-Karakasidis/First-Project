@@ -95,13 +95,40 @@ button span {
   width: 720px;
   height: 480px;
   position: absolute;
-  z-index: 2;
 }
 
 .outro {
   width: 720px;
   height: 480px;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gameovercontainer {
+  position: absolute;
+  bottom: 5px;
+  z-index: 99;
+  width: 100%;
+  gap: 6%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.gameovercontainer button {
+  font-size: 43px;
+  font-weight: 700;
+  border: 1px solid #ffd50e;
+  background-color: #ffd50e;
+  color: #000;
+}
+
+.d-none {
+  display: none;
+}
+
+.gameovercontainer button:hover {
+  background-color: #e6bc00;
+  color: #fff;
+  border-radius: unset;
 }
 
 .intro img {
@@ -126,7 +153,7 @@ button img {
 }
 @media (max-width: 550px) {
   .btn {
-    font-size: 2vw; /* Adjust the value as needed */
+    font-size: 2vw;
   }
   .buttonscontainer {
     flex-direction: column;

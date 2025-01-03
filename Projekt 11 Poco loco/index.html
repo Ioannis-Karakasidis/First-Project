@@ -35,9 +35,13 @@
         <div class="intro">
           <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="" />
         </div>
-        <canvas id="canvas" width="720" height="480"> </canvas>
+        <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
         <div class="outro">
-          <img id="outroimg" src="" alt="" />
+          <img id="outroimg" class="d-none" src="" alt="" />
+        </div>
+        <div class="gameovercontainer d-none">
+          <button onclick="returntomenu()">Return to Menu</button>
+          <button onclick="restartgame()">Play Again</button>
         </div>
       </div>
       <div>

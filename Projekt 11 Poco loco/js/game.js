@@ -4,7 +4,7 @@ let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
 function init() {
   canvas = document.getElementById("canvas");
-  world = new World(canvas, keyboard, init);
+  world = new World(canvas, keyboard);
 }
 
 function throwSalsaBottles() {
@@ -27,35 +27,36 @@ function moveRight() {
   }
 }
 
+function restartgame() {
+  document.querySelector(".outro").style.zIndex = "-1";
+  document.querySelector(".gameovercontainer").classList.add("d-none");
+}
+
 function drawgame() {
-  document.querySelector(".intro").style.display = "none";
-  document.getElementById("start").style.display = "none";
+  document.querySelector(".intro").classList.add("d-none");
+  document.getElementById("start").classList.add("d-none");
   this.init();
+  document.getElementById("canvas").classList.remove("d-none");
+  checkgamestatus();
+}
+
+function checkgamestatus() {
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
       winscreen();
     } else if (world.character.energy == 0) {
       gameoverpart1();
-      setTimeout(() => {
-        gameoverpart2();
-      }, 1000);
+      world.clearAllIntervals();
+      document.querySelector(".gameovercontainer").classList.remove("d-none");
     }
-  }, 1000);
-}
-
-function gameoverpart2() {
-  document.querySelector(".outro").style.zIndex = "-1";
-  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.querySelector(".intro").style.display = "flex";
-  document.getElementById("start").style.display = "flex";
-  world.drawgame();
+  }, 1500);
 }
 
 function gameoverpart1() {
   document.getElementById("outroimg").src =
     "img/9_intro_outro_screens/game_over/game_over.png";
-  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.querySelector(".outro").style.position = "relative";
+  document.getElementById("outroimg").classList.remove("d-none");
 }
 
 function winscreen() {
