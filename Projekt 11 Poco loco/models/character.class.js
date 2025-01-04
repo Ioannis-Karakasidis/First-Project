@@ -7,6 +7,7 @@ class Character extends MovableObject {
   walking_sound = new Audio("audio/528953_3302313-lq.mp3");
   jumping_sound = new Audio("audio/mixkit-video-game-spin-jump-2648.wav");
   hurt_sound = new Audio("audio/mixkit-man-in-pain-2197.wav");
+  death_sound = new Audio("audio/male-death-sound-128357.mp3");
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
@@ -58,6 +59,7 @@ class Character extends MovableObject {
       (this.world.keyboard.SPACE || this.world.keyboard.UP) &&
       !this.isAboveGround()
     ) {
+      this.jumping_sound.play();
       this.jump();
     }
     this.world.camera_x = -this.x + 100;
@@ -105,11 +107,8 @@ class Character extends MovableObject {
 
   updateCharacterAnimation() {
     if (this.isDead()) {
-      this.playAnimation(this.characterarrays.IMAGES_DEATH);
-      setTimeout(() => {
-        this.death();
-      }, 0);
     } else if (this.isHURT()) {
+      this.hurt_sound.play();
       this.playAnimation(this.characterarrays.IMAGES_HURT);
     } else if (this.isAboveGround()) {
       this.playAnimation(this.characterarrays.IMAGES_JUMPING);

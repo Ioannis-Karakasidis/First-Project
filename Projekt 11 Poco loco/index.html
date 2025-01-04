@@ -27,8 +27,9 @@
     <script src="models/bottles.class.js"></script>
     <script src="levels/leve1.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/script.js"></script>
   </head>
-  <body onload="checkOrientation()">
+  <body onload="includeHTML();">
     <div class="box">
       <h1>El pollo loco</h1>
       <div class="boxalign" id="content">
@@ -44,56 +45,58 @@
               <img id="audioicon" src="img/icons8-audio-32.png" alt="" />
             </button>
           </div>
-          <button class="relative-zindex">
+          <button class="relative-zindex" onclick="showstory()">
             <img src="img/icons8-story-32.png" alt="" />
           </button>
         </div>
-
         <div class="intro" id="intro">
           <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="" />
         </div>
         <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
-        <div class="outro">
+        <div class="outro d-none">
           <img id="outroimg" class="d-none" src="" alt="" />
         </div>
         <div class="gameovercontainer d-none">
           <button onclick="returntomenu()">Return to Menu</button>
           <button onclick="restartgame()">Play Again</button>
         </div>
-      </div>
-      <div>
-        <button id="start" class="btn" onclick="drawgame()">Start Game</button>
-      </div>
-      <div class="buttonscontainer d-none">
-        <div class="d-none">
-          <button onclick="closeoverlay()">X</button>
-        </div>
-        <div class="instructions">
-          <div class="alignment">
-            <div class="upbutton">
-              <button onclick="jump()">
-                <img src="img/upbutton.png" alt="" />
+        <div></div>
+        <div class="buttonscontainer d-none">
+          <div class="d-none">
+            <button onclick="closeoverlay()">X</button>
+          </div>
+          <div class="instructions">
+            <div class="alignment">
+              <div class="upbutton">
+                <button onclick="jump()">
+                  <img src="img/upbutton.png" alt="" />
+                </button>
+              </div>
+              <button onclick="moveLeft()">
+                <img src="img/leftbutton.png" alt="" />
+              </button>
+              <button><img src="img/downbutton.png" alt="" /></button>
+              <button onclick="moveRight()">
+                <img src="img/rightbutton.png" alt="" />
               </button>
             </div>
-            <button onclick="moveLeft()">
-              <img src="img/leftbutton.png" alt="" />
-            </button>
-            <button><img src="img/downbutton.png" alt="" /></button>
-            <button onclick="moveRight()">
-              <img src="img/rightbutton.png" alt="" />
-            </button>
-          </div>
-          <div class="buttonscontainer_2">
-            <div class="throw-button-container">
-              <button onclick="throwSalsaBottles()">
-                <span class="white">D</span></button
-              ><span class="white">To throw salsa bottles</span>
-            </div>
-            <div class="jump-button-container">
-              <button onclick="jump()"><span class="white">SPACE</span></button
-              ><span class="white">To jump</span>
+            <div class="buttonscontainer_2">
+              <div class="throw-button-container">
+                <button onclick="throwSalsaBottles()">
+                  <span class="white">D</span></button
+                ><span class="white">To throw salsa bottles</span>
+              </div>
+              <div class="jump-button-container">
+                <button onclick="jump()">
+                  <span class="white">SPACE</span></button
+                ><span class="white">To jump</span>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="storydiv d-none" w3-include-html="story.html"></div>
+        <div class="btn" id="start">
+          <button onclick="drawgame()">Start Game</button>
         </div>
       </div>
     </div>

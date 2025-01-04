@@ -16,10 +16,11 @@ function jump() {
 }
 
 function fullscreen() {
-  let fullscreen = document.getElementById("content");
-  openFullscreen(fullscreen);
-  if (isFullscreen) {
-    closeFullscreen(fullscreen);
+  let fullscreenElement = document.getElementById("content");
+  if (isFullscreen()) {
+    closeFullscreen();
+  } else {
+    openFullscreen(fullscreenElement);
   }
 }
 
@@ -41,23 +42,18 @@ function openFullscreen(elem) {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
   } else if (elem.webkitRequestFullscreen) {
-    /* Safari */
     elem.webkitRequestFullscreen();
   } else if (elem.msRequestFullscreen) {
-    /* IE11 */
     elem.msRequestFullscreen();
   }
 }
 
-/* Close fullscreen */
 function closeFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.webkitExitFullscreen) {
-    /* Safari */
     document.webkitExitFullscreen();
   } else if (document.msExitFullscreen) {
-    /* IE11 */
     document.msExitFullscreen();
   }
 }
@@ -89,7 +85,15 @@ function showcontrolls() {
     .querySelector(".buttonscontainer")
     .children[0].classList.add("closing");
   document.querySelector(".buttonscontainer").style =
-    "flex-direction: column;justify-content: flex-start;gap: 190px;position: absolute;max-width: 720px; width: 100%;background-color: rgba(0, 0, 0, 0.5);height: 50%;top: 263px;z-index: 9999";
+    "flex-direction: column;justify-content: flex-start;gap: 190px;position: absolute;max-width: 720px; width: 100%;background-color: rgba(0, 0, 0, 0.5);height: 100%;top: 0px;z-index: 9999";
+}
+
+function showstory() {
+  document.querySelector(".storydiv").classList.remove("d-none");
+}
+
+function closeinfotext() {
+  document.querySelector(".storydiv").classList.add("d-none");
 }
 
 function closeoverlay() {
@@ -105,13 +109,16 @@ function checkgamestatus() {
       document.querySelector(".gameovercontainer").classList.remove("d-none");
     } else if (world.character.energy == 0) {
       world.background_audio.pause();
+      world.character.death_sound.play();
       gameoverpart1();
+      world.character.death();
       setTimeout(() => {
+        document.querySelector(".outro").classList.remove("d-none");
         world.clearAllIntervals();
-      }, 50);
+      }, 1500);
       document.querySelector(".gameovercontainer").classList.remove("d-none");
     }
-  }, 1500);
+  }, 40);
 }
 
 function closemusic() {
@@ -125,19 +132,18 @@ function closemusic() {
 }
 
 function returntomenu() {
-  document.querySelector(".intro").style.zIndex = 1;
-  document.querySelector(".outro").style.zIndex = -1;
-
   document.querySelector(".gameovercontainer").classList.add("d-none");
+  document.querySelector(".intro").classList.add("d-none");
+  document.getElementById("canvas").classList.add("d-none");
+  document.querySelector(".outro").classList.add("d-none");
   document.querySelector(".intro").classList.remove("d-none");
-  document.getElementById("start").classList.remove("d-none");
-  world.init();
+  document.querySelector(".btn").classList.remove("d-none");
 }
 
 function gameoverpart1() {
   document.getElementById("outroimg").src =
     "img/9_intro_outro_screens/game_over/game_over.png";
-  document.querySelector(".outro").style.position = "relative";
+  document.querySelector(".outro").style.position = "absolute";
   document.getElementById("outroimg").classList.remove("d-none");
 }
 
@@ -152,14 +158,17 @@ function winscreen() {
   document.getElementById("outroimg").classList.remove("d-none");
 }
 
-function checkOrientation() {
-  if (window.matchMedia("(orientation: portrait)").matches) {
+let portrait = window.matchMedia("(orientation: portrait)");
+
+portrait.addEventListener("change", function (e) {
+  if (e.matches) {
     console.log("Portrait mode");
     document.getElementById("start").style.display = "none";
+    document.querySelector("canvas").src = "img/rotate.png";
   } else {
     console.log("Landscape mode");
   }
-}
+});
 
 document.addEventListener("keydown", (e) => {
   let code = e.keyCode;
@@ -249,9 +258,3 @@ function upkeyup() {
   keyboard.UP = false;
   console.log(keyboard.UP);
 }
-
-// Check orientation on load
-window.addEventListener("load", checkOrientation);
-
-// Check orientation on resize
-window.addEventListener("resize", checkOrientation);
