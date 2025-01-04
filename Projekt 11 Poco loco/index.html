@@ -31,11 +31,25 @@
   <body onload="checkOrientation()">
     <div class="box">
       <h1>El pollo loco</h1>
-      <div class="boxalign">
-        <button class="helpbutton" onclick="showcontrolls()">
-          <img class="help" src="img/information-button.png" alt="" />
-        </button>
-        <div class="intro">
+      <div class="boxalign" id="content">
+        <div class="usefulllinks">
+          <button class="helpbutton" onclick="showcontrolls()">
+            <img class="help" src="img/information-button.png" alt="" />
+          </button>
+          <div>
+            <button class="relative-zindex" onclick="fullscreen()">
+              <img src="img/icons8-fullscreen-32.png" alt="" />
+            </button>
+            <button class="relative-zindex" onclick="closemusic()">
+              <img id="audioicon" src="img/icons8-audio-32.png" alt="" />
+            </button>
+          </div>
+          <button class="relative-zindex">
+            <img src="img/icons8-story-32.png" alt="" />
+          </button>
+        </div>
+
+        <div class="intro" id="intro">
           <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="" />
         </div>
         <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>

@@ -15,9 +15,50 @@ function jump() {
   world.character.jump();
 }
 
+function fullscreen() {
+  let fullscreen = document.getElementById("content");
+  openFullscreen(fullscreen);
+  if (isFullscreen) {
+    closeFullscreen(fullscreen);
+  }
+}
+
 function moveLeft() {
   if (world.character.x > 0) {
     world.character.handleMoveLeft();
+  }
+}
+
+function isFullscreen() {
+  return (
+    document.fullscreenElement != null ||
+    document.webkitFullscreenElement != null ||
+    document.msFullscreenElement != null
+  );
+}
+
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    /* IE11 */
+    document.msExitFullscreen();
   }
 }
 
@@ -61,12 +102,36 @@ function checkgamestatus() {
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
       winscreen();
+      document.querySelector(".gameovercontainer").classList.remove("d-none");
     } else if (world.character.energy == 0) {
+      world.background_audio.pause();
       gameoverpart1();
-      world.clearAllIntervals();
+      setTimeout(() => {
+        world.clearAllIntervals();
+      }, 50);
       document.querySelector(".gameovercontainer").classList.remove("d-none");
     }
   }, 1500);
+}
+
+function closemusic() {
+  if (world.background_audio.paused) {
+    world.background_audio.play();
+    document.getElementById("audioicon").src = "img/icons8-audio-32.png";
+  } else {
+    world.background_audio.pause();
+    document.getElementById("audioicon").src = "img/icons8-no-audio-32.png";
+  }
+}
+
+function returntomenu() {
+  document.querySelector(".intro").style.zIndex = 1;
+  document.querySelector(".outro").style.zIndex = -1;
+
+  document.querySelector(".gameovercontainer").classList.add("d-none");
+  document.querySelector(".intro").classList.remove("d-none");
+  document.getElementById("start").classList.remove("d-none");
+  world.init();
 }
 
 function gameoverpart1() {
@@ -79,9 +144,12 @@ function gameoverpart1() {
 function winscreen() {
   document.getElementById("outroimg").src =
     "img/9_intro_outro_screens/win/win_2.png";
+  setTimeout(() => {
+    world.clearAllIntervals();
+    world.background_audio.pause();
+  }, 20);
   document.querySelector(".outro").style.position = "relative";
-  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  world.drawgame();
+  document.getElementById("outroimg").classList.remove("d-none");
 }
 
 function checkOrientation() {

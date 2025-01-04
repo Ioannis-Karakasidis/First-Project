@@ -16,10 +16,14 @@ class World {
   overlayImage = null;
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
+  background_audio = new Audio(
+    "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
+  );
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.background_audio.play();
     this.drawgame();
     this.setWorld();
     this.run();
