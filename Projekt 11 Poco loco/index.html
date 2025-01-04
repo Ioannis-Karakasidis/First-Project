@@ -41,7 +41,11 @@
             <button class="relative-zindex" onclick="fullscreen()">
               <img src="img/icons8-fullscreen-32.png" alt="" />
             </button>
-            <button class="relative-zindex" onclick="closemusic()">
+            <button
+              class="relative-zindex d-none"
+              id="mutebutton"
+              onclick="closemusic()"
+            >
               <img id="audioicon" src="img/icons8-audio-32.png" alt="" />
             </button>
           </div>
@@ -54,7 +58,7 @@
         </div>
         <canvas id="canvas" class="d-none" width="720" height="480"> </canvas>
         <div class="outro d-none">
-          <img id="outroimg" class="d-none" src="" alt="" />
+          <img id="outroimg" src="" alt="" />
         </div>
         <div class="gameovercontainer d-none">
           <button onclick="returntomenu()">Return to Menu</button>

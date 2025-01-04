@@ -77,6 +77,12 @@ function drawgame() {
   this.init();
   document.getElementById("canvas").classList.remove("d-none");
   checkgamestatus();
+  document.getElementById("mutebutton").classList.remove("d-none");
+}
+
+function stopAudio(audio) {
+  audio.pause();
+  audio.currentTime = 0;
 }
 
 function showcontrolls() {
@@ -102,12 +108,29 @@ function closeoverlay() {
   document.querySelector(".closing:hover").classList.remove("closing:hover");
 }
 
+function winscreen() {
+  document.getElementById("outroimg").src =
+    "img/9_intro_outro_screens/win/win_2.png";
+  setTimeout(() => {
+    world.clearAllIntervals();
+    world.background_audio.pause();
+  }, 200);
+  document.querySelector(".outro").style.position = "absolute";
+  document.querySelector(".outro").classList.remove("d-none");
+}
+
 function checkgamestatus() {
   setInterval(() => {
     if (world.enemybosshealthbar.percentage == 0) {
-      winscreen();
-      document.querySelector(".gameovercontainer").classList.remove("d-none");
-    } else if (world.character.energy == 0) {
+      setTimeout(() => {
+        document.querySelector(".gameovercontainer").classList.remove("d-none");
+        winscreen();
+      }, 500);
+    }
+  }, 40);
+
+  setInterval(() => {
+    if (world.character.energy == 0) {
       world.background_audio.pause();
       world.character.death_sound.play();
       gameoverpart1();
@@ -123,12 +146,21 @@ function checkgamestatus() {
 
 function closemusic() {
   if (world.background_audio.paused) {
-    world.background_audio.play();
     document.getElementById("audioicon").src = "img/icons8-audio-32.png";
+    world.background_audio.play();
   } else {
-    world.background_audio.pause();
     document.getElementById("audioicon").src = "img/icons8-no-audio-32.png";
+    world.background_audio.pause();
+    pausemusic();
   }
+}
+
+function pausemusic() {
+  world.character.jumping_sound.pause();
+  world.character.hurt_sound.pause();
+  world.character.death_sound.pause();
+  world.character.snooring_sound.pause();
+  world.background_audio.pause();
 }
 
 function returntomenu() {
@@ -147,19 +179,7 @@ function gameoverpart1() {
   document.getElementById("outroimg").classList.remove("d-none");
 }
 
-function winscreen() {
-  document.getElementById("outroimg").src =
-    "img/9_intro_outro_screens/win/win_2.png";
-  setTimeout(() => {
-    world.clearAllIntervals();
-    world.background_audio.pause();
-  }, 20);
-  document.querySelector(".outro").style.position = "relative";
-  document.getElementById("outroimg").classList.remove("d-none");
-}
-
 let portrait = window.matchMedia("(orientation: portrait)");
-
 portrait.addEventListener("change", function (e) {
   if (e.matches) {
     console.log("Portrait mode");

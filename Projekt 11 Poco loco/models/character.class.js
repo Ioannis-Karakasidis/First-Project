@@ -8,6 +8,7 @@ class Character extends MovableObject {
   jumping_sound = new Audio("audio/mixkit-video-game-spin-jump-2648.wav");
   hurt_sound = new Audio("audio/mixkit-man-in-pain-2197.wav");
   death_sound = new Audio("audio/male-death-sound-128357.mp3");
+  snooring_sound = new Audio("audio/snoring-sound-effect-55854.mp3");
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
@@ -47,6 +48,7 @@ class Character extends MovableObject {
     this.walking_sound.pause();
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.handleMoveRight();
+      this.snooring_sound.pause();
     }
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.handleMoveLeft();
@@ -99,6 +101,7 @@ class Character extends MovableObject {
         Date.now() - this.lastMoveTime >= 1500
       ) {
         setInterval(() => {
+          this.snooring_sound.play();
           this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
         }, 2500);
       }

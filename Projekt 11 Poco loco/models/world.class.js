@@ -96,17 +96,24 @@ class World {
   }
 
   enemykill(enemy) {
-    enemy.hit();
     if (enemy.constructor.name === "Chicken") {
       setInterval(() => {
         enemy.playAnimation(enemy.DEAD_CHICKEN);
       }, 1000 / 75);
-    } else {
+      enemy.hit();
+      enemy.death();
+
+      enemy.deadchicken_audio.play();
+    } else if (enemy.constructor.name === "Smallchicken") {
       setInterval(() => {
         enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
       }, 1000 / 75);
+      enemy.deadchicken_audio.play();
+      enemy.death();
+    } else {
+      this.character.hit();
+      this.statusbar.setpercentage(this.character.energy);
     }
-    enemy.death();
   }
 
   characterkillenemy(enemy) {
