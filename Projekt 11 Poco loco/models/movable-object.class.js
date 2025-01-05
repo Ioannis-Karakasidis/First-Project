@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
   lasthit = 0;
   charactersarray = new Characterarrays();
   deadchicken_audio = new Audio("audio/slap-hurt-pain-sound-effect-262618.mp3");
+
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {

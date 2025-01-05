@@ -65,10 +65,36 @@ function moveRight() {
 }
 
 function restartgame() {
-  document.querySelector(".outro").style.zIndex = "-1";
-  document.querySelector(".gameovercontainer").classList.add("d-none");
-  world.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   init();
+  world.level.enemies.forEach((enemy) => {
+    if (enemy instanceof Chicken) {
+      enemy.animatechickens();
+    }
+  });
+
+  world.level.enemies.forEach((enemy) => {
+    if (enemy instanceof Chicken) {
+      enemy.animatechickens();
+    }
+  });
+  world.level.Cloud.forEach((cloud) => {
+    cloud.animate();
+  });
+  world = new World(canvas, keyboard);
+  setInterval(() => {
+    if (world.character.energy === 0) {
+      world.character.death();
+      checkgamestatus();
+    }
+  }, 40);
+
+  // Update UI
+  document.querySelector(".gameovercontainer").classList.add("d-none");
+  document.querySelector(".intro").classList.add("d-none");
+  document.querySelector(".outro").classList.add("d-none");
+
+  document.getElementById("canvas").classList.remove("d-none");
 }
 
 function drawgame() {
@@ -164,12 +190,33 @@ function pausemusic() {
 }
 
 function returntomenu() {
+  world.clearAllIntervals();
+  // Pause all sounds
+  world.character.walking_sound.pause();
+  world.character.jumping_sound.pause();
+  world.character.hurt_sound.pause();
+  world.character.death_sound.pause();
+  world.character.snooring_sound.pause();
+  world.background_audio.pause();
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("canvas").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
   document.querySelector(".intro").classList.remove("d-none");
   document.querySelector(".btn").classList.remove("d-none");
+
+  // Ensure world and canvas are properly initialized
+  if (world && world.ctx && canvas) {
+    setInterval(() => {
+      world.ctx.clearRect(0, 0, 720, 480);
+    }, 0);
+    console.log("cleared");
+  } else {
+    console.error("world or canvas is not properly initialized");
+  }
+  if (world && world.stopAnimation) {
+    world.stopAnimation();
+  }
 }
 
 function gameoverpart1() {

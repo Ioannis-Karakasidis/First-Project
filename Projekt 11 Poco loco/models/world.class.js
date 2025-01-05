@@ -102,7 +102,6 @@ class World {
       }, 1000 / 75);
       enemy.hit();
       enemy.death();
-
       enemy.deadchicken_audio.play();
     } else if (enemy.constructor.name === "Smallchicken") {
       setInterval(() => {
@@ -183,9 +182,16 @@ class World {
     this.aftercamera();
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
-    requestAnimationFrame(function () {
+    this.animationFrameId = requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  stopAnimation() {
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
   }
 
   beforecamera() {
@@ -237,25 +243,9 @@ class World {
     this.ctx.restore();
   }
 
-  drawIntro(image) {
-    const img = new Image();
-    img.src = image;
-    img.onload = () => {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
-    };
-  }
-
-  drawOverlay() {
-    const img = new Image();
-    img.src = this.overlayImage;
-    img.onload = () => {
-      this.ctx.drawImage(img, 70, 200, 720, 480);
-      console.log("Overlay drawn"); // Debug log
-    };
-  }
-
   clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    for (let i = 1; i < 9999; i++) {
+      window.clearInterval(i);
+    }
   }
 }
