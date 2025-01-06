@@ -5,6 +5,7 @@ class World {
   level = level1;
   canvas;
   ctx;
+  world;
   keyboard;
   camera_x = 0;
   statusbar = new Statusbar();
@@ -12,6 +13,7 @@ class World {
   bottlestatusbar = new Bottlestatusbar();
   enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
+  bottles = [];
   intervals = [];
   overlayImage = null;
   rotatephoto = "img/rotate.png";
@@ -19,6 +21,7 @@ class World {
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -44,15 +47,27 @@ class World {
   checkthrowobjects() {
     if (this.keyboard.D) {
       this.throwSalsaBottle();
+      if (world.level.bottles.length === 4) {
+        console.log(world.level.bottles);
+        let bottle = new ThrowableObject(
+          this.character.x + 40,
+          this.character.y + 60
+        );
+        this.throwableobject.push(bottle);
+      }
     }
   }
 
   throwSalsaBottle() {
-    let bottle = new ThrowableObject(
-      this.character.x + 40,
-      this.character.y + 60
-    );
-    this.throwableobject.push(bottle);
+    if (this.throwableobject.length === 0) {
+      return;
+    } else {
+      let bottle = new ThrowableObject(
+        this.character.x + 40,
+        this.character.y + 60
+      );
+      this.throwableobject.push(bottle);
+    }
   }
 
   coinscollision() {
@@ -71,8 +86,10 @@ class World {
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
         );
+
         return false;
       }
+
       return true;
     });
   }
@@ -150,6 +167,20 @@ class World {
     } else if (enemy.constructor.name === "Endboss") {
       enemy.hit();
       this.enemybosshealthbar.setpercentage(enemy.energy);
+      if (
+        this.enemybosshealthbar.percentage > 0 &&
+        this.enemybosshealthbar.percentage < 100
+      ) {
+        setInterval(() => {
+          enemy.playAnimation(this.enemyboss.IMAGES_HURT);
+        }, 250);
+        setTimeout(() => {
+          enemy.moveLeft();
+          setInterval(() => {
+            enemy.playAnimation(this.enemyboss.IMAGES_ATTACK);
+          }, 1000 / 75);
+        }, 80);
+      }
     }
   }
 
