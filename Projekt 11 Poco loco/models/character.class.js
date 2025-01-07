@@ -104,30 +104,21 @@ class Character extends MovableObject {
   }
 
   sleepinganimation() {
-    console.log(`Current X: ${this.x}, Last Position: ${this.currentPosition}`);
-    console.log(`Time Since Last Move: ${Date.now() - this.lastMoveTime}ms`);
-
-    // Check if character hasn't moved and sufficient time has passed
     if (
       this.x === this.currentPosition &&
       Date.now() - this.lastMoveTime >= 500 // Idle for 1.5 seconds
     ) {
-      console.log("Character is idle. Triggering idle animation.");
       this.idleanimation(); // Trigger idle animation
     } else {
-      // Update position and time only when character moves
       if (this.x !== this.currentPosition) {
-        console.log("Character has moved. Updating position and time.");
         this.currentPosition = this.x;
         this.lastMoveTime = Date.now();
       } else {
-        console.log("Character is not idle yet.");
       }
     }
   }
 
   idleanimation() {
-    console.log("Idle animation triggered.");
     this.playAnimation(this.characterarrays.IMAGES_IDLE);
   }
 

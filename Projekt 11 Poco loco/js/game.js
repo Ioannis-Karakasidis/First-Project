@@ -9,6 +9,7 @@ let i = 1;
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+  setStoppableInterval(checkgamestatus, 40);
 }
 
 function throwSalsaBottles() {
@@ -159,25 +160,25 @@ function winscreen() {
 }
 
 function checkgamestatus() {
-  setInterval(() => {
-    if (world.enemybosshealthbar.percentage == 0) {
-      setTimeout(() => {
-        document.querySelector(".gameovercontainer").classList.remove("d-none");
-        winscreen();
-      }, 500);
-    }
-    if (world.character.energy == 0) {
-      world.background_audio.pause();
-      world.character.death_sound.play();
-      gameoverpart1();
-      world.character.death();
-      setTimeout(() => {
-        document.querySelector(".outro").classList.remove("d-none");
-        world.clearAllIntervals();
-      }, 1500);
+  if (world.enemybosshealthbar.percentage == 0) {
+    world.enemyboss.death();
+    setTimeout(() => {
       document.querySelector(".gameovercontainer").classList.remove("d-none");
-    }
-  }, 40);
+      winscreen();
+      world.character.snooring_sound.pause();
+    }, 1500);
+  }
+  if (world.character.energy == 0) {
+    world.background_audio.pause();
+    world.character.death_sound.play();
+    gameoverpart1();
+    world.character.death();
+    setTimeout(() => {
+      document.querySelector(".outro").classList.remove("d-none");
+      world.clearAllIntervals();
+    }, 1500);
+    document.querySelector(".gameovercontainer").classList.remove("d-none");
+  }
 }
 
 function closemusic() {

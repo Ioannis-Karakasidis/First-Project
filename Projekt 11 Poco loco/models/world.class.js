@@ -159,18 +159,12 @@ class World {
         enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
       }, 1000 / 75);
       enemy.death();
-    } else if (enemy.constructor.name === "Endboss") {
-      enemy.hit();
-      this.enemybosshealthbar.setpercentage(enemy.energy);
-      if (
-        this.enemybosshealthbar.percentage > 0 &&
-        this.enemybosshealthbar.percentage < 100
-      ) {
-        setInterval(() => {
-          enemy.playAnimation(this.enemyboss.IMAGES_HURT);
-        }, 250);
-      }
     }
+  }
+
+  attack(enemy) {
+    enemy.moveLeft();
+    enemy.playAnimation(this.enemyboss.IMAGES_ATTACK);
   }
 
   clearCanvas() {
