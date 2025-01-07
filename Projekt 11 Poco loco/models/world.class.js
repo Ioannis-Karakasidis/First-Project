@@ -37,11 +37,10 @@ class World {
   }
 
   run() {
-    const throwobjects = setInterval(() => {
+    setInterval(() => {
       this.checkCollisions();
       this.checkthrowobjects();
     }, 200);
-    this.intervals.push(throwobjects);
   }
 
   checkthrowobjects() {
@@ -59,15 +58,11 @@ class World {
   }
 
   throwSalsaBottle() {
-    if (this.throwableobject.length === 0) {
-      return;
-    } else {
-      let bottle = new ThrowableObject(
-        this.character.x + 40,
-        this.character.y + 60
-      );
-      this.throwableobject.push(bottle);
-    }
+    let bottle = new ThrowableObject(
+      this.character.x + 40,
+      this.character.y + 60
+    );
+    this.throwableobject.push(bottle);
   }
 
   coinscollision() {
@@ -174,12 +169,6 @@ class World {
         setInterval(() => {
           enemy.playAnimation(this.enemyboss.IMAGES_HURT);
         }, 250);
-        setTimeout(() => {
-          enemy.moveLeft();
-          setInterval(() => {
-            enemy.playAnimation(this.enemyboss.IMAGES_ATTACK);
-          }, 1000 / 75);
-        }, 80);
       }
     }
   }
@@ -216,13 +205,6 @@ class World {
     this.animationFrameId = requestAnimationFrame(function () {
       self.draw();
     });
-  }
-
-  stopAnimation() {
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = null;
-    }
   }
 
   beforecamera() {

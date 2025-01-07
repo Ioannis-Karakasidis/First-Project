@@ -10,24 +10,30 @@ class Chicken extends MovableObject {
 
   DEAD_CHICKEN = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
 
-  constructor(world) {
+  constructor() {
     super();
-    this.world = world;
-    this.x = 500 + Math.random() * 700;
+    this.x = 500 + Math.random() * 700 * 3;
     this.loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.DEAD_CHICKEN);
     this.applyGravity();
     this.animatechickens();
-    this.x = 500 + Math.random() * 700;
+    this.x = 700 + Math.random() * 700;
     this.speed = 0.15 + Math.random() * 0.5;
   }
 
   animatechickens() {
-    const walkinganimation = setInterval(() => {
+    this.walkinganimation();
+    this.moveleft();
+  }
+  walkinganimation() {
+    setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 250);
-    const moveleftanimation = setInterval(() => {
+  }
+
+  moveleft() {
+    setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);
   }

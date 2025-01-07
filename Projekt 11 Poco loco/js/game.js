@@ -1,7 +1,11 @@
 let canvas;
 let world;
+let coins;
 let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
+let intervalsIds = [];
+let i = 1;
+
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -22,6 +26,10 @@ function fullscreen() {
   } else {
     openFullscreen(fullscreenElement);
   }
+}
+
+function stopGame() {
+  intervalsIds.forEach(clearInterval);
 }
 
 function moveLeft() {
@@ -46,6 +54,11 @@ function openFullscreen(elem) {
   } else if (elem.msRequestFullscreen) {
     elem.msRequestFullscreen();
   }
+}
+
+function setStoppableInterval(fn, time) {
+  let id = setInterval(fn, time);
+  intervalsIds.push(id);
 }
 
 function closeFullscreen() {
@@ -153,9 +166,6 @@ function checkgamestatus() {
         winscreen();
       }, 500);
     }
-  }, 40);
-
-  setInterval(() => {
     if (world.character.energy == 0) {
       world.background_audio.pause();
       world.character.death_sound.play();
@@ -205,7 +215,6 @@ function returntomenu() {
   document.querySelector(".intro").classList.remove("d-none");
   document.querySelector(".btn").classList.remove("d-none");
 
-  // Ensure world and canvas are properly initialized
   if (world && world.ctx && canvas) {
     setInterval(() => {
       world.ctx.clearRect(0, 0, 720, 480);
