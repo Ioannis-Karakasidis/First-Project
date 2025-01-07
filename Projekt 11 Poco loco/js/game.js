@@ -31,6 +31,14 @@ function fullscreen() {
 
 function stopGame() {
   intervalsIds.forEach(clearInterval);
+  intervalsIds = [];
+}
+
+function stopSpecificGame(targetIndex) {
+  if (intervalsIds[targetIndex]) {
+    clearInterval(intervalsIds[targetIndex]); // Clear the specific interval
+    intervalsIds[targetIndex] = null; // Optional: Mark as cleared to prevent errors
+  }
 }
 
 function moveLeft() {
@@ -220,9 +228,7 @@ function returntomenu() {
     setInterval(() => {
       world.ctx.clearRect(0, 0, 720, 480);
     }, 0);
-    console.log("cleared");
   } else {
-    console.error("world or canvas is not properly initialized");
   }
   if (world && world.stopAnimation) {
     world.stopAnimation();

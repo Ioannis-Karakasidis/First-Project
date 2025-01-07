@@ -26,7 +26,6 @@ class MovableObject extends DrawableObject {
   }
 
   death() {
-    console.log("dead bsss");
     setInterval(() => {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;

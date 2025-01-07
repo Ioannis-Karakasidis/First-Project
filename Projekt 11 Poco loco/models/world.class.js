@@ -47,7 +47,6 @@ class World {
     if (this.keyboard.D) {
       this.throwSalsaBottle();
       if (world.level.bottles.length === 4) {
-        console.log(world.level.bottles);
         let bottle = new ThrowableObject(
           this.character.x + 40,
           this.character.y + 60

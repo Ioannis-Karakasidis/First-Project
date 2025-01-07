@@ -30,8 +30,10 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.movementandcamera(), 80);
     setStoppableInterval(() => this.walking(), 80);
     setStoppableInterval(() => this.jumping(), 80);
-    setStoppableInterval(() => this.sleepinganimation(), 200);
-    setStoppableInterval(() => this.snooringanimation(), 400); // Long idle
+    let indexOfSleepingAnimation = setStoppableInterval(
+      () => this.sleepinganimation(),
+      500
+    );
   }
 
   initializecharacter() {
@@ -89,7 +91,6 @@ class Character extends MovableObject {
   }
 
   movementandcamera() {
-    console.log("Character is moving.");
     this.updateMovementAndCamera();
   }
 
@@ -99,22 +100,21 @@ class Character extends MovableObject {
   }
 
   characteranimation() {
-    console.log("Updating character animation.");
     this.updateCharacterAnimation();
   }
 
   sleepinganimation() {
-    if (
-      this.x === this.currentPosition &&
-      Date.now() - this.lastMoveTime >= 500 // Idle for 1.5 seconds
-    ) {
-      this.idleanimation(); // Trigger idle animation
-    } else {
-      if (this.x !== this.currentPosition) {
-        this.currentPosition = this.x;
-        this.lastMoveTime = Date.now();
-      } else {
+    const timeElapsed = Date.now() - this.lastMoveTime;
+    if (this.x === this.currentPosition) {
+      if (timeElapsed >= 5000 && timeElapsed < 10000) {
+        this.idleanimation();
+      } else if (timeElapsed >= 10000) {
+        this.snooringanimation();
       }
+    } else {
+      this.currentPosition = this.x;
+      this.lastMoveTime = Date.now();
+      this.snooring_sound.pause();
     }
   }
 
@@ -123,14 +123,8 @@ class Character extends MovableObject {
   }
 
   snooringanimation() {
-    if (
-      this.x === this.currentPosition &&
-      Date.now() - this.lastMoveTime >= 2000
-    ) {
-      console.log("Character is long idle. Playing snooring animation.");
-      this.snooring_sound.play();
-      this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
-    }
+    this.snooring_sound.play();
+    this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
   }
 
   updateCharacterAnimation() {
