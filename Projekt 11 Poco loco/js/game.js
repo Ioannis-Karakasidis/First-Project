@@ -4,6 +4,8 @@ let coins;
 let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
 let intervalsIds = [];
+let lastWidth = window.innerWidth;
+let lastHeight = window.innerHeight;
 let i = 1;
 
 function init() {
@@ -36,8 +38,8 @@ function stopGame() {
 
 function stopSpecificGame(targetIndex) {
   if (intervalsIds[targetIndex]) {
-    clearInterval(intervalsIds[targetIndex]); // Clear the specific interval
-    intervalsIds[targetIndex] = null; // Optional: Mark as cleared to prevent errors
+    clearInterval(intervalsIds[targetIndex]);
+    intervalsIds[targetIndex] = null;
   }
 }
 
@@ -111,7 +113,6 @@ function restartgame() {
     }
   }, 40);
 
-  // Update UI
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
@@ -210,7 +211,6 @@ function pausemusic() {
 
 function returntomenu() {
   world.clearAllIntervals();
-  // Pause all sounds
   world.character.walking_sound.pause();
   world.character.jumping_sound.pause();
   world.character.hurt_sound.pause();
@@ -235,23 +235,59 @@ function returntomenu() {
   }
 }
 
+function togglerotation() {
+  deviceToggled = true;
+
+}
+// Function to check if the device is emulated as mobile
+function isEmulatingMobile() {
+  const isMobileWidth = window.innerWidth <= 768; // Check if width is within mobile range
+  const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi"); // Check user-agent
+
+  return isMobileWidth || isMobileUserAgent;
+}
+
+window.addEventListener("resize", () => {
+  const currentWidth = window.innerWidth;
+  const currentHeight = window.innerHeight;
+
+  checkemulator(currentWidth,currentHeight)
+
+  // Update last known dimensions
+  lastWidth = currentWidth;
+  lastHeight = currentHeight;
+});
+
+function checkemulator(currentWidth,currentHeight) {
+  // Only trigger when in mobile emulation mode and viewport size changes (rotation)
+  if (isEmulatingMobile()) {
+    // Check if the orientation has changed (i.e., width and height are swapped)
+    if (lastWidth !== currentWidth || lastHeight !== currentHeight) {
+      if (currentWidth > currentHeight) {
+        // Landscape mode (width > height)
+        document.getElementById('introimg').src = 'img/9_intro_outro_screens/start/startscreen_2.png';
+        document.getElementById('introimg').classList.remove('rotatepic');
+      } else {
+        // Portrait mode (height > width)
+        document.getElementById('introimg').src = 'img/rotate.png';
+        document.getElementById('introimg').classList.add('rotatepic');
+        document.querySelector('.box h1').style.display = 'none'
+      }
+    }
+
+  } else {
+    document.getElementById('introimg').classList.remove('rotatepic');
+    document.getElementById('introimg').src = 'img/9_intro_outro_screens/start/startscreen_2.png';
+
+  }
+}
+
 function gameoverpart1() {
   document.getElementById("outroimg").src =
     "img/9_intro_outro_screens/game_over/game_over.png";
   document.querySelector(".outro").style.position = "absolute";
   document.getElementById("outroimg").classList.remove("d-none");
 }
-
-let portrait = window.matchMedia("(orientation: portrait)");
-portrait.addEventListener("change", function (e) {
-  if (e.matches) {
-    console.log("Portrait mode");
-    document.getElementById("start").style.display = "none";
-    document.querySelector("canvas").src = "img/rotate.png";
-  } else {
-    console.log("Landscape mode");
-  }
-});
 
 document.addEventListener("keydown", (e) => {
   let code = e.keyCode;
