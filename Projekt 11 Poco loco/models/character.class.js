@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-  height = 280;
+  height = 180;
   y = 150;
   speed = 10;
   characterarrays = new Characterarrays();

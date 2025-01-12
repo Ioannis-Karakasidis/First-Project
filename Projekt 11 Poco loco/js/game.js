@@ -277,6 +277,7 @@ function checkemulator(currentWidth,currentHeight) {
 function gameoverpart1() {
   document.getElementById("outroimg").src =
     "img/9_intro_outro_screens/game_over/game_over.png";
+  world.character.snooring_sound.pause();
   document.querySelector(".outro").style.position = "absolute";
   document.getElementById("outroimg").classList.remove("d-none");
 }
