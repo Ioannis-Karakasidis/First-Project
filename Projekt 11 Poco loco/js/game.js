@@ -239,36 +239,28 @@ function togglerotation() {
   deviceToggled = true;
 
 }
-// Function to check if the device is emulated as mobile
 function isEmulatingMobile() {
-  const isMobileWidth = window.innerWidth <= 768; // Check if width is within mobile range
-  const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi"); // Check user-agent
+  const isMobileWidth = window.innerWidth <= 768; 
+  const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi"); 
 
-  return isMobileWidth || isMobileUserAgent;
+  return isMobileWidth && isMobileUserAgent;
 }
 
 window.addEventListener("resize", () => {
   const currentWidth = window.innerWidth;
   const currentHeight = window.innerHeight;
-
   checkemulator(currentWidth,currentHeight)
-
-  // Update last known dimensions
   lastWidth = currentWidth;
   lastHeight = currentHeight;
 });
 
 function checkemulator(currentWidth,currentHeight) {
-  // Only trigger when in mobile emulation mode and viewport size changes (rotation)
   if (isEmulatingMobile()) {
-    // Check if the orientation has changed (i.e., width and height are swapped)
     if (lastWidth !== currentWidth || lastHeight !== currentHeight) {
       if (currentWidth > currentHeight) {
-        // Landscape mode (width > height)
         document.getElementById('introimg').src = 'img/9_intro_outro_screens/start/startscreen_2.png';
         document.getElementById('introimg').classList.remove('rotatepic');
       } else {
-        // Portrait mode (height > width)
         document.getElementById('introimg').src = 'img/rotate.png';
         document.getElementById('introimg').classList.add('rotatepic');
         document.querySelector('.box h1').style.display = 'none'

@@ -173,7 +173,7 @@ class World {
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
-      enemy.world = this; // Pass reference to World instance to each enemy
+      enemy.world = this; 
     });
   }
 
@@ -238,10 +238,6 @@ class World {
     this.ctx.translate(mo.width, 0);
     this.ctx.scale(-1, 1);
     mo.x = mo.x * -1;
-  }
-
-  setOverlayImage(imagePath) {
-    this.overlayImage = imagePath;
   }
 
   flipImageBack(mo) {
