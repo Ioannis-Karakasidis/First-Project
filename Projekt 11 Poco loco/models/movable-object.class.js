@@ -18,10 +18,10 @@ class MovableObject extends DrawableObject {
 
   isCollidingTop(mo) {
     return (
-      this.y + this.height >= mo.y &&       // Bottom of this object is at or below the top of `mo`
-      this.y + this.height <= mo.y + mo.height && // Bottom of this object is not far below `mo`
-      this.x + this.width > mo.x + mo.width  && // Only collides when hitting near the center of `mo` from the top
-      this.x < mo.x + mo.width * 0.8              // Limits collision to center range
+      this.y + this.height >= mo.y &&       
+      this.y + this.height <= mo.y + mo.height && 
+      this.x + this.width > mo.x + mo.width && 
+      this.x < mo.x + mo.width           
     );
   }
 
