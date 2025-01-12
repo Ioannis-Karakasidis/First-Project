@@ -153,8 +153,17 @@ class World {
       }, 1000 / 75);
       enemy.death();
     } else if(enemy.constructor.name === "Endboss") {
-      console.log('hello');
-      
+       enemy.hit()
+       world.enemybosshealthbar.setpercentage(enemy.energy)
+       if(world.enemybosshealthbar.percentage === 0) {
+        setInterval(() => {
+          enemy.playAnimation(enemy.IMAGES_DEAD)
+        }, 200);
+        setTimeout(() => {
+          enemy.death()
+
+        }, 10);
+       }
     }
   }
 
