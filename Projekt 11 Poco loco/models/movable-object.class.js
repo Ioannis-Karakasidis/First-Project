@@ -20,7 +20,7 @@ class MovableObject extends DrawableObject {
     return (
       this.y + this.height >= mo.y &&       // Bottom of this object is at or below the top of `mo`
       this.y + this.height <= mo.y + mo.height && // Bottom of this object is not far below `mo`
-      this.x + this.width > mo.x + mo.width * 0.2 && // Only collides when hitting near the center of `mo` from the top
+      this.x + this.width > mo.x + mo.width  && // Only collides when hitting near the center of `mo` from the top
       this.x < mo.x + mo.width * 0.8              // Limits collision to center range
     );
   }

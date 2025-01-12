@@ -89,6 +89,8 @@ function moveRight() {
 }
 
 function restartgame() {
+  document.getElementById('start').style.display = 'none'
+
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   init();
   world.level.enemies.forEach((enemy) => {
@@ -210,6 +212,7 @@ function pausemusic() {
 }
 
 function returntomenu() {
+  document.getElementById('start').style.display = 'flex'
   world.clearAllIntervals();
   world.character.walking_sound.pause();
   world.character.jumping_sound.pause();
@@ -233,6 +236,8 @@ function returntomenu() {
   if (world && world.stopAnimation) {
     world.stopAnimation();
   }
+  document.getElementById('startbutton').onclick = restartgame;
+
 }
 
 function togglerotation() {
