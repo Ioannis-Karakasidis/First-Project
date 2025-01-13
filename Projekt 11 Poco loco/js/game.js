@@ -100,7 +100,6 @@ function restartgame() {
       enemy.animatechickens();
     }
   });
-
   world.level.enemies.forEach((enemy) => {
     if (enemy instanceof Chicken) {
       enemy.animatechickens();

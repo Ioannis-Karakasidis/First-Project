@@ -106,9 +106,9 @@ class Character extends MovableObject {
   sleepinganimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
-      if (timeElapsed >= 5000 && timeElapsed < 10000) {
+      if (timeElapsed >= 5000 && timeElapsed < 15000) { // Idle Animation between 5 and 15 seconds
         this.idleanimation();
-      } else if (timeElapsed >= 10000) {
+      } else if (timeElapsed >= 15000) { // Sleep Animation after 15 seconds
         this.snooringanimation();
       }
     } else {
@@ -117,7 +117,7 @@ class Character extends MovableObject {
       this.snooring_sound.pause();
     }
   }
-
+  
   idleanimation() {
     this.playAnimation(this.characterarrays.IMAGES_IDLE);
   }

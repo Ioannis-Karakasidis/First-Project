@@ -18,12 +18,14 @@ class MovableObject extends DrawableObject {
 
   isCollidingTop(mo) {
     return (
-      this.y + this.height >= mo.y &&
       this.y + this.height <= mo.y + mo.height &&
+      this.y + this.height >= mo.y &&
       this.x + this.width > mo.x &&
       this.x < mo.x + mo.width
     );
-  } 
+  }
+
+
 
   death() {
     setInterval(() => {
