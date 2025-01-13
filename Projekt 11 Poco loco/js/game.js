@@ -67,6 +67,8 @@ function openFullscreen(elem) {
   }
 }
 
+
+
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervalsIds.push(id);

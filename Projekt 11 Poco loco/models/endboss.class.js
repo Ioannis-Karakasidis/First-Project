@@ -37,8 +37,11 @@ class Endboss extends MovableObject {
   GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
   win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
   gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
+  animationInterval = null; // Store the interval ID here
+  intervalsIdss = []; // To store all interval IDs
 
   energy = 100;
+
   constructor() {
     super();
     this.loadImage(this.IMAGES_WALKING[0]);
@@ -50,5 +53,23 @@ class Endboss extends MovableObject {
     this.y = 80;
     this.height = 400;
     this.width = 300;
+    this.animate();
+    this.animationInterval = this.setStoppableInterval(() => this.animate(), 200);
+   
+  }
+
+  animate() {
+    this.playAnimation(this.IMAGES_WALKING);
+  }
+
+  stopGames() {
+    this.intervalsIdss.forEach(clearInterval);
+    this.intervalsIdss = [];
+  }
+
+  setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    this.intervalsIdss.push(id); // Store the interval ID
+    return id; // Return the interval ID for potential future use
   }
 }

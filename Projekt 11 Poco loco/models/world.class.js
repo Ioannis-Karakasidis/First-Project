@@ -18,6 +18,9 @@ class World {
   overlayImage = null;
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
+  isEndbossHit = false;
+
+  bottles = 0;
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
@@ -46,16 +49,25 @@ class World {
   checkthrowobjects() {
     if (this.keyboard.D) {
       this.throwSalsaBottle();
-      
+
     }
   }
 
   throwSalsaBottle() {
-    let bottle = new ThrowableObject(
-      this.character.x + 40,
-      this.character.y + 0
-    );
-    this.throwableobject.push(bottle);
+    if (this.bottles === 0) {
+      return;
+    } else {
+      let bottle = new ThrowableObject(
+        this.character.x + 40,
+        this.character.y + 0
+      );
+      this.throwableobject.push(bottle);
+      this.bottles--
+      this.bottlestatusbar.setpercentage(
+        this.bottlestatusbar.percentage - 20
+      );
+    }
+
   }
 
   coinscollision() {
@@ -71,6 +83,7 @@ class World {
   bottlescollision() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
       if (this.character.isColliding(bottle)) {
+        this.bottles++
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
         );
@@ -117,7 +130,7 @@ class World {
     } else {
       this.character.hit();
       this.statusbar.setpercentage(this.character.energy);
-    } 
+    }
   }
 
   characterkillenemy(enemy) {
@@ -152,25 +165,40 @@ class World {
         enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
       }, 1000 / 75);
       enemy.death();
-    } else if(enemy.constructor.name === "Endboss") {
-       enemy.hit()
-       world.enemybosshealthbar.setpercentage(enemy.energy)
-       if(world.enemybosshealthbar.percentage === 0) {
-        setInterval(() => {
-          enemy.playAnimation(enemy.IMAGES_DEAD)
-        }, 200);
-        setTimeout(() => {
-          enemy.death()
-
-        }, 10);
-       }
+    } else if (enemy.constructor.name === "Endboss") {
+      this.enemybosscollision(enemy)
     }
   }
 
-  attack(enemy) {
-    enemy.moveLeft();
-    enemy.playAnimation(this.enemyboss.IMAGES_ATTACK);
+  enemybosscollision(enemy) {
+    if (!this.isEndbossHit) {
+      this.isEndbossHit = true;
+      enemy.hit();
+      world.enemybosshealthbar.setpercentage(enemy.energy);
+      if (world.enemybosshealthbar.percentage === 0) {
+        setInterval(() => {
+          enemy.playAnimation(enemy.IMAGES_DEAD);
+        }, 200);
+        setTimeout(() => {
+          enemy.death();
+          this.isEndbossHit = false;
+        }, 10);
+      } else {
+        enemy.stopGames()
+        setInterval(() => {
+          enemy.moveLeft();
+        }, 1000 / 180);
+        setInterval(() => {
+          enemy.playAnimation(enemy.IMAGES_ATTACK)
+        }, 150);
+        setTimeout(() => {
+          this.isEndbossHit = false;
+        }, 1000);
+      }
+    }
   }
+
+
 
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -179,7 +207,7 @@ class World {
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
-      enemy.world = this; 
+      enemy.world = this;
     });
   }
 
