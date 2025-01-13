@@ -3,6 +3,13 @@ class Bottle extends DrawableObject {
     "img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
     "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
   ];
+
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30
+  }
   constructor() {
     super();
     this.loadImages(this.bottleanimation);

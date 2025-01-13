@@ -1,5 +1,13 @@
 class Coins extends DrawableObject {
   coinanimation = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30
+  }
+  
   constructor() {
     super();
     this.loadImages(this.coinanimation);
@@ -7,6 +15,8 @@ class Coins extends DrawableObject {
     this.y = 100 + Math.random() * 250;
     this.animate();
   }
+
+
   animate() {
     setInterval(() => {
       this.playAnimation(this.coinanimation);

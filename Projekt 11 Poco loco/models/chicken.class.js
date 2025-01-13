@@ -9,7 +9,12 @@ class Chicken extends MovableObject {
   ];
 
   DEAD_CHICKEN = ["img/3_enemies_chicken/chicken_normal/2_dead/dead.png"];
-
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30
+  }
   constructor() {
     super();
     this.x = 500 + Math.random() * 700 * 3;

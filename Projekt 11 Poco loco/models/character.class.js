@@ -10,6 +10,13 @@ class Character extends MovableObject {
   death_sound = new Audio("audio/male-death-sound-128357.mp3");
   snooring_sound = new Audio("audio/snoring-sound-effect-55854.mp3");
 
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30
+  }
+
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
@@ -117,7 +124,7 @@ class Character extends MovableObject {
       this.snooring_sound.pause();
     }
   }
-  
+
   idleanimation() {
     this.playAnimation(this.characterarrays.IMAGES_IDLE);
   }
