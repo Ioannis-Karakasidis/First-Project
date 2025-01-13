@@ -18,15 +18,13 @@ class MovableObject extends DrawableObject {
 
   isCollidingTop(mo) {
     return (
-      this.y + this.height <= mo.y + mo.height &&
-      this.y + this.height >= mo.y &&
-      this.x + this.width > mo.x &&
-      this.x < mo.x + mo.width
+      this.y + this.height > mo.y &&     // Player's bottom is below enemy's top
+      this.y < mo.y + mo.height &&       // Player's top is above enemy's bottom
+      (this.x + this.width > mo.x &&     // Player's right edge is past enemy's left edge
+       this.x < mo.x + mo.width)         // Player's left edge is before enemy's right edge
     );
   }
-
-
-
+  
   death() {
     setInterval(() => {
       this.y -= this.speedY;
@@ -38,7 +36,7 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else {
-      return this.y < 260;
+      return this.y < 170;
     }
   }
 
@@ -55,12 +53,10 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
-    return (
-      this.x + this.width > mo.x &&
+    return this.x + this.width > mo.x &&
       this.y + this.height > mo.y &&
       this.x < mo.x &&
       this.y < mo.y + mo.height
-    );
   }
 
   isHURT() {

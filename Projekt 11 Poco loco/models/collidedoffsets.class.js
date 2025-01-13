@@ -1,0 +1,3 @@
+class Collidedoffsets extends MovableObject {
+
+}

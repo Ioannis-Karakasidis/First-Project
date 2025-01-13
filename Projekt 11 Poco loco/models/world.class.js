@@ -59,7 +59,7 @@ class World {
     } else {
       let bottle = new ThrowableObject(
         this.character.x + 40,
-        this.character.y + 0
+        this.character.y + 40
       );
       this.throwableobject.push(bottle);
       this.bottles--
@@ -87,7 +87,6 @@ class World {
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
         );
-
         return false;
       }
 
@@ -104,14 +103,17 @@ class World {
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isCollidingTop(enemy)) {
+        console.log("Enemy killed from top!");
         this.enemykill(enemy);
       } else if (this.character.isColliding(enemy)) {
+        console.log("Player hit!");
         this.character.hit();
         this.statusbar.setpercentage(this.character.energy);
       }
       this.throwbottles(enemy);
     });
   }
+  
 
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
@@ -256,6 +258,8 @@ class World {
     }
 
     mo.draw(this.ctx);
+    mo.drawframe(this.ctx);
+
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
