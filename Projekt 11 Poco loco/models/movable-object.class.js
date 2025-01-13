@@ -16,15 +16,6 @@ class MovableObject extends DrawableObject {
     }, 40);
   }
 
-  isCollidingTop(mo) {
-    return (
-      this.y + this.height > mo.y &&     // Player's bottom is below enemy's top
-      this.y < mo.y + mo.height &&       // Player's top is above enemy's bottom
-      (this.x + this.width > mo.x &&     // Player's right edge is past enemy's left edge
-        this.x < mo.x + mo.width)         // Player's left edge is before enemy's right edge
-    );
-  }
-
   death() {
     setInterval(() => {
       this.y -= this.speedY;
@@ -51,14 +42,17 @@ class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 20;
   }
-
+z
   isColliding(mo) {
-    return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+    return (
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
       this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
       this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
       this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    );
   }
-
+  
+  
   isHURT() {
     let timepassed = new Date().getTime() - this.lasthit;
     timepassed = timepassed / 1000;

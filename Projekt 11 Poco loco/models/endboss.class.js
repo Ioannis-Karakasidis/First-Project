@@ -39,7 +39,13 @@ class Endboss extends MovableObject {
   gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
   animationInterval = null; // Store the interval ID here
   intervalsIdss = []; // To store all interval IDs
-
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30
+  }
+  
   energy = 100;
 
   constructor() {

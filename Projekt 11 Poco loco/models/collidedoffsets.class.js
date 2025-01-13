@@ -9,5 +9,4 @@ class Collidedoffsets extends MovableObject {
         bottom: 0
     }
 
-
 }

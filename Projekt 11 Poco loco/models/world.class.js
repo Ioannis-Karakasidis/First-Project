@@ -19,7 +19,6 @@ class World {
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
   isEndbossHit = false;
-
   bottles = 0;
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
@@ -102,18 +101,29 @@ class World {
 
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isCollidingTop(enemy)) {
-        console.log("Enemy killed from top!");
-        this.enemykill(enemy);
-      } else if (this.character.isColliding(enemy)) {
-        console.log("Player hit!");
-        this.character.hit();
-        this.statusbar.setpercentage(this.character.energy);
+      if (this.character.isColliding(enemy)) {
+        // Check if the collision is from the top
+        const playerBottom = this.character.y + this.character.height - this.character.offset.bottom;
+        const enemyTop = enemy.y + enemy.offset.top;
+
+        const playerTop = this.character.y + this.character.offset.top;
+        const enemyBottom = enemy.y + enemy.height - enemy.offset.bottom;
+
+        if (playerBottom === enemyTop) { // Allow a small threshold for top collision
+          console.log("Enemy killed from top!");
+        } else if (
+          (playerTop < enemyBottom && playerBottom > enemyTop) && // Ensure vertical overlap
+          (this.character.x < enemy.x + enemy.width && this.character.x + this.character.width > enemy.x) // Ensure horizontal overlap
+        ) {
+          console.log("Player hit from the side!");
+         
+        }
+
+        this.throwbottles(enemy);
       }
-      this.throwbottles(enemy);
     });
   }
-  
+
 
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
