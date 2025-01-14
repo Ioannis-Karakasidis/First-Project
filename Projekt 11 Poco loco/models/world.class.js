@@ -103,31 +103,26 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (world.character.isAboveGround() && !this.isEndbossHit) {
-          this.isEndbossHit = true; // Prevent repeated collisions
+          this.isEndbossHit = true;
           enemy.death();
           this.enemykill(enemy);
-  
-          // Reset the flag after a grace period
           setTimeout(() => {
             this.isEndbossHit = false;
-          }, 500); // Grace period
+          }, 500);
         } else if (!world.character.isAboveGround() && !this.isEndbossHit) {
-          this.isEndbossHit = true; // Prevent repeated damage
+          this.isEndbossHit = true;
           world.character.hit();
           this.statusbar.setpercentage(world.character.energy);
-  
-          // Reset the flag after a short delay
           setTimeout(() => {
             this.isEndbossHit = false;
-          }, 500); // Match the grace period for consistency
+          }, 500);
         }
-  
-        // Trigger bottle throw
+
         this.throwbottles(enemy);
       }
     });
   }
-  
+
 
 
 
@@ -260,10 +255,7 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-
     mo.draw(this.ctx);
-    mo.drawframe(this.ctx);
-
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
