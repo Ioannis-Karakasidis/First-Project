@@ -102,27 +102,34 @@ class World {
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        // Check if the collision is from the top
-        const playerBottom = this.character.y + this.character.height - this.character.offset.bottom;
-        const enemyTop = enemy.y + enemy.offset.top;
-
-        const playerTop = this.character.y + this.character.offset.top;
-        const enemyBottom = enemy.y + enemy.height - enemy.offset.bottom;
-
-        if (playerBottom === enemyTop) { // Allow a small threshold for top collision
-          console.log("Enemy killed from top!");
-        } else if (
-          (playerTop < enemyBottom && playerBottom > enemyTop) && // Ensure vertical overlap
-          (this.character.x < enemy.x + enemy.width && this.character.x + this.character.width > enemy.x) // Ensure horizontal overlap
-        ) {
-          console.log("Player hit from the side!");
-         
+        if (world.character.isAboveGround() && !this.isEndbossHit) {
+          this.isEndbossHit = true; // Prevent repeated collisions
+          enemy.death();
+          this.enemykill(enemy);
+  
+          // Reset the flag after a grace period
+          setTimeout(() => {
+            this.isEndbossHit = false;
+          }, 500); // Grace period
+        } else if (!world.character.isAboveGround() && !this.isEndbossHit) {
+          this.isEndbossHit = true; // Prevent repeated damage
+          world.character.hit();
+          this.statusbar.setpercentage(world.character.energy);
+  
+          // Reset the flag after a short delay
+          setTimeout(() => {
+            this.isEndbossHit = false;
+          }, 500); // Match the grace period for consistency
         }
-
+  
+        // Trigger bottle throw
         this.throwbottles(enemy);
       }
     });
   }
+  
+
+
 
 
   enemykill(enemy) {
@@ -142,19 +149,6 @@ class World {
     } else {
       this.character.hit();
       this.statusbar.setpercentage(this.character.energy);
-    }
-  }
-
-  characterkillenemy(enemy) {
-    if (
-      this.character.isColliding(enemy) &&
-      this.character.y + this.character.height <= enemy.y + enemy.height / 2
-    ) {
-      enemy.hit();
-      setInterval(() => {
-        enemy.playAnimation(enemy.DEAD_CHICKEN);
-      }, 1000 / 75);
-      enemy.death();
     }
   }
 

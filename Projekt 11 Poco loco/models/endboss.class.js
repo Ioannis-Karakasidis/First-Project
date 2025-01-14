@@ -37,13 +37,13 @@ class Endboss extends MovableObject {
   GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
   win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
   gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
-  animationInterval = null; // Store the interval ID here
-  intervalsIdss = []; // To store all interval IDs
+  animationInterval = null; 
+  intervalsIdss = []; 
   offset = {
-    top: 120,
-    left: 30,
-    right: 40,
-    bottom: 30
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   }
   
   energy = 100;

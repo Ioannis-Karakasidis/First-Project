@@ -2,9 +2,9 @@ class Coins extends DrawableObject {
   coinanimation = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
 
   offset = {
-    top: 120,
+    top: 30,
     left: 30,
-    right: 40,
+    right: 30,
     bottom: 30
   }
   

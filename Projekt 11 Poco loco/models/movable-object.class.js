@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;
-  speedY = 0;
+  speedY = 0.5;
   acceleration = 1;
   lasthit = 0;
   charactersarray = new Characterarrays();
