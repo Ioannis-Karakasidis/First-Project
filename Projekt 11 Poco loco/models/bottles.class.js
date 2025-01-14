@@ -31,11 +31,11 @@ class Bottle extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.bottleanimation);
-    this.x = 500 + Math.random() * 700; // Random x position between 500 and 1200.
-    this.y = 300; // Fixed y position.
+    this.x = 500 + Math.random() * 700; 
+    this.y = 300; 
 
     setInterval(() => {
       this.playAnimation(this.bottleanimation);
-    }, 400); // Plays animation every 400ms.
+    }, 400); 
   }
 }
