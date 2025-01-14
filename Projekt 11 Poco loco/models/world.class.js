@@ -19,6 +19,7 @@ class World {
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
   isEndbossHit = false;
+  isEndbosshit = false;
   bottles = 0;
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
@@ -102,24 +103,25 @@ class World {
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        if (world.character.isAboveGround() && !this.isEndbossHit) {
-          this.isEndbossHit = true;
+        if (world.character.isAboveGround() && !this.isEndbosshit) {
+          this.isEndbosshit = true;
           enemy.death();
           this.enemykill(enemy);
           setTimeout(() => {
-            this.isEndbossHit = false;
+            this.isEndbosshit = false;
           }, 500);
-        } else if (!world.character.isAboveGround() && !this.isEndbossHit) {
-          this.isEndbossHit = true;
+        } else if (!world.character.isAboveGround() && !this.isEndbosshit) {
+          this.isEndbosshit = true;
           world.character.hit();
           this.statusbar.setpercentage(world.character.energy);
           setTimeout(() => {
-            this.isEndbossHit = false;
+            this.isEndbosshit = false;
           }, 500);
         }
 
-        this.throwbottles(enemy);
       }
+      this.throwbottles(enemy);
+
     });
   }
 
