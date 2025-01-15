@@ -98,6 +98,10 @@ class World {
     this.coinscollision();
     this.charactercollision();
     this.bottlescollision();
+
+    this.level.enemies.forEach((enemy) => {
+      this.throwbottles(enemy);
+    });
   }
 
   charactercollision() {
@@ -119,8 +123,10 @@ class World {
           }, 500);
         }
 
+      } else {
+        this.throwbottles(enemy);
+
       }
-      this.throwbottles(enemy);
 
     });
   }

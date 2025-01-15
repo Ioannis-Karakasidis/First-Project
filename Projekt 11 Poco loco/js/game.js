@@ -132,10 +132,6 @@ function drawgame() {
   document.getElementById("mutebutton").classList.remove("d-none");
 }
 
-function stopAudio(audio) {
-  audio.pause();
-  audio.currentTime = 0;
-}
 
 function showcontrolls() {
   document.querySelector(".buttonscontainer").classList.remove("d-none");
@@ -205,11 +201,30 @@ function closemusic() {
 }
 
 function pausemusic() {
-  world.character.jumping_sound.pause();
-  world.character.hurt_sound.pause();
-  world.character.death_sound.pause();
-  world.character.snooring_sound.pause();
-  world.background_audio.pause();
+  setInterval(() => {
+    if (world.character.jumping_sound.play()) {
+      world.character.jumping_sound.pause();
+    }
+    if (world.character.hurt_sound.play()) {
+      world.character.hurt_sound.pause();
+    }
+    if (world.character.death_sound.play()) {
+      world.character.death_sound.pause();
+    }
+    if (world.character.snooring_sound.play()) {
+      world.character.snooring_sound.pause();
+    }
+    if (world.background_audio.play()) {
+      world.background_audio.pause();
+    }
+    if (world.character.walking_sound.play()) {
+      world.character.walking_sound.pause();
+    }
+    if (world.movableObject.deadchicken_audio.play) {
+      world.movableObject.deadchicken_audio.pause();
+    }
+  }, 1000 / 200);
+
 }
 
 function returntomenu() {
@@ -246,21 +261,25 @@ function togglerotation() {
 
 }
 function isEmulatingMobile() {
-  const isMobileWidth = window.innerWidth <= 768; 
-  const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi"); 
+  const isMobileWidth = window.innerWidth <= 768;
+  const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi");
 
   return isMobileWidth && isMobileUserAgent;
 }
 
-window.addEventListener("resize", () => {
-  const currentWidth = window.innerWidth;
-  const currentHeight = window.innerHeight;
-  checkemulator(currentWidth,currentHeight)
-  lastWidth = currentWidth;
-  lastHeight = currentHeight;
-});
+function checkorientation() {
+  setInterval(() => {
+    const currentWidth = window.innerWidth;
+    const currentHeight = window.innerHeight;
+    if (currentWidth !== lastWidth || currentHeight !== lastHeight) {
+      checkemulator(currentWidth, currentHeight);
+      lastWidth = currentWidth;
+      lastHeight = currentHeight;
+    }
+  }, 10);
+}
 
-function checkemulator(currentWidth,currentHeight) {
+function checkemulator(currentWidth, currentHeight) {
   if (isEmulatingMobile()) {
     if (lastWidth !== currentWidth || lastHeight !== currentHeight) {
       if (currentWidth > currentHeight) {

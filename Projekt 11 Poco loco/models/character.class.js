@@ -36,7 +36,7 @@ class Character extends MovableObject {
   stopintervals() {
     setStoppableInterval(() => this.movementandcamera(), 80);
     setStoppableInterval(() => this.walking(), 80);
-    setStoppableInterval(() => this.jumping(), 80);
+    setStoppableInterval(() => this.jumping(), 200);
     let indexOfSleepingAnimation = setStoppableInterval(
       () => this.sleepinganimation(),
       500

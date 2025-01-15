@@ -43,14 +43,19 @@ class MovableObject extends DrawableObject {
     this.speedY = 20;
   }
 z
-  isColliding(mo) {
-    return (
-      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
-    );
+isColliding(mo) {
+  if (!this.offset || !mo.offset) {
+    console.error('Offset is undefined:', this.offset, mo.offset);
+    return false; // Or some default value to prevent further errors
   }
+  
+  return (
+    this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+    this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+    this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+    this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+  );
+}
   
   
   isHURT() {
