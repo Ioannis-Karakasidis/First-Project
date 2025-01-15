@@ -279,27 +279,3 @@ button img {
   color: white;
 }
 
-@media (orientation: landscape) {
-  body {
-    margin: 0;
-    height: 100vh;
-  }
-
-  a {
-    display: none;
-  }
-
-  .box {
-    height: 100%;
-  }
-
-  .box h1 {
-    display: none;
-  }
-}
-
-@media (orientation: portrait) {
-  .box {
-    width: 100vw;
-  }
-}
