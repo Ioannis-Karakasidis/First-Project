@@ -91,45 +91,59 @@ function moveRight() {
 }
 
 function restartgame() {
-  document.getElementById('start').style.display = 'none'
+  // Stop all active intervals
+  stopGame();
 
+  // Clear the canvas to remove all drawn objects
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  init();
-  world.level.enemies.forEach((enemy) => {
-    if (enemy instanceof Chicken) {
-      enemy.animatechickens();
-    }
-  });
-  world.level.enemies.forEach((enemy) => {
-    if (enemy instanceof Chicken) {
-      enemy.animatechickens();
-    }
-  });
-  world.level.Cloud.forEach((cloud) => {
-    cloud.animate();
-  });
-  world = new World(canvas, keyboard);
-  setInterval(() => {
-    if (world.character.energy === 0) {
-      world.character.death();
-      checkgamestatus();
-    }
-  }, 40);
 
+  // Reset game objects
+  world = new World(canvas, keyboard); // Reinitialize the world with new settings
+
+  // Reset UI elements
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
-
   document.getElementById("canvas").classList.remove("d-none");
+  document.getElementById("start").style.display = "none";
+
+  // Reinitialize animations and interactions
+  world.level.enemies.forEach((enemy) => {
+    if (enemy instanceof Chicken) {
+      enemy.animatechickens();
+    }
+  });
+
+  world.level.Cloud.forEach((cloud) => {
+    cloud.animate();
+  });
+
+  // Restart game mechanics (e.g., status checks, music, etc.)
+  setStoppableInterval(checkgamestatus, 40);
+
+  // Reset sounds (if applicable)
+  if (world.background_audio) {
+    world.background_audio.currentTime = 0; // Reset music to the start
+    world.background_audio.play(); // Restart background music
+  }
+
+  console.log("Game restarted successfully");
 }
 
+
 function drawgame() {
+  initleve1()
+  document.getElementById('reload').classList.remove('d-none')
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
-  this.init();
   document.getElementById("canvas").classList.remove("d-none");
+  init()
   checkgamestatus();
   document.getElementById("mutebutton").classList.remove("d-none");
+}
+
+function reloadgame() {
+  restartGame()
 }
 
 
