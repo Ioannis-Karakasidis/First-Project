@@ -104,23 +104,22 @@ class World {
     });
   }
 
+  enemydead(enemy) {
+    this.isEndbosshit = true;
+    enemy.death();
+    this.enemykill(enemy);
+    setTimeout(() => {
+      this.isEndbosshit = false;
+    }, 500);
+  }
+
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (world.character.isAboveGround() && !this.isEndbosshit) {
-          this.isEndbosshit = true;
-          enemy.death();
-          this.enemykill(enemy);
-          setTimeout(() => {
-            this.isEndbosshit = false;
-          }, 500);
+          this.enemydead(enemy)
         } else if (!world.character.isAboveGround() && !this.isEndbosshit) {
-          this.isEndbosshit = true;
-          world.character.hit();
-          this.statusbar.setpercentage(world.character.energy);
-          setTimeout(() => {
-            this.isEndbosshit = false;
-          }, 500);
+          this.characterattacked()
         }
 
       } else {
@@ -131,9 +130,14 @@ class World {
     });
   }
 
-
-
-
+  characterattacked() {
+    this.isEndbosshit = true;
+    world.character.hit();
+    this.statusbar.setpercentage(world.character.energy);
+    setTimeout(() => {
+      this.isEndbosshit = false;
+    }, 100);
+  }
 
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
@@ -179,35 +183,41 @@ class World {
     }
   }
 
+  deadboss(enemy) {
+    setInterval(() => {
+      enemy.playAnimation(enemy.IMAGES_DEAD);
+    }, 200);
+    setTimeout(() => {
+      enemy.death();
+      this.isEndbossHit = false;
+    }, 10);
+  }
+
   enemybosscollision(enemy) {
     if (!this.isEndbossHit) {
       this.isEndbossHit = true;
       enemy.hit();
       world.enemybosshealthbar.setpercentage(enemy.energy);
       if (world.enemybosshealthbar.percentage === 0) {
-        setInterval(() => {
-          enemy.playAnimation(enemy.IMAGES_DEAD);
-        }, 200);
-        setTimeout(() => {
-          enemy.death();
-          this.isEndbossHit = false;
-        }, 10);
+        this.deadboss(enemy)
       } else {
-        enemy.stopGames()
-        setInterval(() => {
-          enemy.moveLeft();
-        }, 1000 / 180);
-        setInterval(() => {
-          enemy.playAnimation(enemy.IMAGES_ATTACK)
-        }, 150);
-        setTimeout(() => {
-          this.isEndbossHit = false;
-        }, 1000);
+        this.bossattack(enemy)
       }
     }
   }
 
-
+  bossattack(enemy) {
+    enemy.stopGames()
+    setInterval(() => {
+      enemy.moveLeft();
+    }, 1000 / 180);
+    setInterval(() => {
+      enemy.playAnimation(enemy.IMAGES_ATTACK)
+    }, 150);
+    setTimeout(() => {
+      this.isEndbossHit = false;
+    }, 1000);
+  }
 
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -231,7 +241,7 @@ class World {
   drawgame() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    if(this.level.backgroundObjects){
+    if (this.level.backgroundObjects) {
       this.addObjectsToMap(this.level.backgroundObjects);
 
     }

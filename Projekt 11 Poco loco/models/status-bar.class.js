@@ -1,4 +1,9 @@
+/**
+ * Represents a status bar displaying health or progress.
+ * Inherits from DrawableObject, allowing for image loading and animation.
+ */
 class Statusbar extends DrawableObject {
+  /** @type {Array} The images representing different health levels of the status bar. */
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
@@ -7,14 +12,21 @@ class Statusbar extends DrawableObject {
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
   ];
+
+  /** @type {number} The percentage value representing the current health or progress. */
   percentage = 100;
+
+  /**
+   * Creates a new Statusbar object.
+   * Initializes the position, size, and the initial health percentage.
+   */
   constructor() {
     super();
-    this.loadImages(this.IMAGES);
-    this.x = 20;
-    this.y = 70;
-    this.width = 200;
-    this.height = 100;
-    this.setpercentage(100);
+    this.loadImages(this.IMAGES);  
+    this.x = 20;  
+    this.y = 70;  
+    this.width = 200;  
+    this.height = 100; 
+    this.setpercentage(100); 
   }
 }

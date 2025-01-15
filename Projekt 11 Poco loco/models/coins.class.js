@@ -1,11 +1,21 @@
+/**
+ * Represents a coin object in the game.
+ * Inherits from DrawableObject to enable drawing on the canvas.
+ */
 class Coins extends DrawableObject {
   coinanimation = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+
   offset = {
     top: 30,
     left: 30,
     right: 30,
     bottom: 30
   }
+
+  /**
+   * Initializes the coin's position, image loading, and animation.
+   * The coin is randomly placed within the level.
+   */
   constructor() {
     super();
     this.loadImages(this.coinanimation);
@@ -14,7 +24,9 @@ class Coins extends DrawableObject {
     this.animate();
   }
 
-
+  /**
+   * Starts the coin's animation, alternating between coin images at a set interval.
+   */
   animate() {
     setInterval(() => {
       this.playAnimation(this.coinanimation);

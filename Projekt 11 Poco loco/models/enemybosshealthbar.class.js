@@ -1,3 +1,7 @@
+/**
+ * Represents the health bar for the Endboss.
+ * It displays the Endboss's health status using various images.
+ */
 class Enemybosshealthbar extends DrawableObject {
   IMAGES = [
     "img/7_statusbars/2_statusbar_endboss/blue/blue0.png",
@@ -8,6 +12,10 @@ class Enemybosshealthbar extends DrawableObject {
     "img/7_statusbars/2_statusbar_endboss/blue/blue100.png",
   ];
 
+  /**
+   * Creates a new Enemybosshealthbar instance.
+   * Loads the health bar images, sets initial position, size, and percentage.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);

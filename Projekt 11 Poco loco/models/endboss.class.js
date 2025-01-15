@@ -1,3 +1,6 @@
+/**
+ * Represents the Endboss object that moves, animates, and handles interactions.
+ */
 class Endboss extends MovableObject {
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -48,6 +51,10 @@ class Endboss extends MovableObject {
   
   energy = 100;
 
+  /**
+   * Creates a new Endboss instance and initializes it.
+   * Loads images, sets position, and starts animations.
+   */
   constructor() {
     super();
     this.loadImage(this.IMAGES_WALKING[0]);
@@ -61,21 +68,33 @@ class Endboss extends MovableObject {
     this.width = 300;
     this.animate();
     this.animationInterval = this.setStoppableInterval(() => this.animate(), 200);
-   
   }
 
+  /**
+   * Animates the Endboss by cycling through the walking images.
+   */
   animate() {
     this.playAnimation(this.IMAGES_WALKING);
   }
 
+  /**
+   * Stops the game and clears all intervals related to the Endboss.
+   */
   stopGames() {
     this.intervalsIdss.forEach(clearInterval);
     this.intervalsIdss = [];
   }
 
+  /**
+   * Sets a stoppable interval and adds it to the intervals list.
+   * 
+   * @param {Function} fn - The function to execute at each interval.
+   * @param {number} time - The time in milliseconds between function executions.
+   * @returns {number} The interval ID.
+   */
   setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
-    this.intervalsIdss.push(id); // Store the interval ID
-    return id; // Return the interval ID for potential future use
+    this.intervalsIdss.push(id); 
+    return id; 
   }
 }

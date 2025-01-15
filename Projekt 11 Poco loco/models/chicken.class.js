@@ -1,3 +1,7 @@
+/**
+ * Represents a chicken character in the game.
+ * Inherits from MovableObject to gain movement capabilities.
+ */
 class Chicken extends MovableObject {
   height = 100;
   y = 350;
@@ -16,6 +20,11 @@ class Chicken extends MovableObject {
     right: 5,
     bottom: 5
   }
+
+  /**
+   * Initializes the chicken's properties, including position, image loading, gravity, and animation.
+   * Randomizes the starting position and movement speed.
+   */
   constructor() {
     super();
     this.x = 500 + Math.random() * 700 * 3;
@@ -28,16 +37,26 @@ class Chicken extends MovableObject {
     this.speed = 0.15 + Math.random() * 0.5;
   }
 
+  /**
+   * Starts the chicken's walking animation and movement to the left.
+   */
   animatechickens() {
     this.walkinganimation();
     this.moveleft();
   }
+
+  /**
+   * Plays the walking animation of the chicken at a set interval.
+   */
   walkinganimation() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 250);
   }
 
+  /**
+   * Moves the chicken to the left at a constant speed.
+   */
   moveleft() {
     setInterval(() => {
       this.moveLeft();

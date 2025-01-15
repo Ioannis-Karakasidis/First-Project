@@ -1,4 +1,9 @@
+/**
+ * Represents the main character in the game.
+ * Extends the MovableObject class to inherit movement and gravity functionalities.
+ */
 class Character extends MovableObject {
+  
   height = 280;
   y = 70;
   speed = 8;
@@ -15,8 +20,11 @@ class Character extends MovableObject {
     left: 30,
     right: 40,
     bottom: 30
-  }
+  };
 
+  /**
+   * Initializes the character's properties and loads the necessary images for animations.
+   */
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
@@ -24,6 +32,9 @@ class Character extends MovableObject {
     this.initializecharacter();
   }
 
+  /**
+   * Loads all images for the character's animations (walking, jumping, etc.).
+   */
   loadingimages() {
     this.loadImages(this.characterarrays.IMAGES_WALKING);
     this.loadImages(this.characterarrays.IMAGES_JUMPING);
@@ -33,6 +44,9 @@ class Character extends MovableObject {
     this.loadImages(this.characterarrays.IMAGES_LONG_IDLE);
   }
 
+  /**
+   * Stops any ongoing intervals that control movement, walking, jumping, and snooring.
+   */
   stopintervals() {
     setStoppableInterval(() => this.movementandcamera(), 80);
     setStoppableInterval(() => this.walking(), 80);
@@ -43,6 +57,9 @@ class Character extends MovableObject {
     );
   }
 
+  /**
+   * Initializes the character's starting position and applies gravity.
+   */
   initializecharacter() {
     this.x = 120;
     this.currentPosition = 120;
@@ -51,6 +68,9 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Moves the character to the right and plays the walking sound.
+   */
   handleMoveRight() {
     this.moveRight();
     this.otherDirection = false;
@@ -59,6 +79,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Moves the character to the left and plays the walking sound.
+   */
   handleMoveLeft() {
     this.moveLeft();
     this.otherDirection = true;
@@ -67,6 +90,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Updates the character's movement and camera based on user input.
+   */
   updateMovementAndCamera() {
     this.walking_sound.pause();
     if (
@@ -83,6 +109,9 @@ class Character extends MovableObject {
     this.handleJumpAndCamera();
   }
 
+  /**
+   * Handles character's jumping and updates camera position.
+   */
   handleJumpAndCamera() {
     if (
       this.world &&
@@ -97,25 +126,37 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Controls the movement and camera update process.
+   */
   movementandcamera() {
     this.updateMovementAndCamera();
   }
 
+  /**
+   * Triggers character animation and updates movement and camera.
+   */
   animate() {
     this.movementandcamera();
     this.characteranimation();
   }
 
+  /**
+   * Handles the animation of the character based on the state (e.g., idle, hurt, death).
+   */
   characteranimation() {
     this.updateCharacterAnimation();
   }
 
+  /**
+   * Handles the character's sleeping animation based on time elapsed and movement.
+   */
   sleepinganimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
-      if (timeElapsed >= 5000 && timeElapsed < 15000) { // Idle Animation between 5 and 15 seconds
+      if (timeElapsed >= 5000 && timeElapsed < 15000) { 
         this.idleanimation();
-      } else if (timeElapsed >= 15000) { // Sleep Animation after 15 seconds
+      } else if (timeElapsed >= 15000) { 
         this.snooringanimation();
       }
     } else {
@@ -125,15 +166,24 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the idle animation for the character when it's not moving.
+   */
   idleanimation() {
     this.playAnimation(this.characterarrays.IMAGES_IDLE);
   }
 
+  /**
+   * Plays the snooring animation when the character is idle for a long period.
+   */
   snooringanimation() {
     this.snooring_sound.play();
     this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
   }
 
+  /**
+   * Updates the character's animation based on whether it's dead or hurt.
+   */
   updateCharacterAnimation() {
     if (this.isDead()) {
       this.playAnimation(this.characterarrays.IMAGES_DEATH);
@@ -144,12 +194,18 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the jumping animation if the character is in the air.
+   */
   jumping() {
     if (this.isAboveGround()) {
       this.playAnimation(this.characterarrays.IMAGES_JUMPING);
     }
   }
 
+  /**
+   * Plays the walking animation if the character is moving left or right.
+   */
   walking() {
     if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
       this.playAnimation(this.characterarrays.IMAGES_WALKING);

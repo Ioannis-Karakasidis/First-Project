@@ -11,9 +11,7 @@ let i = 1;
 function init() {
   canvas = document.getElementById("canvas");
   initleve1()
-
   world = new World(canvas, keyboard);
-
   setStoppableInterval(checkgamestatus, 40);
 }
 
@@ -94,45 +92,33 @@ function moveRight() {
 }
 
 function restartgame() {
-  // Stop all active intervals
   stopGame();
   init()
-  // Clear the canvas to remove all drawn objects
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Reset game objects
-  world = new World(canvas, keyboard); // Reinitialize the world with new settings
-
-  // Reset UI elements
+  world = new World(canvas, keyboard);
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
   document.getElementById("start").style.display = "none";
+  restartgamepart2()
+}
 
-  // Reinitialize animations and interactions
+function restartgamepart2() {
   world.level.enemies.forEach((enemy) => {
     if (enemy instanceof Chicken) {
       enemy.animatechickens();
     }
   });
-
   world.level.Cloud.forEach((cloud) => {
     cloud.animate();
   });
-
-  // Restart game mechanics (e.g., status checks, music, etc.)
   setStoppableInterval(checkgamestatus, 40);
-
-  // Reset sounds (if applicable)
   if (world.background_audio) {
-    world.background_audio.currentTime = 0; // Reset music to the start
-    world.background_audio.play(); // Restart background music
+    world.background_audio.currentTime = 0;
+    world.background_audio.play();
   }
-
-  console.log("Game restarted successfully");
 }
-
 
 function drawgame() {
   document.getElementById('reload').classList.remove('d-none')
@@ -147,7 +133,6 @@ function drawgame() {
 function reloadgame() {
   restartgame()
 }
-
 
 function showcontrolls() {
   document.querySelector(".buttonscontainer").classList.remove("d-none");
@@ -183,26 +168,34 @@ function winscreen() {
   document.querySelector(".outro").classList.remove("d-none");
 }
 
+function bossdeath() {
+  world.enemyboss.death();
+  setTimeout(() => {
+    document.querySelector(".gameovercontainer").classList.remove("d-none");
+    winscreen();
+    world.character.snooring_sound.pause();
+  }, 1500);
+}
+
 function checkgamestatus() {
   if (world.enemybosshealthbar.percentage == 0) {
-    world.enemyboss.death();
-    setTimeout(() => {
-      document.querySelector(".gameovercontainer").classList.remove("d-none");
-      winscreen();
-      world.character.snooring_sound.pause();
-    }, 1500);
+    bossdeath()
   }
   if (world.character.energy == 0) {
-    world.background_audio.pause();
-    world.character.death_sound.play();
-    gameoverpart1();
-    world.character.death();
-    setTimeout(() => {
-      document.querySelector(".outro").classList.remove("d-none");
-      world.clearAllIntervals();
-    }, 1500);
-    document.querySelector(".gameovercontainer").classList.remove("d-none");
+    characterdeath()
   }
+}
+
+function characterdeath() {
+  world.background_audio.pause();
+  world.character.death_sound.play();
+  gameoverpart1();
+  world.character.death();
+  setTimeout(() => {
+    document.querySelector(".outro").classList.remove("d-none");
+    world.clearAllIntervals();
+  }, 1500);
+  document.querySelector(".gameovercontainer").classList.remove("d-none");
 }
 
 function closemusic() {
@@ -227,20 +220,23 @@ function pausemusic() {
     if (world.character.death_sound.play()) {
       world.character.death_sound.pause();
     }
-    if (world.character.snooring_sound.play()) {
-      world.character.snooring_sound.pause();
-    }
-    if (world.background_audio.play()) {
-      world.background_audio.pause();
-    }
-    if (world.character.walking_sound.play()) {
-      world.character.walking_sound.pause();
-    }
-    if (world.movableObject.deadchicken_audio.play) {
-      world.movableObject.deadchicken_audio.pause();
-    }
+    pausemusicpart2();
   }, 1000 / 200);
+}
 
+function pausemusicpart2() {
+  if (world.character.snooring_sound.play()) {
+    world.character.snooring_sound.pause();
+  }
+  if (world.background_audio.play()) {
+    world.background_audio.pause();
+  }
+  if (world.character.walking_sound.play()) {
+    world.character.walking_sound.pause();
+  }
+  if (world.movableObject.deadchicken_audio.play) {
+    world.movableObject.deadchicken_audio.pause();
+  }
 }
 
 function returntomenu() {
@@ -255,10 +251,13 @@ function returntomenu() {
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("canvas").classList.add("d-none");
+  returntomenupart2()
+}
+
+function returntomenupart2() {
   document.querySelector(".outro").classList.add("d-none");
   document.querySelector(".intro").classList.remove("d-none");
   document.querySelector(".btn").classList.remove("d-none");
-
   if (world && world.ctx && canvas) {
     setInterval(() => {
       world.ctx.clearRect(0, 0, 720, 480);
@@ -269,13 +268,13 @@ function returntomenu() {
     world.stopAnimation();
   }
   document.getElementById('startbutton').onclick = restartgame;
-
 }
 
 function togglerotation() {
   deviceToggled = true;
 
 }
+
 function isEmulatingMobile() {
   const isMobileWidth = window.innerWidth <= 768;
   const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi");
@@ -342,27 +341,22 @@ document.addEventListener("keydown", (e) => {
 
 function spacekeydown() {
   keyboard.SPACE = true;
-  console.log(keyboard.SPACE);
 }
 
 function downkeydown() {
   keyboard.DOWN = true;
-  console.log(keyboard.DOWN);
 }
 
 function leftkeydown() {
   keyboard.LEFT = true;
-  console.log(keyboard.LEFT);
 }
 
 function upkeydown() {
   keyboard.UP = true;
-  console.log(keyboard.UP);
 }
 
 function rightkeydown() {
   keyboard.RIGHT = true;
-  console.log(keyboard.RIGHT);
 }
 
 document.addEventListener("keyup", (e) => {
@@ -384,30 +378,24 @@ document.addEventListener("keyup", (e) => {
 
 function dkeyup() {
   keyboard.D = false;
-  console.log(keyboard.D);
 }
 
 function spacekeyup() {
   keyboard.SPACE = false;
-  console.log(keyboard.SPACE);
 }
 
 function downkeyup() {
   keyboard.DOWN = false;
-  console.log(keyboard.DOWN);
 }
 
 function leftkeyup() {
   keyboard.LEFT = false;
-  console.log(keyboard.LEFT);
 }
 
 function rightkeyup() {
   keyboard.RIGHT = false;
-  console.log(keyboard.RIGHT);
 }
 
 function upkeyup() {
   keyboard.UP = false;
-  console.log(keyboard.UP);
 }

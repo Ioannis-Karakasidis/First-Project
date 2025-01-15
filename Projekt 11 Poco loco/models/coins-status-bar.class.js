@@ -28,10 +28,10 @@ class Coinsstatusbar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES);
-    this.x = 20; // X-coordinate of the status bar.
-    this.y = 150; // Y-coordinate of the status bar.
-    this.width = 200; // Width of the status bar.
-    this.height = 100; // Height of the status bar.
-    this.setpercentage(0); // Initializes the status bar with 0%.
+    this.x = 20; 
+    this.y = 150; 
+    this.width = 200; 
+    this.height = 100;
+    this.setpercentage(0); 
   }
 }
