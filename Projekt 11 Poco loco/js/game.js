@@ -10,7 +10,10 @@ let i = 1;
 
 function init() {
   canvas = document.getElementById("canvas");
+  initleve1()
+
   world = new World(canvas, keyboard);
+
   setStoppableInterval(checkgamestatus, 40);
 }
 
@@ -93,7 +96,7 @@ function moveRight() {
 function restartgame() {
   // Stop all active intervals
   stopGame();
-
+  init()
   // Clear the canvas to remove all drawn objects
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -132,7 +135,6 @@ function restartgame() {
 
 
 function drawgame() {
-  initleve1()
   document.getElementById('reload').classList.remove('d-none')
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
@@ -143,7 +145,7 @@ function drawgame() {
 }
 
 function reloadgame() {
-  restartGame()
+  restartgame()
 }
 
 

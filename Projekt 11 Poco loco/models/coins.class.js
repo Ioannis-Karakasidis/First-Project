@@ -6,7 +6,6 @@ class Coins extends DrawableObject {
     right: 30,
     bottom: 30
   }
-  
   constructor() {
     super();
     this.loadImages(this.coinanimation);
