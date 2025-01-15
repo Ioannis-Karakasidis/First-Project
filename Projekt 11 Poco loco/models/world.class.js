@@ -157,7 +157,7 @@ class World {
 
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
-      if (enemy.isColliding(bottle)) {
+      if (enemy.iscolliding(bottle)) {
         this.enemiescollision(enemy);
       }
     });

@@ -42,22 +42,30 @@ class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 20;
   }
-z
-isColliding(mo) {
-  if (!this.offset || !mo.offset) {
-    console.error('Offset is undefined:', this.offset, mo.offset);
-    return false; // Or some default value to prevent further errors
+
+  iscolliding(mo) {
+    return this.x + this.width > mo.x &&
+      this.y + this.height > mo.y &&
+      this.x < mo.x &&
+      this.y < mo.y + mo.height
   }
-  
-  return (
-    this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-    this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-    this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-    this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
-  );
-}
-  
-  
+
+
+  isColliding(mo) {
+    if (!this.offset || !mo.offset) {
+      console.error('Offset is undefined:', this.offset, mo.offset);
+      return false; // Or some default value to prevent further errors
+    }
+
+    return (
+      this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    );
+  }
+
+
   isHURT() {
     let timepassed = new Date().getTime() - this.lasthit;
     timepassed = timepassed / 1000;
