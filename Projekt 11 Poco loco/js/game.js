@@ -1,61 +1,18 @@
+
 /**
- * Canvas element for the game.
- * @type {HTMLCanvasElement}
+ * Main game script that initializes and manages the game state, handles user input,
+ * and controls game mechanics such as throwing objects, jumping, and toggling fullscreen mode.
  */
+
 let canvas;
-
-/**
- * The game world instance.
- * @type {World}
- */
 let world;
-
-/**
- * Collection of coins in the game.
- * @type {Array}
- */
 let coins;
-
-/**
- * Instance of throwable object.
- * @type {ThrowableObject}
- */
 let throwableobject = new ThrowableObject();
-
-/**
- * Instance of keyboard input handler.
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
-
-/**
- * Array to store interval IDs for stoppable intervals.
- * @type {Array<number>}
- */
 let intervalsIds = [];
-
-/**
- * Last recorded window width.
- * @type {number}
- */
 let lastWidth = window.innerWidth;
-
-/**
- * Last recorded window height.
- * @type {number}
- */
 let lastHeight = window.innerHeight;
-
-/**
- * Flag to check if the user agent is mobile.
- * @type {boolean}
- */
 let isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi");
-
-/**
- * Counter variable.
- * @type {number}
- */
 let i = 1;
 
 /**
@@ -522,6 +479,18 @@ function gameoverpart1() {
   document.getElementById("outroimg").classList.remove("d-none");
 }
 
+/**
+ * Adds an event listener to handle keydown events and execute corresponding functions 
+ * based on the key pressed.
+ * 
+ * Key mappings:
+ * - Left Arrow (keyCode 37): Calls `leftkeydown()`.
+ * - Up Arrow (keyCode 38): Calls `upkeydown()`.
+ * - Right Arrow (keyCode 39): Calls `rightkeydown()`.
+ * - Down Arrow (keyCode 40): Calls `downkeydown()`.
+ * - Space (keyCode 32): Calls `spacekeydown()`.
+ * - 'D' Key (keyCode 68): Sets `keyboard.D` to true.
+ */
 document.addEventListener("keydown", (e) => {
   let code = e.keyCode;
   if (code === 37) {
@@ -538,7 +507,6 @@ document.addEventListener("keydown", (e) => {
     keyboard.D = true;
   }
 });
-
 /**
  * Handles the space key down event.
  */

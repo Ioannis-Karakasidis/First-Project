@@ -17,8 +17,12 @@ class ThrowableObject extends MovableObject {
     this.x = x;  
     this.y = y;  
     this.height = 100;  
-    this.width = 50;  
+    this.width = 110;  
     this.throw();  
+  }
+
+  remove(ctx) {
+    ctx.clearRect(this.x, this.y, this.width, this.height);  // Clears the bottle from the canvas
   }
 
   /**

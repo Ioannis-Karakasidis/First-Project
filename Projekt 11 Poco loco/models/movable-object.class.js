@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
     setInterval(() => {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;
-    }, 60);
+    }, 50);
   }
 
   /**
@@ -54,6 +54,7 @@ class MovableObject extends DrawableObject {
    */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
+
       return true;
     } else {
       return this.y < 170;
@@ -103,7 +104,6 @@ class MovableObject extends DrawableObject {
       console.error('Offset is undefined:', this.offset, mo.offset);
       return false;
     }
-
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
       this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&

@@ -46,7 +46,6 @@ class World {
   coins = new Coinsstatusbar();
   isEndbossHit = false;
   isEndbosshit = false;
-  bottles = 0;
 
   /**
    * The background audio instance.
@@ -103,7 +102,7 @@ class World {
    * Throws a salsa bottle.
    */
   throwSalsaBottle() {
-    if (this.bottles === 0) {
+    if (this.bottles.length === 0) {
       return;
     } else {
       let bottle = new ThrowableObject(
@@ -111,7 +110,7 @@ class World {
         this.character.y + 40
       );
       this.throwableobject.push(bottle);
-      this.bottles--;
+      this.bottles.splice(0, 1);
       this.bottlestatusbar.setpercentage(
         this.bottlestatusbar.percentage - 20
       );
@@ -136,8 +135,10 @@ class World {
    */
   bottlescollision() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        this.bottles++;
+
+      if (this.character.iscolliding(bottle)) {
+
+        this.bottles.push(bottle);
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
         );
@@ -154,7 +155,6 @@ class World {
     this.coinscollision();
     this.charactercollision();
     this.bottlescollision();
-
     this.level.enemies.forEach((enemy) => {
       this.throwbottles(enemy);
     });
@@ -166,12 +166,8 @@ class World {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemydead(enemy) {
-    this.isEndbosshit = true;
-    enemy.death();
-    this.enemykill(enemy);
-    setTimeout(() => {
-      this.isEndbosshit = false;
-    }, 500);
+    console.log(world.character.y);
+    this.enemykill(enemy)
   }
 
   /**
@@ -180,14 +176,12 @@ class World {
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        if (world.character.isAboveGround() && !this.isEndbosshit) {
-          this.enemydead(enemy);
-        } else if (!world.character.isAboveGround() && !this.isEndbosshit) {
-          this.characterattacked();
-        }
-      } else {
-        this.throwbottles(enemy);
+        this.enemydead(enemy)
+        console.log('dead enemy');
+
       }
+      this.throwbottles(enemy);
+
     });
   }
 
@@ -195,12 +189,8 @@ class World {
    * Handles character being attacked.
    */
   characterattacked() {
-    this.isEndbosshit = true;
     world.character.hit();
     this.statusbar.setpercentage(world.character.energy);
-    setTimeout(() => {
-      this.isEndbosshit = false;
-    }, 100);
   }
 
   /**
@@ -210,22 +200,40 @@ class World {
    */
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
-      setInterval(() => {
-        enemy.playAnimation(enemy.DEAD_CHICKEN);
-      }, 1000 / 75);
-      enemy.hit();
-      enemy.death();
-      enemy.deadchicken_audio.play();
+      this.chickenkill(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
-      setInterval(() => {
-        enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
-      }, 1000 / 75);
-      enemy.deadchicken_audio.play();
-      enemy.death();
+      this.smallchickenkill(enemy)
     } else {
       this.character.hit();
       this.statusbar.setpercentage(this.character.energy);
     }
+  }
+
+  /**
+ * Handles the death of a small chicken.
+ *
+ * @param {Enemy} enemy - The enemy instance.
+ */
+  smallchickenkill(enemy) {
+    setInterval(() => {
+      enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
+    }, 1000 / 75);
+    enemy.deadchicken_audio.play();
+    enemy.death();
+  }
+
+  /**
+   * Handles the death of a chicken.
+   *
+   * @param {Enemy} enemy - The enemy instance.
+   */
+  chickenkill(enemy) {
+    setInterval(() => {
+      enemy.playAnimation(enemy.DEAD_CHICKEN);
+    }, 1000 / 75);
+    enemy.hit();
+    enemy.death();
+    enemy.deadchicken_audio.play();
   }
 
   /**
@@ -243,23 +251,54 @@ class World {
 
   /**
    * Handles collisions with enemies.
-   *
+   *abe
    * @param {Enemy} enemy - The enemy instance.
    */
   enemiescollision(enemy) {
     if (enemy.constructor.name === "Chicken") {
-      setInterval(() => {
-        enemy.playAnimation(enemy.DEAD_CHICKEN);
-      }, 1000 / 75);
-      enemy.death();
+      this.chickencollision(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
-      setInterval(() => {
-        enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
-      }, 1000 / 75);
-      enemy.death();
+      this.smallchickencollision(enemy)
     } else if (enemy.constructor.name === "Endboss") {
-      this.enemybosscollision(enemy);
+      this.endbosscollision()
     }
+  }
+
+  chickencollision(enemy) {
+    setInterval(() => {
+      enemy.playAnimation(enemy.DEAD_CHICKEN);
+    }, 1000 / 75);
+    enemy.death();
+    this.throwableobject.forEach((bottle, index) => {
+      if (enemy.iscolliding(bottle)) {
+        bottle.remove(this.ctx);
+        this.throwableobject.splice(index, 1);
+      }
+    });
+  }
+
+  smallchickencollision(enemy) {
+    setInterval(() => {
+      enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
+    }, 1000 / 75);
+    enemy.death();
+    this.throwableobject.forEach((bottle, index) => {
+      if (enemy.iscolliding(bottle)) {
+        bottle.remove(this.ctx);
+        this.throwableobject.splice(index, 1);
+      }
+    });
+  }
+
+
+  endbosscollision(enemy) {
+    this.throwableobject.forEach((bottle, index) => {
+      if (enemy.iscolliding(bottle)) {
+        bottle.remove(this.ctx);
+        this.throwableobject.splice(index, 1);
+      }
+    });
+    this.enemybosscollision(enemy);
   }
 
   /**
