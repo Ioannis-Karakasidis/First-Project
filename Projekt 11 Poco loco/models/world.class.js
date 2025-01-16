@@ -1,30 +1,122 @@
 class World {
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   character = new Character(); // Initialize character with world instance
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   enemyboss = new Endboss();
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   bottle = new ThrowableObject();
   level = level1;
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   canvas;
   ctx;
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   world;
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   keyboard;
+  /**
+   * Description placeholder
+   *
+   * @type {number}
+   */
   camera_x = 0;
   statusbar = new Statusbar();
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   coinsstatusbar = new Coinsstatusbar();
   bottlestatusbar = new Bottlestatusbar();
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
   bottles = [];
+  /**
+   * Description placeholder
+   *
+   * @type {{}}
+   */
   intervals = [];
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   overlayImage = null;
+  /**
+   * Description placeholder
+   *
+   * @type {string}
+   */
   rotatephoto = "img/rotate.png";
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   coins = new Coinsstatusbar();
+  /**
+   * Description placeholder
+   *
+   * @type {boolean}
+   */
   isEndbossHit = false;
+  /**
+   * Description placeholder
+   *
+   * @type {boolean}
+   */
   isEndbosshit = false;
+  /**
+   * Description placeholder
+   *
+   * @type {{}}
+   */
   bottles = 0;
+  /**
+   * Description placeholder
+   *
+   * @type {*}
+   */
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
 
+  /**
+   * Creates an instance of World.
+   *
+   * @constructor
+   * @param {*} canvas 
+   * @param {*} keyboard 
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -39,6 +131,7 @@ class World {
     this.character.world = this;
   }
 
+  /** Description placeholder */
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -46,6 +139,7 @@ class World {
     }, 200);
   }
 
+  /** Description placeholder */
   checkthrowobjects() {
     if (this.keyboard.D) {
       this.throwSalsaBottle();
@@ -53,6 +147,7 @@ class World {
     }
   }
 
+  /** Description placeholder */
   throwSalsaBottle() {
     if (this.bottles === 0) {
       return;
@@ -94,6 +189,7 @@ class World {
     });
   }
 
+  /** Description placeholder */
   checkCollisions() {
     this.coinscollision();
     this.charactercollision();
@@ -104,6 +200,11 @@ class World {
     });
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   enemydead(enemy) {
     this.isEndbosshit = true;
     enemy.death();
@@ -113,6 +214,7 @@ class World {
     }, 500);
   }
 
+  /** Description placeholder */
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -130,6 +232,7 @@ class World {
     });
   }
 
+  /** Description placeholder */
   characterattacked() {
     this.isEndbosshit = true;
     world.character.hit();
@@ -139,6 +242,11 @@ class World {
     }, 100);
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
       setInterval(() => {
@@ -159,6 +267,11 @@ class World {
     }
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
       if (enemy.iscolliding(bottle)) {
@@ -167,6 +280,11 @@ class World {
     });
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   enemiescollision(enemy) {
     if (enemy.constructor.name === "Chicken") {
       setInterval(() => {
@@ -193,6 +311,11 @@ class World {
     }, 10);
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   enemybosscollision(enemy) {
     if (!this.isEndbossHit) {
       this.isEndbossHit = true;
@@ -206,6 +329,11 @@ class World {
     }
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} enemy 
+   */
   bossattack(enemy) {
     enemy.stopGames()
     setInterval(() => {
@@ -219,10 +347,16 @@ class World {
     }, 1000);
   }
 
+  /** Description placeholder */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
+  /**
+   * Description placeholder
+   *
+   * @returns 
+   */
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
@@ -230,6 +364,7 @@ class World {
     });
   }
 
+  /** Description placeholder */
   draw() {
     if (this.showIntro) {
       this.drawIntro(this.introImage);
@@ -238,6 +373,7 @@ class World {
     }
   }
 
+  /** Description placeholder */
   drawgame() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -256,6 +392,7 @@ class World {
     });
   }
 
+  /** Description placeholder */
   beforecamera() {
     this.addToMap(this.statusbar);
     this.addToMap(this.coinsstatusbar);
@@ -263,6 +400,7 @@ class World {
     this.addToMap(this.enemybosshealthbar);
   }
 
+  /** Description placeholder */
   aftercamera() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coins);
@@ -272,6 +410,11 @@ class World {
     this.addObjectsToMap(this.throwableobject);
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} mo 
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -281,12 +424,22 @@ class World {
       this.flipImageBack(mo);
     }
   }
+  /**
+   * Description placeholder
+   *
+   * @param {*} objects 
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} mo 
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -294,11 +447,17 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Description placeholder
+   *
+   * @param {*} mo 
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
 
+  /** Description placeholder */
   clearAllIntervals() {
     for (let i = 1; i < 9999; i++) {
       window.clearInterval(i);

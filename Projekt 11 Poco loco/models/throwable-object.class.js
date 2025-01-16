@@ -25,7 +25,6 @@ class ThrowableObject extends MovableObject {
    * Makes the object move forward and apply gravity to simulate throwing.
    */
   throw() {
-    console.log("hello"); 
     this.speedY = 5;  
     this.applyGravity();  
     setInterval(() => {

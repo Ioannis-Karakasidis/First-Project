@@ -242,6 +242,12 @@ button img {
   background-color: unset;
 }
 
+.Instructions {
+  display: none;
+  justify-content: space-around;
+  width: 100%;
+}
+
 .instructions {
   display: flex;
   justify-content: space-around;
@@ -279,3 +285,8 @@ button img {
   color: white;
 }
 
+.mobilealign {
+  display: flex;
+  flex-direction: column;
+  height: 68%;
+}
