@@ -391,7 +391,6 @@ function isEmulatingMobile() {
  * Checks if the window size has changed and calls the emulator adjustment logic.
  */
 function checkorientation() {
-  console.log('hello');
   const currentWidth = window.innerWidth;
   const currentHeight = window.innerHeight;
   if (currentWidth !== lastWidth || currentHeight !== lastHeight) {

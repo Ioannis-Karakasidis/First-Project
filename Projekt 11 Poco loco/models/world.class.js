@@ -166,7 +166,6 @@ class World {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemydead(enemy) {
-    console.log(world.character.y);
     this.enemykill(enemy)
   }
 
@@ -177,8 +176,6 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.enemydead(enemy)
-        console.log('dead enemy');
-
       }
       this.throwbottles(enemy);
 
