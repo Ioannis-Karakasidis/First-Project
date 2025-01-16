@@ -410,6 +410,7 @@ function checkemulator(currentWidth, currentHeight) {
 }
 
 function nonmobilemode() {
+  document.getElementById('canvas').style.height = 'unset'
   document.querySelector('body').style = ''
   document.querySelector('.box').style.height = 'calc(100vh - 41px)'
   document.querySelector(".box h1").classList.remove('d-none')
