@@ -382,6 +382,8 @@ function isEmulatingMobile() {
  * Checks if the window size has changed and calls the emulator adjustment logic.
  */
 function checkorientation() {
+  console.log('hello');
+  
   const currentWidth = window.innerWidth;
   const currentHeight = window.innerHeight;
 
@@ -389,6 +391,9 @@ function checkorientation() {
     checkemulator(currentWidth, currentHeight);
     lastWidth = currentWidth;
     lastHeight = currentHeight;
+  } else {
+    checkemulator(currentWidth, currentHeight);
+
   }
 }
 
@@ -449,6 +454,7 @@ function portraitmode() {
 }
 
 window.addEventListener("resize", checkorientation);
+
 
 /** Description placeholder */
 function gameoverpart1() {
