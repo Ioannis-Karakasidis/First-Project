@@ -1,83 +1,90 @@
 /**
- * Description placeholder
- *
- * @type {*}
+ * Canvas element for the game.
+ * @type {HTMLCanvasElement}
  */
 let canvas;
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * The game world instance.
+ * @type {World}
  */
 let world;
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Collection of coins in the game.
+ * @type {Array}
  */
 let coins;
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Instance of throwable object.
+ * @type {ThrowableObject}
  */
 let throwableobject = new ThrowableObject();
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Instance of keyboard input handler.
+ * @type {Keyboard}
  */
 let keyboard = new Keyboard();
+
 /**
- * Description placeholder
- *
- * @type {{}}
+ * Array to store interval IDs for stoppable intervals.
+ * @type {Array<number>}
  */
 let intervalsIds = [];
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Last recorded window width.
+ * @type {number}
  */
 let lastWidth = window.innerWidth;
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Last recorded window height.
+ * @type {number}
  */
 let lastHeight = window.innerHeight;
+
 /**
- * Description placeholder
- *
- * @type {*}
+ * Flag to check if the user agent is mobile.
+ * @type {boolean}
  */
 let isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi");
 
 /**
- * Description placeholder
- *
+ * Counter variable.
  * @type {number}
  */
 let i = 1;
 
+/**
+ * Initializes the game.
+ */
 function init() {
   canvas = document.getElementById("canvas");
-  initleve1()
+  initleve1();
   world = new World(canvas, keyboard);
   setStoppableInterval(checkgamestatus, 40);
 }
 
-/** Description placeholder */
+/**
+ * Throws salsa bottles in the game.
+ */
 function throwSalsaBottles() {
   world.throwSalsaBottle();
 }
 
-/** Description placeholder */
+/**
+ * Makes the character jump.
+ */
 function jump() {
   world.character.jump();
 }
 
-/** Description placeholder */
+/**
+ * Toggles fullscreen mode.
+ */
 function fullscreen() {
   let fullscreenElement = document.getElementById("content");
   if (isFullscreen()) {
@@ -87,16 +94,18 @@ function fullscreen() {
   }
 }
 
-/** Description placeholder */
+/**
+ * Stops the game by clearing all intervals.
+ */
 function stopGame() {
   intervalsIds.forEach(clearInterval);
   intervalsIds = [];
 }
 
 /**
- * Description placeholder
+ * Stops a specific interval in the game.
  *
- * @param {*} targetIndex 
+ * @param {number} targetIndex - The index of the interval to stop.
  */
 function stopSpecificGame(targetIndex) {
   if (intervalsIds[targetIndex]) {
@@ -105,7 +114,9 @@ function stopSpecificGame(targetIndex) {
   }
 }
 
-/** Description placeholder */
+/**
+ * Moves the character to the left.
+ */
 function moveLeft() {
   if (world.character.x > 0) {
     world.character.handleMoveLeft();
@@ -113,9 +124,9 @@ function moveLeft() {
 }
 
 /**
- * Description placeholder
+ * Checks if the game is in fullscreen mode.
  *
- * @returns {boolean} 
+ * @returns {boolean} True if in fullscreen mode, false otherwise.
  */
 function isFullscreen() {
   return (
@@ -126,9 +137,9 @@ function isFullscreen() {
 }
 
 /**
- * Description placeholder
+ * Opens the game in fullscreen mode.
  *
- * @param {*} elem 
+ * @param {HTMLElement} elem - The element to display in fullscreen.
  */
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
@@ -140,14 +151,20 @@ function openFullscreen(elem) {
   }
 }
 
-
-
+/**
+ * Sets an interval that can be stopped later.
+ *
+ * @param {Function} fn - The function to execute at each interval.
+ * @param {number} time - The interval time in milliseconds.
+ */
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervalsIds.push(id);
 }
 
-/** Description placeholder */
+/**
+ * Closes the fullscreen mode.
+ */
 function closeFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -158,16 +175,21 @@ function closeFullscreen() {
   }
 }
 
-/** Description placeholder */
+/**
+ * Moves the character to the right.
+ */
 function moveRight() {
   if (world.character.x < world.level.level_end_x) {
     world.character.handleMoveRight();
   }
 }
 
+/**
+ * Restarts the game.
+ */
 function restartgame() {
   stopGame();
-  init()
+  init();
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   world = new World(canvas, keyboard);
   document.querySelector(".gameovercontainer").classList.add("d-none");
@@ -175,10 +197,12 @@ function restartgame() {
   document.querySelector(".outro").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
   document.getElementById("start").style.display = "none";
-  restartgamepart2()
+  restartgamepart2();
 }
 
-/** Description placeholder */
+/**
+ * Additional steps to restart the game.
+ */
 function restartgamepart2() {
   world.level.enemies.forEach((enemy) => {
     if (enemy instanceof Chicken) {
@@ -195,53 +219,64 @@ function restartgamepart2() {
   }
 }
 
-/** Description placeholder */
+/**
+ * Draws the game on the canvas.
+ */
 function drawgame() {
-  document.getElementById('reload').classList.remove('d-none')
+  document.getElementById('reload').classList.remove('d-none');
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
-  init()
+  init();
   checkgamestatus();
   document.getElementById("mutebutton").classList.remove("d-none");
 }
 
-/** Description placeholder */
+/**
+ * Reloads the game.
+ */
 function reloadgame() {
-  restartgame()
+  restartgame();
 }
 
-/** Description placeholder */
+/**
+ * Shows the game controls.
+ */
 function showcontrolls() {
   document.querySelector(".buttonscontainer").classList.remove("d-none");
-  document
-    .querySelector(".buttonscontainer")
-    .children[0].classList.add("closing");
+  document.querySelector(".buttonscontainer").children[0].classList.add("closing");
   document.querySelector(".buttonscontainer").style =
     "flex-direction: column;justify-content: flex-start;gap: 190px;position: absolute;max-width: 720px; width: 100%;background-color: rgba(0, 0, 0, 0.5);height: 100%;top: 0px;z-index: 9999";
 }
 
-/** Description placeholder */
+/**
+ * Shows the story overlay.
+ */
 function showstory() {
   document.querySelector(".storydiv").classList.remove("d-none");
 }
 
-/** Description placeholder */
+/**
+ * Closes the story overlay.
+ */
 function closeinfotext() {
   document.querySelector(".storydiv").classList.add("d-none");
 }
 
-/** Description placeholder */
+/**
+ * Closes the control overlay.
+ */
 function closeoverlay() {
   document.querySelector(".buttonscontainer").style = "";
   document.querySelector(".buttonscontainer").classList.add("d-none");
   document.querySelector(".closing:hover").classList.remove("closing:hover");
 }
 
-/** Description placeholder */
+/**
+ * Displays the win screen.
+ */
 function winscreen() {
-  document.getElementById("outroimg").src =
-    "img/9_intro_outro_screens/win/win_2.png";
+  document.getElementById("outroimg").src = "img/9_intro_outro_screens/win/win_2.png";
   setTimeout(() => {
     world.clearAllIntervals();
     world.background_audio.pause();
@@ -250,6 +285,9 @@ function winscreen() {
   document.querySelector(".outro").classList.remove("d-none");
 }
 
+/**
+ * Handles the boss death event.
+ */
 function bossdeath() {
   world.enemyboss.death();
   setTimeout(() => {
@@ -259,17 +297,21 @@ function bossdeath() {
   }, 1500);
 }
 
-/** Description placeholder */
+/**
+ * Checks the game status.
+ */
 function checkgamestatus() {
   if (world.enemybosshealthbar.percentage == 0) {
-    bossdeath()
+    bossdeath();
   }
   if (world.character.energy == 0) {
-    characterdeath()
+    characterdeath();
   }
 }
 
-/** Description placeholder */
+/**
+ * Handles the character death event.
+ */
 function characterdeath() {
   world.background_audio.pause();
   world.character.death_sound.play();
@@ -282,7 +324,9 @@ function characterdeath() {
   document.querySelector(".gameovercontainer").classList.remove("d-none");
 }
 
-/** Description placeholder */
+/**
+ * Toggles the background music.
+ */
 function closemusic() {
   if (world.background_audio.paused) {
     document.getElementById("audioicon").src = "img/icons8-audio-32.png";
@@ -294,7 +338,9 @@ function closemusic() {
   }
 }
 
-/** Description placeholder */
+/**
+ * Pauses the background music.
+ */
 function pausemusic() {
   setInterval(() => {
     if (world.character.jumping_sound.play()) {
@@ -310,7 +356,9 @@ function pausemusic() {
   }, 1000 / 200);
 }
 
-/** Description placeholder */
+/**
+ * Additional steps to pause the background music.
+ */
 function pausemusicpart2() {
   if (world.character.snooring_sound.play()) {
     world.character.snooring_sound.pause();
@@ -326,9 +374,11 @@ function pausemusicpart2() {
   }
 }
 
-/** Description placeholder */
+/**
+ * Returns to the main menu.
+ */
 function returntomenu() {
-  document.getElementById('start').style.display = 'flex'
+  document.getElementById('start').style.display = 'flex';
   world.clearAllIntervals();
   world.character.walking_sound.pause();
   world.character.jumping_sound.pause();
@@ -339,10 +389,12 @@ function returntomenu() {
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("canvas").classList.add("d-none");
-  returntomenupart2()
+  returntomenupart2();
 }
 
-/** Description placeholder */
+/**
+ * Additional steps to return to the main menu.
+ */
 function returntomenupart2() {
   document.querySelector(".outro").classList.add("d-none");
   document.querySelector(".intro").classList.remove("d-none");
@@ -351,7 +403,6 @@ function returntomenupart2() {
     setInterval(() => {
       world.ctx.clearRect(0, 0, 720, 480);
     }, 0);
-  } else {
   }
   if (world && world.stopAnimation) {
     world.stopAnimation();
@@ -359,10 +410,11 @@ function returntomenupart2() {
   document.getElementById('startbutton').onclick = restartgame;
 }
 
-/** Description placeholder */
+/**
+ * Toggles the device rotation.
+ */
 function togglerotation() {
   deviceToggled = true;
-
 }
 
 /**
@@ -383,17 +435,14 @@ function isEmulatingMobile() {
  */
 function checkorientation() {
   console.log('hello');
-  
   const currentWidth = window.innerWidth;
   const currentHeight = window.innerHeight;
-
   if (currentWidth !== lastWidth || currentHeight !== lastHeight) {
     checkemulator(currentWidth, currentHeight);
     lastWidth = currentWidth;
     lastHeight = currentHeight;
   } else {
     checkemulator(currentWidth, currentHeight);
-
   }
 }
 
@@ -405,49 +454,56 @@ function checkorientation() {
 function checkemulator(currentWidth, currentHeight) {
   if (isEmulatingMobile()) {
     if (currentWidth > currentHeight) {
-      landscapemode()
+      landscapemode();
     } else {
-      portraitmode()
+      portraitmode();
     }
   } else {
-    nonmobilemode()
+    nonmobilemode();
   }
 }
 
+/**
+ * Adjusts the layout for non-mobile mode.
+ */
 function nonmobilemode() {
-  document.getElementById('canvas').style.height = 'unset'
-  document.querySelector('body').style = ''
-  document.querySelector('.box').style.height = 'calc(100vh - 41px)'
-  document.querySelector(".box h1").classList.remove('d-none')
+  document.getElementById('canvas').style.height = 'unset';
+  document.querySelector('body').style = '';
+  document.querySelector('.box').style.height = 'calc(100vh - 41px)';
+  document.querySelector(".box h1").classList.remove('d-none');
   document.getElementById("impressum").classList.remove("d-none");
-  document.querySelector('.Instructions').style.display = 'none'
+  document.querySelector('.Instructions').style.display = 'none';
   document.getElementById("introimg").classList.remove("rotatepic");
-  document.getElementById("introimg").src =
-    "img/9_intro_outro_screens/start/startscreen_2.png";
+  document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
 }
 
+/**
+ * Adjusts the layout for landscape mode.
+ */
 function landscapemode() {
-  document.querySelector('.Instructions').style.display = 'flex'
-  document.getElementById('content').style = 'height: 97%;width: 85vw;'
-  document.querySelector('body').style = ''
-  document.querySelector('body').style.height = '96.2vh'
+  document.querySelector('.Instructions').style.display = 'flex';
+  document.getElementById('content').style = 'height: 97%;width: 85vw;';
+  document.querySelector('body').style = '';
+  document.querySelector('body').style.height = '96.2vh';
   const canvas = document.querySelector('canvas');
   canvas.style.height = "60vh";
-  canvas.style.width = 'height: 59vh;'
-  document.querySelector('.boxalign').style.height = '94%'
+  canvas.style.width = 'height: 59vh;';
+  document.querySelector('.boxalign').style.height = '94%';
   document.querySelector(".box").style.height = "100%";
   document.querySelector(".box h1").classList.add("d-none");
   document.getElementById("impressum").classList.add("d-none");
-  document.getElementById("introimg").src =
-    "img/9_intro_outro_screens/start/startscreen_2.png";
+  document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
   document.getElementById("introimg").classList.remove("rotatepic");
 }
 
+/**
+ * Adjusts the layout for portrait mode.
+ */
 function portraitmode() {
-  document.getElementById('content').style = 'height: 97%'
-  document.querySelector('.Instructions').style.display = 'none'
+  document.getElementById('content').style = 'height: 97%';
+  document.querySelector('.Instructions').style.display = 'none';
   const calculatedHeight = (window.innerHeight / window.screen.height) * 100;
-  document.querySelector('body').style = 'height: 100vh;position: fixed;background: black;'
+  document.querySelector('body').style = 'height: 100vh;position: fixed;background: black;';
   document.getElementById("impressum").classList.add("d-none");
   document.getElementById("introimg").src = "img/rotate.png";
   document.getElementById("introimg").classList.add("rotatepic");
@@ -455,13 +511,13 @@ function portraitmode() {
 
 window.addEventListener("resize", checkorientation);
 
-
-/** Description placeholder */
+/**
+ * Displays the game over screen.
+ */
 function gameoverpart1() {
-  document.getElementById("outroimg").src =
-    "img/9_intro_outro_screens/game_over/game_over.png";
+  document.getElementById("outroimg").src = "img/9_intro_outro_screens/game_over/game_over.png";
   world.character.snooring_sound.pause();
-  document.querySelector('.outro').style.zIndex = '99'
+  document.querySelector('.outro').style.zIndex = '99';
   document.querySelector(".outro").style.position = "absolute";
   document.getElementById("outroimg").classList.remove("d-none");
 }
@@ -483,31 +539,53 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/** Description placeholder */
+/**
+ * Handles the space key down event.
+ */
 function spacekeydown() {
   keyboard.SPACE = true;
 }
 
-/** Description placeholder */
+/**
+ * Handles the down arrow key down event.
+ */
 function downkeydown() {
   keyboard.DOWN = true;
 }
 
-/** Description placeholder */
+/**
+ * Handles the left arrow key down event.
+ */
 function leftkeydown() {
   keyboard.LEFT = true;
 }
 
-/** Description placeholder */
+/**
+ * Handles the up arrow key down event.
+ */
 function upkeydown() {
   keyboard.UP = true;
 }
 
-/** Description placeholder */
+/**
+ * Handles the right arrow key down event.
+ */
 function rightkeydown() {
   keyboard.RIGHT = true;
 }
 
+/**
+ * Adds an event listener to handle keyup events and execute corresponding functions 
+ * based on the key pressed.
+ * 
+ * Key mappings:
+ * - Left Arrow (keyCode 37): Calls `leftkeyup()`.
+ * - Up Arrow (keyCode 38): Calls `upkeyup()`.
+ * - Right Arrow (keyCode 39): Calls `rightkeyup()`.
+ * - Down Arrow (keyCode 40): Calls `downkeyup()`.
+ * - Space (keyCode 32): Calls `spacekeyup()`.
+ * - 'D' Key (keyCode 68): Calls `dkeyup()`.
+ */
 document.addEventListener("keyup", (e) => {
   let code = e.keyCode;
   if (code === 37) {
@@ -525,32 +603,44 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
-/** Description placeholder */
+/**
+ * Handles the 'D' key up event.
+ */
 function dkeyup() {
   keyboard.D = false;
 }
 
-/** Description placeholder */
+/**
+ * Handles the space key up event.
+ */
 function spacekeyup() {
   keyboard.SPACE = false;
 }
 
-/** Description placeholder */
+/**
+ * Handles the down arrow key up event.
+ */
 function downkeyup() {
   keyboard.DOWN = false;
 }
 
-/** Description placeholder */
+/**
+ * Handles the left arrow key up event.
+ */
 function leftkeyup() {
   keyboard.LEFT = false;
 }
 
-/** Description placeholder */
+/**
+ * Handles the right arrow key up event.
+ */
 function rightkeyup() {
   keyboard.RIGHT = false;
 }
 
-/** Description placeholder */
+/**
+ * Handles the up arrow key up event.
+ */
 function upkeyup() {
   keyboard.UP = false;
 }

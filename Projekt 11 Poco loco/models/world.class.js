@@ -1,110 +1,56 @@
 class World {
+
   /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
-  character = new Character(); // Initialize character with world instance
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
+ * @property {Character} character - The character instance in the game.
+ * @property {Endboss} enemyboss - The enemy boss instance in the game.
+ * @property {ThrowableObject} bottle - The throwable object instance in the game.
+ * @property {Level} level - The current level in the game.
+ * @property {HTMLCanvasElement} canvas - The canvas element for the game.
+ * @property {CanvasRenderingContext2D} ctx - The 2D rendering context for the canvas.
+ * @property {World} world - The world instance.
+ * @property {Keyboard} keyboard - The keyboard input handler.
+ * @property {number} camera_x - The camera's x-coordinate.
+ * @property {Statusbar} statusbar - The status bar instance.
+ * @property {Coinsstatusbar} coinsstatusbar - The coins status bar instance.
+ * @property {Bottlestatusbar} bottlestatusbar - The bottles status bar instance.
+ * @property {Enemybosshealthbar} enemybosshealthbar - The enemy boss health bar instance.
+ * @property {Array<ThrowableObject>} throwableobject - Array of throwable objects.
+ * @property {Array<ThrowableObject>} bottles - Array of bottles.
+ * @property {Array<number>} intervals - Array of interval IDs.
+ * @property {HTMLImageElement} overlayImage - The overlay image.
+ * @property {string} rotatephoto - The path to the rotate photo image.
+ * @property {Coinsstatusbar} coins - The coins status bar instance.
+ * @property {boolean} isEndbossHit - Flag indicating if the end boss is hit.
+ * @property {boolean} isEndbosshit - Flag indicating if the end boss is hit.
+ * @property {number} bottles - Number of bottles.
+ */
+
+  character = new Character();
   enemyboss = new Endboss();
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   bottle = new ThrowableObject();
   level = level1;
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   canvas;
   ctx;
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   world;
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   keyboard;
-  /**
-   * Description placeholder
-   *
-   * @type {number}
-   */
   camera_x = 0;
   statusbar = new Statusbar();
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   coinsstatusbar = new Coinsstatusbar();
   bottlestatusbar = new Bottlestatusbar();
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
   bottles = [];
-  /**
-   * Description placeholder
-   *
-   * @type {{}}
-   */
   intervals = [];
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   overlayImage = null;
-  /**
-   * Description placeholder
-   *
-   * @type {string}
-   */
   rotatephoto = "img/rotate.png";
-  /**
-   * Description placeholder
-   *
-   * @type {*}
-   */
   coins = new Coinsstatusbar();
-  /**
-   * Description placeholder
-   *
-   * @type {boolean}
-   */
   isEndbossHit = false;
-  /**
-   * Description placeholder
-   *
-   * @type {boolean}
-   */
   isEndbosshit = false;
-  /**
-   * Description placeholder
-   *
-   * @type {{}}
-   */
   bottles = 0;
+
   /**
-   * Description placeholder
-   *
-   * @type {*}
+   * The background audio instance.
+   * @type {HTMLAudioElement}
    */
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
@@ -114,8 +60,8 @@ class World {
    * Creates an instance of World.
    *
    * @constructor
-   * @param {*} canvas 
-   * @param {*} keyboard 
+   * @param {HTMLCanvasElement} canvas - The canvas element.
+   * @param {Keyboard} keyboard - The keyboard input handler.
    */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -127,11 +73,16 @@ class World {
     this.run();
   }
 
+  /**
+   * Sets the world instance for the character.
+   */
   setWorld() {
     this.character.world = this;
   }
 
-  /** Description placeholder */
+  /**
+   * Runs the game loop.
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -139,15 +90,18 @@ class World {
     }, 200);
   }
 
-  /** Description placeholder */
+  /**
+   * Checks if the player is throwing objects.
+   */
   checkthrowobjects() {
     if (this.keyboard.D) {
       this.throwSalsaBottle();
-
     }
   }
 
-  /** Description placeholder */
+  /**
+   * Throws a salsa bottle.
+   */
   throwSalsaBottle() {
     if (this.bottles === 0) {
       return;
@@ -157,14 +111,16 @@ class World {
         this.character.y + 40
       );
       this.throwableobject.push(bottle);
-      this.bottles--
+      this.bottles--;
       this.bottlestatusbar.setpercentage(
         this.bottlestatusbar.percentage - 20
       );
     }
-
   }
 
+  /**
+   * Handles coin collisions.
+   */
   coinscollision() {
     this.level.coins = this.level.coins.filter((coin) => {
       if (this.character.isColliding(coin)) {
@@ -175,21 +131,25 @@ class World {
     });
   }
 
+  /**
+   * Handles bottle collisions.
+   */
   bottlescollision() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
       if (this.character.isColliding(bottle)) {
-        this.bottles++
+        this.bottles++;
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
         );
         return false;
       }
-
       return true;
     });
   }
 
-  /** Description placeholder */
+  /**
+   * Checks for collisions in the game.
+   */
   checkCollisions() {
     this.coinscollision();
     this.charactercollision();
@@ -201,9 +161,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Handles enemy death.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   enemydead(enemy) {
     this.isEndbosshit = true;
@@ -214,25 +174,26 @@ class World {
     }, 500);
   }
 
-  /** Description placeholder */
+  /**
+   * Handles character collisions.
+   */
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (world.character.isAboveGround() && !this.isEndbosshit) {
-          this.enemydead(enemy)
+          this.enemydead(enemy);
         } else if (!world.character.isAboveGround() && !this.isEndbosshit) {
-          this.characterattacked()
+          this.characterattacked();
         }
-
       } else {
         this.throwbottles(enemy);
-
       }
-
     });
   }
 
-  /** Description placeholder */
+  /**
+   * Handles character being attacked.
+   */
   characterattacked() {
     this.isEndbosshit = true;
     world.character.hit();
@@ -243,9 +204,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Handles enemy kill.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   enemykill(enemy) {
     if (enemy.constructor.name === "Chicken") {
@@ -268,9 +229,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Handles throwing bottles at enemies.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
@@ -281,9 +242,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Handles collisions with enemies.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   enemiescollision(enemy) {
     if (enemy.constructor.name === "Chicken") {
@@ -297,10 +258,15 @@ class World {
       }, 1000 / 75);
       enemy.death();
     } else if (enemy.constructor.name === "Endboss") {
-      this.enemybosscollision(enemy)
+      this.enemybosscollision(enemy);
     }
   }
 
+  /**
+   * Handles the death of the boss.
+   *
+   * @param {Enemy} enemy - The enemy instance.
+   */
   deadboss(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
@@ -312,9 +278,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Handles collisions with the boss.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   enemybosscollision(enemy) {
     if (!this.isEndbossHit) {
@@ -322,40 +288,42 @@ class World {
       enemy.hit();
       world.enemybosshealthbar.setpercentage(enemy.energy);
       if (world.enemybosshealthbar.percentage === 0) {
-        this.deadboss(enemy)
+        this.deadboss(enemy);
       } else {
-        this.bossattack(enemy)
+        this.bossattack(enemy);
       }
     }
   }
 
   /**
-   * Description placeholder
+   * Handles the boss attack.
    *
-   * @param {*} enemy 
+   * @param {Enemy} enemy - The enemy instance.
    */
   bossattack(enemy) {
-    enemy.stopGames()
+    enemy.stopGames();
     setInterval(() => {
       enemy.moveLeft();
     }, 1000 / 180);
     setInterval(() => {
-      enemy.playAnimation(enemy.IMAGES_ATTACK)
+      enemy.playAnimation(enemy.IMAGES_ATTACK);
     }, 150);
     setTimeout(() => {
       this.isEndbossHit = false;
     }, 1000);
   }
 
-  /** Description placeholder */
+  /**
+   * Clears the canvas.
+   */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /**
-   * Description placeholder
+   * Sets the world instance for the character and enemies.
    *
-   * @returns 
+   * @returns {void}
    */
   setWorld() {
     this.character.world = this;
@@ -364,7 +332,9 @@ class World {
     });
   }
 
-  /** Description placeholder */
+  /**
+   * Draws the game.
+   */
   draw() {
     if (this.showIntro) {
       this.drawIntro(this.introImage);
@@ -373,13 +343,14 @@ class World {
     }
   }
 
-  /** Description placeholder */
+  /**
+   * Draws the game elements.
+   */
   drawgame() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     if (this.level.backgroundObjects) {
       this.addObjectsToMap(this.level.backgroundObjects);
-
     }
     this.ctx.translate(-this.camera_x, 0);
     this.beforecamera();
@@ -392,7 +363,9 @@ class World {
     });
   }
 
-  /** Description placeholder */
+  /**
+   * Draws elements before the camera.
+   */
   beforecamera() {
     this.addToMap(this.statusbar);
     this.addToMap(this.coinsstatusbar);
@@ -400,7 +373,9 @@ class World {
     this.addToMap(this.enemybosshealthbar);
   }
 
-  /** Description placeholder */
+  /**
+   * Draws elements after the camera.
+   */
   aftercamera() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coins);
@@ -411,9 +386,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Adds an object to the map.
    *
-   * @param {*} mo 
+   * @param {MovableObject} mo - The movable object.
    */
   addToMap(mo) {
     if (mo.otherDirection) {
@@ -424,10 +399,11 @@ class World {
       this.flipImageBack(mo);
     }
   }
+
   /**
-   * Description placeholder
+   * Adds multiple objects to the map.
    *
-   * @param {*} objects 
+   * @param {Array<MovableObject>} objects - The array of movable objects.
    */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -436,9 +412,9 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Flips an image horizontally.
    *
-   * @param {*} mo 
+   * @param {MovableObject} mo - The movable object.
    */
   flipImage(mo) {
     this.ctx.save();
@@ -448,16 +424,18 @@ class World {
   }
 
   /**
-   * Description placeholder
+   * Flips an image back to its original orientation.
    *
-   * @param {*} mo 
+   * @param {MovableObject} mo - The movable object.
    */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
 
-  /** Description placeholder */
+  /**
+   * Clears all intervals.
+   */
   clearAllIntervals() {
     for (let i = 1; i < 9999; i++) {
       window.clearInterval(i);

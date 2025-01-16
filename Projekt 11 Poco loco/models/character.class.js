@@ -3,9 +3,9 @@
  * Extends the MovableObject class to inherit movement and gravity functionalities.
  */
 class Character extends MovableObject {
-  
+
   height = 280;
-  y = 70;
+  y = 100;
   speed = 8;
   characterarrays = new Characterarrays();
   world;
@@ -154,9 +154,9 @@ class Character extends MovableObject {
   sleepinganimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
-      if (timeElapsed >= 5000 && timeElapsed < 15000) { 
+      if (timeElapsed >= 5000 && timeElapsed < 15000) {
         this.idleanimation();
-      } else if (timeElapsed >= 15000) { 
+      } else if (timeElapsed >= 15000) {
         this.snooringanimation();
       }
     } else {
