@@ -184,13 +184,6 @@ function drawgame() {
 }
 
 /**
- * Reloads the game.
- */
-function reloadgame() {
-  restartgame();
-}
-
-/**
  * Shows the game controls.
  */
 function showcontrolls() {

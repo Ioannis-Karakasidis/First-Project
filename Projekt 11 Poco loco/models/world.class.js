@@ -140,6 +140,7 @@ class World extends Wordpart2 {
       return;
     } else {
       this.characterattacked();
+      return;
     }
   }
 
@@ -149,7 +150,7 @@ class World extends Wordpart2 {
    */
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.iscolliding(enemy)) {
         this.enemydead(enemy)
       }
       this.throwbottles(enemy);
