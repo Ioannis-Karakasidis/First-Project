@@ -166,7 +166,11 @@ class World {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemydead(enemy) {
-    this.enemykill(enemy)
+    if (this.character.isAboveGround()) {
+      this.characterattacked();
+    } else {
+      this.enemykill(enemy)
+    }
   }
 
   /**
