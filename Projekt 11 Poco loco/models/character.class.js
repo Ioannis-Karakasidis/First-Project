@@ -1,7 +1,3 @@
-/**
- * Represents the main character in the game.
- * Extends the MovableObject class to inherit movement and gravity functionalities.
- */
 class Character extends MovableObject {
 
   height = 280;

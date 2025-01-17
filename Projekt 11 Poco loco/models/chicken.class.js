@@ -1,7 +1,4 @@
-/**
- * Represents a chicken character in the game.
- * Inherits from MovableObject to gain movement capabilities.
- */
+
 class Chicken extends MovableObject {
   height = 100;
   y = 350;

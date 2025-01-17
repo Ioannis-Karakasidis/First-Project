@@ -1,27 +1,11 @@
-/**
- * Represents a movable object in the game.
- * A subclass of DrawableObject that adds movement, gravity, collision detection, and health functionality.
- */
+
 class MovableObject extends DrawableObject {
-  /** @type {number} The speed at which the object moves horizontally. */
   speed = 0.15;
-
-  /** @type {boolean} Indicates whether the object is facing the other direction. */
   otherDirection = false;
-
-  /** @type {number} The speed at which the object moves vertically. */
   speedY = 0.5;
-
-  /** @type {number} The acceleration applied to the object's vertical speed. */
   acceleration = 1;
-
-  /** @type {number} The timestamp of the last hit the object received. */
   lasthit = 0;
-
-  /** @type {Characterarrays} An instance of the Characterarrays class for managing characters. */
   charactersarray = new Characterarrays();
-
-  /** @type {HTMLAudioElement} The audio played when the object is hurt. */
   deadchicken_audio = new Audio("audio/slap-hurt-pain-sound-effect-262618.mp3");
 
   /**

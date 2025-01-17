@@ -1,7 +1,4 @@
-/**
- * Represents an object that can be drawn on the canvas with images.
- * Handles image loading, animation, and rendering.
- */
+
 class DrawableObject {
   img;
   imageCache = {};

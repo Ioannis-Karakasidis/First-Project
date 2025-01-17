@@ -1,9 +1,4 @@
-/**
- * Represents a throwable object, such as a bottle.
- * Inherits from MovableObject, allowing for movement and gravity application.
- */
 class ThrowableObject extends MovableObject {
-  /** @type {Array} An array that holds the bottles thrown in the game. */
   bottles = [];
 
   /**

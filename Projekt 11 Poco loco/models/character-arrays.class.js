@@ -1,6 +1,3 @@
-/**
- * Class representing the arrays of image paths for a character's various animations.
- */
 class Characterarrays {
   /**
    * @type {string[]}

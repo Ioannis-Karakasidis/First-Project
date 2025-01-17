@@ -1,10 +1,4 @@
-/**
- * Class representing the bottle status bar.
- */
 class Bottlestatusbar extends DrawableObject {
-  /**
-   * @type {string[]}
-   */
   IMAGES = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",
@@ -13,12 +7,14 @@ class Bottlestatusbar extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/80.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
   ];
-
-  /**
-   * @type {number}
-   */
   percentage = 0;
 
+  /**
+ * Initializes a new instance of the game object with specified position, size, and images.
+ * 
+ * @constructor
+ * @extends ParentClass
+ */
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -28,4 +24,5 @@ class Bottlestatusbar extends DrawableObject {
     this.height = 100;
     this.setpercentage(0);
   }
+
 }

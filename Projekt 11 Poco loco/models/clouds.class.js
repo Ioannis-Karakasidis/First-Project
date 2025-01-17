@@ -1,30 +1,7 @@
-/**
- * Class representing a cloud object that extends the MovableObject class.
- * Handles cloud movement and animation.
- */
 class Clouds extends MovableObject {
-  /**
-   * The y-coordinate position of the cloud.
-   * @type {number}
-   */
   y = 0;
-
-  /**
-   * The width of the cloud.
-   * @type {number}
-   */
   width = 550;
-
-  /**
-   * The height of the cloud.
-   * @type {number}
-   */
   height = 300;
-
-  /**
-   * The speed at which the cloud moves.
-   * @type {number}
-   */
   speed = 0.35;
 
   /**

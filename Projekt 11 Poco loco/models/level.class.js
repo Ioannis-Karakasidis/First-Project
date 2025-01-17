@@ -1,21 +1,9 @@
-/**
- * Represents a level in the game.
- * Contains the enemies, cloud, background objects, coins, and bottles present in the level.
- */
+
 class level {
-  /** @type {Array} List of enemies in the level. */
   enemies;
-
-  /** @type {Array} List of clouds in the level. */
   Cloud;
-
-  /** @type {Array} List of background objects in the level. */
   backgroundObjects;
-
-  /** @type {Array} List of coins in the level. */
   coins;
-
-  /** @type {number} The x-coordinate where the level ends. */
   level_end_x = 2250;
 
   /** 

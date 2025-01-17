@@ -1,15 +1,7 @@
-/**
- * Represents a small chicken enemy in the game that moves and can be killed.
- * Inherits from MovableObject, adding walking animation and movement.
- */
 class Smallchicken extends MovableObject {
-  /** @type {number} The height of the small chicken. */
   height = 100;
-
-  /** @type {number} The initial vertical position of the small chicken. */
   y = 350;
 
-  /** @type {Object} The offset used for collision detection. */
   offset = {
     top: 5,
     left: 5,
@@ -17,14 +9,12 @@ class Smallchicken extends MovableObject {
     bottom: 5
   };
 
-  /** @type {Array} The images used for the walking animation of the small chicken. */
   IMAGES_WALKING = [
     "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
     "img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
 
-  /** @type {Array} The image used when the small chicken is dead. */
   DEAD_SMALLCHICKEN = ["img/3_enemies_chicken/chicken_small/2_dead/dead.png"];
 
   /**

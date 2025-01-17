@@ -1,6 +1,3 @@
-/**
- * Represents the Endboss object that moves, animates, and handles interactions.
- */
 class Endboss extends MovableObject {
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",

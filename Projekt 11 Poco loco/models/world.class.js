@@ -1,30 +1,4 @@
-class World {
-
-  /**
- * @property {Character} character - The character instance in the game.
- * @property {Endboss} enemyboss - The enemy boss instance in the game.
- * @property {ThrowableObject} bottle - The throwable object instance in the game.
- * @property {Level} level - The current level in the game.
- * @property {HTMLCanvasElement} canvas - The canvas element for the game.
- * @property {CanvasRenderingContext2D} ctx - The 2D rendering context for the canvas.
- * @property {World} world - The world instance.
- * @property {Keyboard} keyboard - The keyboard input handler.
- * @property {number} camera_x - The camera's x-coordinate.
- * @property {Statusbar} statusbar - The status bar instance.
- * @property {Coinsstatusbar} coinsstatusbar - The coins status bar instance.
- * @property {Bottlestatusbar} bottlestatusbar - The bottles status bar instance.
- * @property {Enemybosshealthbar} enemybosshealthbar - The enemy boss health bar instance.
- * @property {Array<ThrowableObject>} throwableobject - Array of throwable objects.
- * @property {Array<ThrowableObject>} bottles - Array of bottles.
- * @property {Array<number>} intervals - Array of interval IDs.
- * @property {HTMLImageElement} overlayImage - The overlay image.
- * @property {string} rotatephoto - The path to the rotate photo image.
- * @property {Coinsstatusbar} coins - The coins status bar instance.
- * @property {boolean} isEndbossHit - Flag indicating if the end boss is hit.
- * @property {boolean} isEndbosshit - Flag indicating if the end boss is hit.
- * @property {number} bottles - Number of bottles.
- */
-
+class World extends Wordpart2 {
   character = new Character();
   enemyboss = new Endboss();
   bottle = new ThrowableObject();
@@ -45,11 +19,6 @@ class World {
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
   isEndbossHit = false;
-
-  /**
-   * The background audio instance.
-   * @type {HTMLAudioElement}
-   */
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
@@ -62,6 +31,7 @@ class World {
    * @param {Keyboard} keyboard - The keyboard input handler.
    */
   constructor(canvas, keyboard) {
+    super();
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -168,8 +138,8 @@ class World {
     if (this.character.isAboveGround()) {
       this.enemykill(enemy);
       return;
-    } else{
-        this.characterattacked();
+    } else {
+      this.characterattacked();
     }
   }
 
@@ -418,82 +388,4 @@ class World {
     });
   }
 
-  /**
-   * Draws elements before the camera.
-   */
-  beforecamera() {
-    this.addToMap(this.statusbar);
-    this.addToMap(this.coinsstatusbar);
-    this.addToMap(this.bottlestatusbar);
-    this.addToMap(this.enemybosshealthbar);
-  }
-
-  /**
-   * Draws elements after the camera.
-   */
-  aftercamera() {
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.coins);
-    this.addObjectsToMap(this.level.bottles);
-    this.addObjectsToMap(this.level.Cloud);
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableobject);
-  }
-
-  /**
-   * Adds an object to the map.
-   *
-   * @param {MovableObject} mo - The movable object.
-   */
-  addToMap(mo) {
-    if (mo.otherDirection) {
-      this.flipImage(mo);
-    }
-    mo.draw(this.ctx);
-    if (mo.otherDirection) {
-      this.flipImageBack(mo);
-    }
-  }
-
-  /**
-   * Adds multiple objects to the map.
-   *
-   * @param {Array<MovableObject>} objects - The array of movable objects.
-   */
-  addObjectsToMap(objects) {
-    objects.forEach((o) => {
-      this.addToMap(o);
-    });
-  }
-
-  /**
-   * Flips an image horizontally.
-   *
-   * @param {MovableObject} mo - The movable object.
-   */
-  flipImage(mo) {
-    this.ctx.save();
-    this.ctx.translate(mo.width, 0);
-    this.ctx.scale(-1, 1);
-    mo.x = mo.x * -1;
-  }
-
-  /**
-   * Flips an image back to its original orientation.
-   *
-   * @param {MovableObject} mo - The movable object.
-   */
-  flipImageBack(mo) {
-    mo.x = mo.x * -1;
-    this.ctx.restore();
-  }
-
-  /**
-   * Clears all intervals.
-   */
-  clearAllIntervals() {
-    for (let i = 1; i < 9999; i++) {
-      window.clearInterval(i);
-    }
-  }
 }

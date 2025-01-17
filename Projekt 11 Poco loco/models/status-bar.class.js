@@ -1,9 +1,4 @@
-/**
- * Represents a status bar displaying health or progress.
- * Inherits from DrawableObject, allowing for image loading and animation.
- */
 class Statusbar extends DrawableObject {
-  /** @type {Array} The images representing different health levels of the status bar. */
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
@@ -13,7 +8,6 @@ class Statusbar extends DrawableObject {
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
   ];
 
-  /** @type {number} The percentage value representing the current health or progress. */
   percentage = 100;
 
   /**

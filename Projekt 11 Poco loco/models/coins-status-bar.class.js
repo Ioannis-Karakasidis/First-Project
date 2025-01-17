@@ -1,12 +1,5 @@
-/**
- * Class representing the coins status bar.
- * Extends the DrawableObject class and displays the coin status based on the percentage.
- */
 class Coinsstatusbar extends DrawableObject {
-  /**
-   * @type {string[]}
-   */
-  IMAGES = [
+    IMAGES = [
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/20.png",
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/40.png",
@@ -15,9 +8,6 @@ class Coinsstatusbar extends DrawableObject {
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png",
   ];
 
-  /**
-   * @type {number}
-   */
   percentage = 0;
 
   /**
