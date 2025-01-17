@@ -85,7 +85,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkthrowobjects();
-    }, 120);
+    }, 200);
   }
 
   /**
@@ -169,8 +169,7 @@ class World {
       this.enemykill(enemy);
       return;
     } else{
-      this.characterattacked();
-
+        this.characterattacked();
     }
   }
 
