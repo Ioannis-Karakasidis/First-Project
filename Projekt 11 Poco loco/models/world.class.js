@@ -265,42 +265,56 @@ class World {
     }
   }
 
-  chickencollision(enemy) {
-    setInterval(() => {
+  /**
+ * Handles the collision between a chicken and throwable objects.
+ *
+ * @param {object} enemy - The enemy instance representing a chicken.
+ */
+chickencollision(enemy) {
+  setInterval(() => {
       enemy.playAnimation(enemy.DEAD_CHICKEN);
-    }, 1000 / 75);
-    enemy.death();
-    this.throwableobject.forEach((bottle, index) => {
+  }, 1000 / 75);
+  enemy.death();
+  this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
       }
-    });
-  }
+  });
+}
 
-  smallchickencollision(enemy) {
-    setInterval(() => {
+/**
+* Handles the collision between a small chicken and throwable objects.
+*
+* @param {object} enemy - The enemy instance representing a small chicken.
+*/
+smallchickencollision(enemy) {
+  setInterval(() => {
       enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
-    }, 1000 / 75);
-    enemy.death();
-    this.throwableobject.forEach((bottle, index) => {
+  }, 1000 / 75);
+  enemy.death();
+  this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
       }
-    });
-  }
+  });
+}
 
-
-  endbosscollision(enemy) {
-    this.throwableobject.forEach((bottle, index) => {
+/**
+* Handles the collision between the end boss and throwable objects.
+*
+* @param {object} enemy - The enemy instance representing the end boss.
+*/
+endbosscollision(enemy) {
+  this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
       }
-    });
-    this.enemybosscollision(enemy);
-  }
+  });
+  this.enemybosscollision(enemy);
+}
 
   /**
    * Handles the death of the boss.

@@ -383,7 +383,6 @@ function isEmulatingMobile() {
   const isMobileWidth = window.innerWidth <= 768;
   const isMobileHeight = window.innerHeight <= 480; // Check for small height (landscape)
   const isMobileUserAgent = navigator.userAgent.toLowerCase().includes("mobi");
-
   return (isMobileWidth || isMobileHeight) && isMobileUserAgent;
 }
 
