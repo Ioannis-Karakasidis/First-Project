@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
     setInterval(() => {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;
-    }, 50);
+    }, 0);
   }
 
   /**
@@ -54,7 +54,6 @@ class MovableObject extends DrawableObject {
    */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
-
       return true;
     } else {
       return this.y < 170;
