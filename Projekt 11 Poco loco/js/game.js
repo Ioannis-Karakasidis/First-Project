@@ -398,7 +398,7 @@ function togglerotation() {
  * @returns {boolean} True if in mobile emulator mode, false otherwise.
  */
 function mobile() {
-  isMobileUserAgent = window.navigator.max === 1
+  isMobileUserAgent = window.navigator.maxTouchPoints === 1
   return isMobileUserAgent;
 }
 
