@@ -13,10 +13,12 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   font-family: "Bangers", serif;
+  overflow: hidden;
 }
 
 canvas {
   width: 100%;
+  height: 100%;
 }
 
 .Impressumdesign {
@@ -288,5 +290,6 @@ button img {
 .mobilealign {
   display: flex;
   flex-direction: column;
-  height: 68%;
+  height: 100%;
+  justify-content: center;
 }

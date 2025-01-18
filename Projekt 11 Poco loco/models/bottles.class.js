@@ -5,10 +5,10 @@ class Bottle extends DrawableObject {
   ];
   
   offset = {
-    top: 2,
-    left: 2,
-    right: 2,
-    bottom: 2
+    top: 30,
+    left: 30,
+    right: 30,
+    bottom: 30
   };
 
   /**

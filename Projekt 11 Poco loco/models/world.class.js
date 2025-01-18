@@ -1,4 +1,4 @@
-class World extends Wordpart2 {
+class World extends worldDrawer {
   character = new Character();
   enemyboss = new Endboss();
   bottle = new ThrowableObject();
@@ -9,6 +9,7 @@ class World extends Wordpart2 {
   keyboard;
   camera_x = 0;
   statusbar = new Statusbar();
+  movableobjects = new MovableObject();
   coinsstatusbar = new Coinsstatusbar();
   bottlestatusbar = new Bottlestatusbar();
   enemybosshealthbar = new Enemybosshealthbar();
@@ -104,7 +105,7 @@ class World extends Wordpart2 {
    */
   bottlescollision() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
-      if (this.character.iscolliding(bottle)) {
+      if (this.character.isColliding(bottle)) {
         this.bottles.push(bottle);
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
@@ -164,6 +165,7 @@ class World extends Wordpart2 {
    */
   characterattacked() {
     world.character.hit();
+    world.character.playAnimation(world.character.characterarrays.IMAGES_HURT)
     this.statusbar.setpercentage(world.character.energy);
   }
 
@@ -298,10 +300,8 @@ class World extends Wordpart2 {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
     }, 200);
-    setTimeout(() => {
-      enemy.death();
-      this.isEndbossHit = false;
-    }, 10);
+    enemy.death();
+    this.isEndbossHit = false;
   }
 
   /**
@@ -310,15 +310,14 @@ class World extends Wordpart2 {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemybosscollision(enemy) {
-    if (!this.isEndbossHit) {
-      this.isEndbossHit = true;
-      enemy.hit();
-      world.enemybosshealthbar.setpercentage(enemy.energy);
-      if (world.enemybosshealthbar.percentage === 0) {
-        this.deadboss(enemy);
-      } else {
-        this.bossattack(enemy);
-      }
+    enemy.hit();
+    enemy.playAnimation(enemy.IMAGES_HURT)
+    enemy.deadchicken_audio.play()
+    world.enemybosshealthbar.setpercentage(enemy.energy);
+    if (world.enemybosshealthbar.percentage === 0) {
+      this.deadboss(enemy);
+    } else {
+      this.bossattack(enemy);
     }
   }
 
@@ -334,10 +333,7 @@ class World extends Wordpart2 {
     }, 1000 / 180);
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_ATTACK);
-    }, 150);
-    setTimeout(() => {
-      this.isEndbossHit = false;
-    }, 1000);
+    }, 250);
   }
 
   /**

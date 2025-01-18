@@ -1,4 +1,4 @@
-class Wordpart2 {
+class worldDrawer {
     /**
        * Draws elements before the camera.
        */

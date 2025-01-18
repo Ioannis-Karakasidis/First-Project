@@ -37,15 +37,15 @@ class Endboss extends MovableObject {
   GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
   win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
   gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
-  animationInterval = null; 
-  intervalsIdss = []; 
+  animationInterval = null;
+  intervalsIdss = [];
   offset = {
     top: 0,
     left: 0,
     right: 0,
     bottom: 0
   }
-  
+
   energy = 100;
 
   /**
@@ -91,7 +91,19 @@ class Endboss extends MovableObject {
    */
   setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
-    this.intervalsIdss.push(id); 
-    return id; 
+    this.intervalsIdss.push(id);
+    return id;
+  }
+  
+  /**
+ * Stops a specific interval in the game.
+ *
+ * @param {number} targetIndex - The index of the interval to stop.
+ */
+  stopSpecificGame(targetIndex) {
+    if (intervalsIds[targetIndex]) {
+      clearInterval(intervalsIds[targetIndex]);
+      intervalsIds[targetIndex] = null;
+    }
   }
 }

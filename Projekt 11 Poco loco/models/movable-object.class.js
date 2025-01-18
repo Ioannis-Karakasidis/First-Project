@@ -8,6 +8,11 @@ class MovableObject extends DrawableObject {
   charactersarray = new Characterarrays();
   deadchicken_audio = new Audio("audio/slap-hurt-pain-sound-effect-262618.mp3");
 
+
+  constructor() {
+    super();
+    this.deadchicken_audio.preload = "none"; // Prevents the file from preloading automatically
+  }
   /**
    * Applies gravity to the object, causing it to move downward unless it is above the ground.
    * Gravity is applied at regular intervals.
