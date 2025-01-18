@@ -55,7 +55,7 @@ class World extends Wordpart2 {
     setInterval(() => {
       this.checkCollisions();
       this.checkthrowobjects();
-    }, 200);
+    }, 150);
   }
 
   /**
@@ -104,9 +104,7 @@ class World extends Wordpart2 {
    */
   bottlescollision() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
-
       if (this.character.iscolliding(bottle)) {
-
         this.bottles.push(bottle);
         this.bottlestatusbar.setpercentage(
           this.bottlestatusbar.percentage + 20
@@ -150,10 +148,13 @@ class World extends Wordpart2 {
    */
   charactercollision() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.iscolliding(enemy)) {
+      if (this.character.isColliding(enemy)) {
         this.enemydead(enemy)
+        return;
+      } else {
+        this.throwbottles(enemy);
+        return;
       }
-      this.throwbottles(enemy);
 
     });
   }
@@ -233,7 +234,7 @@ class World extends Wordpart2 {
     } else if (enemy.constructor.name === "Smallchicken") {
       this.smallchickencollision(enemy)
     } else if (enemy.constructor.name === "Endboss") {
-      this.endbosscollision()
+      this.endbosscollision(enemy)
     }
   }
 
