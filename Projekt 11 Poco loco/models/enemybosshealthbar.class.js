@@ -16,9 +16,9 @@ class Enemybosshealthbar extends DrawableObject {
     super();
     this.loadImages(this.IMAGES);
     this.x = 500;
-    this.y = 0;
+    this.y = 13;
     this.width = 200;
-    this.height = 100;
+    this.height = 70;
     this.setpercentage(100);
   }
 }

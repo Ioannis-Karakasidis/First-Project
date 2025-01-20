@@ -45,8 +45,8 @@ class Character extends MovableObject {
    */
   stopintervals() {
     setStoppableInterval(() => this.movementandcamera(), 80);
-    setStoppableInterval(() => this.walking(), 80);
-    setStoppableInterval(() => this.jumping(), 200);
+    setStoppableInterval(() => this.walking(), 50);
+    setStoppableInterval(() => this.jumping(), 250);
     let indexOfSleepingAnimation = setStoppableInterval(
       () => this.sleepinganimation(),
       500
@@ -154,7 +154,7 @@ class Character extends MovableObject {
   sleepinganimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
-      if (timeElapsed >= 5000 && timeElapsed < 15000) {
+      if (timeElapsed >= 1000 && timeElapsed < 15000) {
         this.idleanimation();
       } else if (timeElapsed >= 15000) {
         this.snooringanimation();
@@ -189,21 +189,24 @@ class Character extends MovableObject {
    * Updates the character's animation based on whether it's dead or hurt.
    */
   updateCharacterAnimation() {
-    if (this.isDead()) {
-      this.playAnimation(this.characterarrays.IMAGES_DEATH);
-      if (mute) {
-        this.death_sound.pause();
-      } else {
-        this.death_sound.play();
+    setInterval(() => {
+      if (this.isDead()) {
+        this.playAnimation(this.characterarrays.IMAGES_DEATH);
+        if (mute) {
+          this.death_sound.pause();
+        } else {
+          this.death_sound.play();
+        }
+      } else if (this.isHURT()) {
+        if (mute) {
+          this.hurt_sound.pause();
+        } else {
+          this.hurt_sound.play();
+        }
+        this.playAnimation(this.characterarrays.IMAGES_HURT);
       }
-    } else if (this.isHURT()) {
-      if (mute) {
-        this.hurt_sound.pause();
-      } else {
-        this.hurt_sound.play();
-      } 
-      this.playAnimation(this.characterarrays.IMAGES_HURT);
-    }
+    }, 0);
+
   }
 
   /**
