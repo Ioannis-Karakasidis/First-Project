@@ -6,7 +6,7 @@ let keyboard = new Keyboard();
 let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
 let throwableobject = new ThrowableObject();
-
+let mute = false;
 
 /**
  * Initializes the game.
@@ -246,19 +246,42 @@ function characterdeath() {
 }
 
 /**
- * Toggles the background music.
+ * Toggles the audio state and saves the mute state to localStorage.
  */
 function closemusic() {
   const audioIcon = document.getElementById("audioicon");
-  const audioSrc = audioIcon.getAttribute("src"); // Get the relative src
+  const audioSrc = audioIcon.getAttribute("src");
   if (audioSrc === "img/icons8-audio-32.png") {
     audioIcon.src = "img/icons8-no-audio-32.png";
-    world.background_audio.pause(); // Pause the audio
+    if(world.background_audio) {
+      world.background_audio.pause();
+    }
+    mute = true;
   } else if (audioSrc === "img/icons8-no-audio-32.png") {
-    audioIcon.src = "img/icons8-audio-32.png"; // Change icon to "audio" state
-    world.background_audio.play(); // Play the audio
+    audioIcon.src = "img/icons8-audio-32.png";
+    world.background_audio.play();
+    mute = false;
+  }
+  localStorage.setItem("muteState", mute);
+}
+
+/**
+ * Initializes the audio state based on the saved mute state in localStorage.
+ */
+function initializeAudioState() {
+  const savedMuteState = localStorage.getItem("muteState");
+  const audioIcon = document.getElementById("audioicon");
+  if (savedMuteState === "true") {
+    audioIcon.src = "img/icons8-no-audio-32.png";
+    mute = true;
+  } else {
+    audioIcon.src = "img/icons8-audio-32.png";
+    mute = false;
   }
 }
+
+document.addEventListener("DOMContentLoaded", initializeAudioState);
+
 
 /**
  * Returns to the main menu.

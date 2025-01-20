@@ -70,7 +70,7 @@ class Character extends MovableObject {
   handleMoveRight() {
     this.moveRight();
     this.otherDirection = false;
-    if (this.walking_sound.paused) {
+    if (this.walking_sound.paused && !mute === true) {
       this.walking_sound.play();
     }
   }
@@ -81,7 +81,7 @@ class Character extends MovableObject {
   handleMoveLeft() {
     this.moveLeft();
     this.otherDirection = true;
-    if (this.walking_sound.paused) {
+    if (this.walking_sound.paused && !mute === true) {
       this.walking_sound.play();
     }
   }
@@ -114,7 +114,11 @@ class Character extends MovableObject {
       (this.world.keyboard.SPACE || this.world.keyboard.UP) &&
       !this.isAboveGround()
     ) {
-      this.jumping_sound.play();
+      if (mute) {
+        this.jumping_sound.pause();
+      } else {
+        this.jumping_sound.play();
+      }
       this.jump();
     }
     if (this.world) {
@@ -173,7 +177,11 @@ class Character extends MovableObject {
    * Plays the snooring animation when the character is idle for a long period.
    */
   snooringanimation() {
-    this.snooring_sound.play();
+    if (mute) {
+      this.snooring_sound.pause();
+    } else {
+      this.snooring_sound.play();
+    }
     this.playAnimation(this.characterarrays.IMAGES_LONG_IDLE);
   }
 
@@ -183,9 +191,17 @@ class Character extends MovableObject {
   updateCharacterAnimation() {
     if (this.isDead()) {
       this.playAnimation(this.characterarrays.IMAGES_DEATH);
-      this.death_sound.play();
+      if (mute) {
+        this.death_sound.pause();
+      } else {
+        this.death_sound.play();
+      }
     } else if (this.isHURT()) {
-      this.hurt_sound.play();
+      if (mute) {
+        this.hurt_sound.pause();
+      } else {
+        this.hurt_sound.play();
+      } 
       this.playAnimation(this.characterarrays.IMAGES_HURT);
     }
   }

@@ -36,7 +36,12 @@ class World extends worldDrawer {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.background_audio.play();
+    if (mute) {
+      this.background_audio.pause();
+    } else {
+      this.background_audio.play();
+
+    }
     this.drawgame();
     this.setWorld();
     this.run();
@@ -159,9 +164,7 @@ class World extends worldDrawer {
         this.enemydead(enemy)
         return;
       }
-
       this.throwbottles(enemy);
-
     });
   }
 
@@ -198,7 +201,11 @@ class World extends worldDrawer {
     this.character.jump();
     setTimeout(() => {
       enemy.death()
-      enemy.deadchicken_audio.play();
+      if (mute) {
+        enemy.deadchicken_audio.pause();
+      } else {
+        enemy.deadchicken_audio.play();
+      }
     }, 150);
   }
 
@@ -212,7 +219,11 @@ class World extends worldDrawer {
     this.character.jump();
     setTimeout(() => {
       enemy.death()
-      enemy.deadchicken_audio.play();
+      if (mute) {
+        enemy.deadchicken_audio.pause();
+      } else {
+        enemy.deadchicken_audio.play();
+      }
     }, 100);
 
   }
@@ -225,7 +236,7 @@ class World extends worldDrawer {
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
       if (enemy.iscolliding(bottle)) {
-          this.enemiescollision(enemy);
+        this.enemiescollision(enemy);
       }
     });
   }
@@ -297,17 +308,15 @@ class World extends worldDrawer {
   endbosscollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.playAnimation(bottle.bottlesplash)
-        setTimeout(() => {
-          bottle.remove(this.ctx);
-          this.throwableobject.splice(index, 1);
-        }, 100);
-        setTimeout(() => {
-          this.enemybosscollision(enemy);
-        }, 100);
+        // Play the splash animation only once
+        bottle.playAnimation(bottle.bottlesplash);
+        bottle.remove(this.ctx);
+        this.throwableobject.splice(index, 1);
+        this.enemybosscollision(enemy);
       }
     });
   }
+
 
   /**
    * Handles the death of the boss.
@@ -329,28 +338,18 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemybosscollision(enemy) { 
-    this.handleBossHealth(enemy)
+  enemybosscollision(enemy) {
+    enemy.hit();
+    enemy.playAnimation(enemy.IMAGES_HURT);
+    if (!mute) {
+      enemy.deadchicken_audio.play();
+    }
+    world.enemybosshealthbar.setpercentage(enemy.energy);
     if (world.enemybosshealthbar.percentage === 0) {
-      this.deadboss(enemy);
+      this.deadboss(enemy); // Handle boss death
     } else {
       this.bossattack(enemy);
     }
-      this.isEndbossHit = false;
-  }
-
-  /**
- * Handles the boss's health state by checking if it is 0. 
- * If the health is 0, the boss dies. Otherwise, the boss performs an attack.
- *
- * @param {Enemy} enemy - The enemy instance representing the boss.
- */
-  handleBossHealth(enemy) {
-    this.isEndbossHit = true;
-    enemy.hit();
-    enemy.playAnimation(enemy.IMAGES_HURT);
-    enemy.deadchicken_audio.play();
-    world.enemybosshealthbar.setpercentage(enemy.energy);
   }
 
   /**
