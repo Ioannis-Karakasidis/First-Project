@@ -1,12 +1,12 @@
+let intervalsIds = [];
 let canvas;
 let world;
 let coins;
-let throwableobject = new ThrowableObject();
 let keyboard = new Keyboard();
-let intervalsIds = [];
 let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
-let i = 1;
+let throwableobject = new ThrowableObject();
+
 
 /**
  * Initializes the game.
@@ -138,35 +138,13 @@ function moveRight() {
  * Restarts the game.
  */
 function restartgame() {
-  stopGame();
-  init();
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  world = new World(canvas, keyboard);
+  init();
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
   document.getElementById("start").style.display = "none";
-  restartgamepart2();
-}
-
-/**
- * Additional steps to restart the game.
- */
-function restartgamepart2() {
-  world.level.enemies.forEach((enemy) => {
-    if (enemy instanceof Chicken) {
-      enemy.animatechickens();
-    }
-  });
-  world.level.Cloud.forEach((cloud) => {
-    cloud.animate();
-  });
-  setStoppableInterval(checkgamestatus, 40);
-  if (world.background_audio) {
-    world.background_audio.currentTime = 0;
-    world.background_audio.play();
-  }
 }
 
 /**

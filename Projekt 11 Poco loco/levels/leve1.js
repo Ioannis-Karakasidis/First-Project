@@ -1,22 +1,3 @@
-/**
- * @typedef {Object} Level
- * @description Represents the game level, including enemies, background objects, coins, and bottles.
- * 
- * @property {Array.<Object>} enemies - The enemies in the level, such as chickens and end bosses.
- * @property {Array.<Object>} clouds - The cloud objects in the background of the level.
- * @property {Array.<Object>} backgroundObjects - The layers of background objects for the level.
- * @property {Array.<Object>} coins - The coin objects scattered throughout the level.
- * @property {Array.<Object>} bottles - The bottle objects in the level.
- */
-
-/**
- * A variable holding the current instance of the game level.
- * This object will be populated with an instance of the {@link Level} class,
- * containing details like enemies, background objects, and collectibles for level 1.
- * 
- * @type {Level|undefined}
- */
-
 let level1;
 
 /**

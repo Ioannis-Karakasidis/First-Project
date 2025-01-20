@@ -11,7 +11,7 @@ class MovableObject extends DrawableObject {
 
   constructor() {
     super();
-    this.deadchicken_audio.preload = "none"; // Prevents the file from preloading automatically
+    this.deadchicken_audio.preload = "none";
   }
   /**
    * Applies gravity to the object, causing it to move downward unless it is above the ground.
@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 40);
+    }, 30);
   }
 
   /**
@@ -34,7 +34,7 @@ class MovableObject extends DrawableObject {
     setInterval(() => {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;
-    }, 0);
+    }, 5);
   }
 
   /**
@@ -143,6 +143,18 @@ class MovableObject extends DrawableObject {
    */
   isDead() {
     return this.energy == 0;
+  }
+
+  /**
+   * Plays an animation by cycling through a list of image paths.
+   * 
+   * @param {string[]} images - An array of image paths to be used in the animation.
+   */
+  playAnimation(images) {
+    let i = this.currentimage % images.length;
+    let path = images[i];
+    this.img = this.imageCache[path];
+    this.currentimage++;
   }
 
   /**

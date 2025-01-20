@@ -15,7 +15,6 @@ class World extends worldDrawer {
   enemybosshealthbar = new Enemybosshealthbar();
   throwableobject = [];
   bottles = [];
-  intervals = [];
   overlayImage = null;
   rotatephoto = "img/rotate.png";
   coins = new Coinsstatusbar();
@@ -23,6 +22,7 @@ class World extends worldDrawer {
   background_audio = new Audio(
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
+  characterAlreadyAttacked = false;
 
   /**
    * Creates an instance of World.
@@ -47,6 +47,9 @@ class World extends worldDrawer {
    */
   setWorld() {
     this.character.world = this;
+    this.level.enemies.forEach((enemy) => {
+      enemy.world = this;
+    });
   }
 
   /**
@@ -86,6 +89,8 @@ class World extends worldDrawer {
       );
     }
   }
+
+
 
   /**
    * Handles coin collisions.
@@ -137,12 +142,15 @@ class World extends worldDrawer {
     if (this.character.isAboveGround()) {
       this.enemykill(enemy);
       return;
-    } else {
+    }
+    if (!this.characterAlreadyAttacked) {
+      this.characterAlreadyAttacked = true;
       this.characterattacked();
-      return;
+      setTimeout(() => {
+        this.characterAlreadyAttacked = false;
+      }, 500);
     }
   }
-
 
   /**
    * Handles character collisions.
@@ -152,10 +160,9 @@ class World extends worldDrawer {
       if (this.character.isColliding(enemy)) {
         this.enemydead(enemy)
         return;
-      } else {
-        this.throwbottles(enemy);
-        return;
       }
+
+      this.throwbottles(enemy);
 
     });
   }
@@ -179,10 +186,8 @@ class World extends worldDrawer {
       this.chickenkill(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
       this.smallchickenkill(enemy)
-    } else {
-      this.character.hit();
-      this.statusbar.setpercentage(this.character.energy);
     }
+
   }
 
   /**
@@ -191,11 +196,12 @@ class World extends worldDrawer {
  * @param {Enemy} enemy - The enemy instance.
  */
   smallchickenkill(enemy) {
-    setInterval(() => {
-      enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
-    }, 1000 / 75);
-    enemy.deadchicken_audio.play();
-    enemy.death();
+    enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
+    this.character.jump();
+    setTimeout(() => {
+      enemy.death()
+      enemy.deadchicken_audio.play();
+    }, 150);
   }
 
   /**
@@ -204,12 +210,13 @@ class World extends worldDrawer {
    * @param {Enemy} enemy - The enemy instance.
    */
   chickenkill(enemy) {
-    setInterval(() => {
-      enemy.playAnimation(enemy.DEAD_CHICKEN);
-    }, 1000 / 75);
-    enemy.hit();
-    enemy.death();
-    enemy.deadchicken_audio.play();
+    enemy.loadImage(enemy.DEAD_CHICKEN);
+    this.character.jump();
+    setTimeout(() => {
+      enemy.death()
+      enemy.deadchicken_audio.play();
+    }, 100);
+
   }
 
   /**
@@ -220,7 +227,9 @@ class World extends worldDrawer {
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
       if (enemy.iscolliding(bottle)) {
-        this.enemiescollision(enemy);
+        setInterval(() => {
+          this.enemiescollision(enemy);
+        }, 0);
       }
     });
   }
@@ -246,14 +255,17 @@ class World extends worldDrawer {
  * @param {object} enemy - The enemy instance representing a chicken.
  */
   chickencollision(enemy) {
-    setInterval(() => {
-      enemy.playAnimation(enemy.DEAD_CHICKEN);
-    }, 1000 / 75);
-    enemy.death();
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+        enemy.loadImage(enemy.DEAD_CHICKEN);
+        bottle.playAnimation(bottle.bottlesplash)
+        setTimeout(() => {
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
+        }, 5);
+        setTimeout(() => {
+          enemy.death()
+        }, 150);
       }
     });
   }
@@ -264,14 +276,19 @@ class World extends worldDrawer {
   * @param {object} enemy - The enemy instance representing a small chicken.
   */
   smallchickencollision(enemy) {
-    setInterval(() => {
-      enemy.playAnimation(enemy.DEAD_SMALLCHICKEN);
-    }, 1000 / 75);
-    enemy.death();
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+        setInterval(() => {
+          enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
+        }, 0);
+        bottle.playAnimation(bottle.bottlesplash)
+        setTimeout(() => {
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
+        }, 5);
+        setTimeout(() => {
+          enemy.death()
+        }, 10);
       }
     });
   }
@@ -284,11 +301,14 @@ class World extends worldDrawer {
   endbosscollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        bottle.remove(this.ctx);
-        this.throwableobject.splice(index, 1);
+        bottle.playAnimation(bottle.bottlesplash)
+        setTimeout(() => {
+          bottle.remove(this.ctx);
+          this.throwableobject.splice(index, 1);
+        }, 100);
+        this.enemybosscollision(enemy);
       }
     });
-    this.enemybosscollision(enemy);
   }
 
   /**
@@ -310,16 +330,25 @@ class World extends worldDrawer {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemybosscollision(enemy) {
-    enemy.hit();
-    enemy.playAnimation(enemy.IMAGES_HURT)
-    enemy.deadchicken_audio.play()
+    // Prevent multiple hits in quick succession by adding a cooldown timer
+    if (this.isEndbossHit) {
+      return;
+    }
+    this.isEndbossHit = true;
+    enemy.hit();  // Apply damage
+    enemy.playAnimation(enemy.IMAGES_HURT);
+    enemy.deadchicken_audio.play();
     world.enemybosshealthbar.setpercentage(enemy.energy);
     if (world.enemybosshealthbar.percentage === 0) {
       this.deadboss(enemy);
     } else {
       this.bossattack(enemy);
     }
+    setTimeout(() => {
+      this.isEndbossHit = false;
+    }, 1000);
   }
+
 
   /**
    * Handles the boss attack.
@@ -341,18 +370,6 @@ class World extends worldDrawer {
    */
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  /**
-   * Sets the world instance for the character and enemies.
-   *
-   * @returns {void}
-   */
-  setWorld() {
-    this.character.world = this;
-    this.level.enemies.forEach((enemy) => {
-      enemy.world = this;
-    });
   }
 
   /**
