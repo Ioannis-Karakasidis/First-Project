@@ -225,9 +225,7 @@ class World extends worldDrawer {
   throwbottles(enemy) {
     this.throwableobject.forEach((bottle) => {
       if (enemy.iscolliding(bottle)) {
-        setInterval(() => {
           this.enemiescollision(enemy);
-        }, 0);
       }
     });
   }
@@ -304,7 +302,9 @@ class World extends worldDrawer {
           bottle.remove(this.ctx);
           this.throwableobject.splice(index, 1);
         }, 100);
-        this.enemybosscollision(enemy);
+        setTimeout(() => {
+          this.enemybosscollision(enemy);
+        }, 100);
       }
     });
   }
@@ -317,8 +317,10 @@ class World extends worldDrawer {
   deadboss(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
-    }, 200);
-    enemy.death();
+    }, 250);
+    setTimeout(() => {
+      enemy.death();
+    }, 500);
     this.isEndbossHit = false;
   }
 
@@ -327,18 +329,14 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemybosscollision(enemy) {
-    if (this.isEndbossHit) {
-      return;
-    }
+  enemybosscollision(enemy) { 
     this.handleBossHealth(enemy)
     if (world.enemybosshealthbar.percentage === 0) {
       this.deadboss(enemy);
     } else {
       this.bossattack(enemy);
-    }    setTimeout(() => {
+    }
       this.isEndbossHit = false;
-    }, 1000);
   }
 
   /**
