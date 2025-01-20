@@ -289,12 +289,6 @@ document.addEventListener("DOMContentLoaded", initializeAudioState);
 function returntomenu() {
   document.getElementById('start').style.display = 'flex';
   world.clearAllIntervals();
-  world.character.walking_sound.pause();
-  world.character.jumping_sound.pause();
-  world.character.hurt_sound.pause();
-  world.character.death_sound.pause();
-  world.character.snooring_sound.pause();
-  world.background_audio.pause();
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("canvas").classList.add("d-none");

@@ -13,6 +13,10 @@ function initleve1() {
   level1 = new level(
     [
       new Smallchicken(),
+      new Smallchicken(),
+      new Smallchicken(),
+      new Smallchicken(),
+      new Smallchicken(),
       new Chicken(),
       new Chicken(),
       new Chicken(),
