@@ -249,83 +249,16 @@ function characterdeath() {
  * Toggles the background music.
  */
 function closemusic() {
-  if (world.background_audio.paused) {
-    document.getElementById("audioicon").src = "img/icons8-audio-32.png";
-    world.background_audio.play();
-  } else {
-    document.getElementById("audioicon").src = "img/icons8-no-audio-32.png";
-    world.background_audio.pause();
-    pausemusic();
+  const audioIcon = document.getElementById("audioicon");
+  const audioSrc = audioIcon.getAttribute("src"); // Get the relative src
+  if (audioSrc === "img/icons8-audio-32.png") {
+    audioIcon.src = "img/icons8-no-audio-32.png";
+    world.background_audio.pause(); // Pause the audio
+  } else if (audioSrc === "img/icons8-no-audio-32.png") {
+    audioIcon.src = "img/icons8-audio-32.png"; // Change icon to "audio" state
+    world.background_audio.play(); // Play the audio
   }
 }
-
-/**
- * Pauses the background music and character sounds safely.
- */
-function pausemusic() {
-  setInterval(() => {
-    safelyPauseAudio(world.character.jumping_sound);
-    safelyPauseAudio(world.character.hurt_sound);
-    safelyPauseAudio(world.character.death_sound);
-    pausemusicpart2();
-  }, 0);
-}
-
-/**
- * Additional steps to pause the background music.
- */
-function pausemusicpart2() {
-  safelyPauseAudio(world.character.snooring_sound);
-  safelyPauseAudio(world.background_audio);
-  safelyPauseAudio(world.character.walking_sound);
-
-  world.level.enemies.forEach(enemy => {
-    if (enemy.deadchicken_audio) {
-      safelyPauseAudio(enemy.deadchicken_audio);
-    }
-  });
-}
-
-/**
- * Safely plays and pauses audio using Promises to prevent errors.
- * @param {HTMLMediaElement} audio - The audio element to pause.
- */
-function safelyPauseAudio(audio) {
-  if (audio && typeof audio.play === 'function' && typeof audio.pause === 'function') {
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playpromise(playPromise,audio)
-    } else {
-      // If playPromise is undefined, directly pause the audio.
-      if (!audio.paused) {
-        audio.pause();
-      }
-    }
-  } else {
-    console.warn('Invalid audio element:', audio);
-  }
-}
-
-/**
- * Handles the play promise for an audio element and pauses it if playback starts successfully.
- *
- * @param {Promise} playPromise - The promise returned by the play() method of the audio element.
- * @param {HTMLMediaElement} audio - The audio element to pause.
- */
-function playpromise(playPromise,audio) {
-  playPromise
-    .then(() => {
-      // Playback started successfully, now we pause it.
-      if (!audio.paused) {
-        audio.pause();
-      }
-    })
-    .catch(error => {
-      // If play() fails (e.g., auto-play restrictions), handle it gracefully.
-      console.warn('Audio play was prevented or interrupted:', error);
-    });
-}
-
 
 /**
  * Returns to the main menu.
