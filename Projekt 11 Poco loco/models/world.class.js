@@ -90,8 +90,6 @@ class World extends worldDrawer {
     }
   }
 
-
-
   /**
    * Handles coin collisions.
    */
@@ -330,25 +328,32 @@ class World extends worldDrawer {
    * @param {Enemy} enemy - The enemy instance.
    */
   enemybosscollision(enemy) {
-    // Prevent multiple hits in quick succession by adding a cooldown timer
     if (this.isEndbossHit) {
       return;
     }
-    this.isEndbossHit = true;
-    enemy.hit();  // Apply damage
-    enemy.playAnimation(enemy.IMAGES_HURT);
-    enemy.deadchicken_audio.play();
-    world.enemybosshealthbar.setpercentage(enemy.energy);
+    this.handleBossHealth(enemy)
     if (world.enemybosshealthbar.percentage === 0) {
       this.deadboss(enemy);
     } else {
       this.bossattack(enemy);
-    }
-    setTimeout(() => {
+    }    setTimeout(() => {
       this.isEndbossHit = false;
     }, 1000);
   }
 
+  /**
+ * Handles the boss's health state by checking if it is 0. 
+ * If the health is 0, the boss dies. Otherwise, the boss performs an attack.
+ *
+ * @param {Enemy} enemy - The enemy instance representing the boss.
+ */
+  handleBossHealth(enemy) {
+    this.isEndbossHit = true;
+    enemy.hit();
+    enemy.playAnimation(enemy.IMAGES_HURT);
+    enemy.deadchicken_audio.play();
+    world.enemybosshealthbar.setpercentage(enemy.energy);
+  }
 
   /**
    * Handles the boss attack.
@@ -371,36 +376,4 @@ class World extends worldDrawer {
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
-
-  /**
-   * Draws the game.
-   */
-  draw() {
-    if (this.showIntro) {
-      this.drawIntro(this.introImage);
-    } else {
-      this.drawgame();
-    }
-  }
-
-  /**
-   * Draws the game elements.
-   */
-  drawgame() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0);
-    if (this.level.backgroundObjects) {
-      this.addObjectsToMap(this.level.backgroundObjects);
-    }
-    this.ctx.translate(-this.camera_x, 0);
-    this.beforecamera();
-    this.ctx.translate(this.camera_x, 0);
-    this.aftercamera();
-    this.ctx.translate(-this.camera_x, 0);
-    let self = this;
-    this.animationFrameId = requestAnimationFrame(function () {
-      self.draw();
-    });
-  }
-
 }

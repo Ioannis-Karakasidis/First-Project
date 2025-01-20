@@ -77,6 +77,37 @@ class worldDrawer {
             window.clearInterval(i);
         }
     }
+
+     /**
+   * Draws the game.
+   */
+  draw() {
+    if (this.showIntro) {
+      this.drawIntro(this.introImage);
+    } else {
+      this.drawgame();
+    }
+  }
+
+  /**
+   * Draws the game elements.
+   */
+  drawgame() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.translate(this.camera_x, 0);
+    if (this.level.backgroundObjects) {
+      this.addObjectsToMap(this.level.backgroundObjects);
+    }
+    this.ctx.translate(-this.camera_x, 0);
+    this.beforecamera();
+    this.ctx.translate(this.camera_x, 0);
+    this.aftercamera();
+    this.ctx.translate(-this.camera_x, 0);
+    let self = this;
+    this.animationFrameId = requestAnimationFrame(function () {
+      self.draw();
+    });
+  }
 }
 
 
