@@ -272,7 +272,7 @@ function checkjumpbuttonpart2() {
   })
 }
 
-function checkjumpbuttonpart2() {
+function checkthrowsalsa() {
   document.getElementById('throwsalsa').addEventListener('touchstart', function (e) {
     e.preventDefault();
     keyboard.D = true;
@@ -289,6 +289,7 @@ function checkmobile() {
     checkleftbutton();
     checkjumpbutton();
     checkjumpbuttonpart2();
+    checkthrowsalsa()
   }, 0);
 }
 
