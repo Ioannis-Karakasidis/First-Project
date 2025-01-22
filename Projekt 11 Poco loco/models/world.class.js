@@ -326,10 +326,10 @@ class World extends worldDrawer {
   deadboss(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
-    }, 250);
+    }, 300);
     setTimeout(() => {
       enemy.death();
-    }, 500);
+    }, 800);
     this.isEndbossHit = false;
   }
 

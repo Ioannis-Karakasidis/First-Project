@@ -224,3 +224,71 @@ function rightkeyup() {
 function upkeyup() {
   keyboard.UP = false;
 }
+
+function checkrightbutton() {
+  document.getElementById('rightbuttonmobile').addEventListener('touchstart', function (e) {
+    e.preventDefault();
+
+    keyboard.RIGHT = true;
+  })
+  document.getElementById('rightbuttonmobile').addEventListener('touchend', function (e) {
+    e.preventDefault;
+    keyboard.RIGHT = false;
+  })
+
+}
+
+function checkleftbutton() {
+  document.getElementById('leftbuttonmobile').addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  })
+  document.getElementById('leftbuttonmobile').addEventListener('touchend', function (e) {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  })
+
+}
+
+function checkjumpbutton() {
+  document.getElementById('upbuttonmobile').addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    keyboard.UP = true;
+  })
+  document.getElementById('upbuttonmobile').addEventListener('touchend', function (e) {
+    e.preventDefault();
+    keyboard.UP = false;
+  })
+}
+
+function checkjumpbuttonpart2() {
+  document.getElementById('jump').addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    keyboard.UP = true;
+  })
+  document.getElementById('jump').addEventListener('touchend', function (e) {
+    e.preventDefault();
+    keyboard.UP = false;
+  })
+}
+
+function checkjumpbuttonpart2() {
+  document.getElementById('throwsalsa').addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    keyboard.D = true;
+  })
+  document.getElementById('throwsalsa').addEventListener('touchend', function (e) {
+    e.preventDefault();
+    keyboard.D = false;
+  })
+}
+
+function checkmobile() {
+  setInterval(() => {
+    checkrightbutton();
+    checkleftbutton();
+    checkjumpbutton();
+    checkjumpbuttonpart2();
+  }, 0);
+}
+

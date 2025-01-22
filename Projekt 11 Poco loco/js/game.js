@@ -253,7 +253,7 @@ function closemusic() {
   const audioSrc = audioIcon.getAttribute("src");
   if (audioSrc === "img/icons8-audio-32.png") {
     audioIcon.src = "img/icons8-no-audio-32.png";
-    if(world.background_audio) {
+    if (world.background_audio) {
       world.background_audio.pause();
     }
     mute = true;
@@ -329,4 +329,6 @@ function mobile() {
   isMobileUserAgent = window.navigator.maxTouchPoints === 1
   return isMobileUserAgent;
 }
+
+
 

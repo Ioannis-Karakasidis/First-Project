@@ -44,7 +44,7 @@ class Character extends MovableObject {
    * Stops any ongoing intervals that control movement, walking, jumping, and snooring.
    */
   stopintervals() {
-    setStoppableInterval(() => this.movementandcamera(), 80);
+    setStoppableInterval(() => this.animate(), 1000 / 75);
     setStoppableInterval(() => this.walking(), 50);
     setStoppableInterval(() => this.jumping(), 250);
     let indexOfSleepingAnimation = setStoppableInterval(
@@ -154,7 +154,7 @@ class Character extends MovableObject {
   sleepinganimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
-      if (timeElapsed >= 1000 && timeElapsed < 15000) {
+      if (timeElapsed >= 0 && timeElapsed < 15000) {
         this.idleanimation();
       } else if (timeElapsed >= 15000) {
         this.snooringanimation();

@@ -59,20 +59,30 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_ATTACK);
+    this.animationInterval = this.setStoppableInterval(() => this.animate(), 250);
+
     this.x = 2200;
     this.y = 80;
     this.height = 400;
     this.width = 300;
     this.animate();
-    this.animationInterval = this.setStoppableInterval(() => this.animate(), 200);
+    setInterval(() => {
+    this.moveLeft()
+    }, 1000 / 75);
+    console.log(this.intervalsIdss);
+    
   }
 
   /**
    * Animates the Endboss by cycling through the walking images.
    */
   animate() {
-    this.playAnimation(this.IMAGES_WALKING);
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_ATTACK)
+      this.stopGames()
+    }, 10000);
   }
+
 
   /**
    * Stops the game and clears all intervals related to the Endboss.
@@ -94,12 +104,12 @@ class Endboss extends MovableObject {
     this.intervalsIdss.push(id);
     return id;
   }
-  
+
   /**
- * Stops a specific interval in the game.
- *
- * @param {number} targetIndex - The index of the interval to stop.
- */
+  * Stops a specific interval in the game.
+  *
+  * @param {number} targetIndex - The index of the interval to stop.
+  */
   stopSpecificGame(targetIndex) {
     if (intervalsIds[targetIndex]) {
       clearInterval(intervalsIds[targetIndex]);
