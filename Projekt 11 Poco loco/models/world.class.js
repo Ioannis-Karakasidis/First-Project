@@ -64,7 +64,7 @@ class World extends worldDrawer {
     setInterval(() => {
       this.checkCollisions();
       this.checkthrowobjects();
-    }, 150);
+    }, 0);
   }
 
   /**
