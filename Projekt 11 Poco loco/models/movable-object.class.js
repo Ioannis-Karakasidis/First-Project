@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-    }, 40);
+    }, 1000 / 60);
   }
 
   /**
@@ -34,7 +34,7 @@ class MovableObject extends DrawableObject {
     setInterval(() => {
       this.y -= this.speedY;
       this.speedY -= this.acceleration;
-    }, 1000 / 75);
+    }, 1000 / 60);
   }
 
   /**
