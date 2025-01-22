@@ -63,8 +63,10 @@ class World extends worldDrawer {
   run() {
     setInterval(() => {
       this.checkCollisions();
-      this.checkthrowobjects();
     }, 0);
+    setInterval(() => {
+      this.checkthrowobjects();
+    }, 150);
   }
 
   /**
@@ -308,7 +310,6 @@ class World extends worldDrawer {
   endbosscollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        // Play the splash animation only once
         bottle.playAnimation(bottle.bottlesplash);
         bottle.remove(this.ctx);
         this.throwableobject.splice(index, 1);
@@ -346,7 +347,7 @@ class World extends worldDrawer {
     }
     world.enemybosshealthbar.setpercentage(enemy.energy);
     if (world.enemybosshealthbar.percentage === 0) {
-      this.deadboss(enemy); // Handle boss death
+      this.deadboss(enemy); 
     } else {
       this.bossattack(enemy);
     }
