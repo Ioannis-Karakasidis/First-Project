@@ -347,7 +347,7 @@ class World extends worldDrawer {
     }
     world.enemybosshealthbar.setpercentage(enemy.energy);
     if (world.enemybosshealthbar.percentage === 0) {
-      this.deadboss(enemy); 
+      this.deadboss(enemy);
     } else {
       this.bossattack(enemy);
     }
@@ -362,10 +362,11 @@ class World extends worldDrawer {
     enemy.stopGames();
     setInterval(() => {
       enemy.moveLeft();
-    }, 1000 / 180);
+    }, 1000 / 60);
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_ATTACK);
-    }, 250);
+
+    }, 400);
   }
 
   /**
