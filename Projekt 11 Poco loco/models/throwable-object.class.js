@@ -45,11 +45,11 @@ class ThrowableObject extends MovableObject {
 
   /**
    * Animates the object by playing its bottle rotation animation at a set interval.
-   */
+ */
   animate() {
     setInterval(() => {
       this.playAnimation(this.bottlerotation)
-    }, 200);
+    }, 70);
   }
 
   /**

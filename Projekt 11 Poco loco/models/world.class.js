@@ -36,16 +36,16 @@ class World extends worldDrawer {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.mute();
+    this.toggleBackgroundAudio();
     this.drawgame();
-    this.setWorld();
-    this.run();
+    this.initializeWorld();
+    this.startGameLoop();
   }
 
   /**
    * Toggles the background audio playback based on the mute state.
    */
-  mute() {
+  toggleBackgroundAudio() {
     if (mute) {
       this.background_audio.pause();
     } else {
@@ -56,7 +56,7 @@ class World extends worldDrawer {
   /**
    * Sets the world instance for the character.
    */
-  setWorld() {
+  initializeWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
       enemy.world = this;
@@ -66,39 +66,39 @@ class World extends worldDrawer {
   /**
    * Runs the game loop.
    */
-  run() {
+  startGameLoop() {
     setInterval(() => {
-      this.checkCollisions();
+      this.detectCollisions();
     }, 0);
     setInterval(() => {
-      this.checkthrowobjects();
+      this.checkForThrowables();
     }, 150);
   }
 
   /**
    * Checks if the player is throwing objects.
    */
-  checkthrowobjects() {
+  checkForThrowables() {
     if (this.keyboard.D) {
-      this.throwSalsaBottle();
+      this.throwBottleIfAvailable();
     }
   }
 
   /**
    * Throws a salsa bottle.
    */
-  throwSalsaBottle() {
+  throwBottleIfAvailable() {
     if (this.bottles.length === 0) {
       return;
     } else {
-      this.throwSalsaBottleelse()
+      this.throwNewBottle()
     }
   }
 
   /**
    * Throws a salsa bottle by creating a new throwable object and updating the bottle inventory and status bar.
    */
-  throwSalsaBottleelse() {
+  throwNewBottle() {
     let bottle = new ThrowableObject(
       this.character.x + 40,
       this.character.y + 40
@@ -113,7 +113,7 @@ class World extends worldDrawer {
   /**
    * Handles coin collisions.
    */
-  coinscollision() {
+  checkForCoinCollisions() {
     this.level.coins = this.level.coins.filter((coin) => {
       if (this.character.isColliding(coin)) {
         this.coinsstatusbar.setpercentage(this.coinsstatusbar.percentage + 20);
@@ -126,7 +126,7 @@ class World extends worldDrawer {
   /**
    * Handles bottle collisions.
    */
-  bottlescollision() {
+  checkForBottleCollisions() {
     this.level.bottles = this.level.bottles.filter((bottle) => {
       if (this.character.isColliding(bottle)) {
         this.bottles.push(bottle);
@@ -142,12 +142,12 @@ class World extends worldDrawer {
   /**
    * Checks for collisions in the game.
    */
-  checkCollisions() {
-    this.coinscollision();
-    this.charactercollision();
-    this.bottlescollision();
+  detectCollisions() {
+    this.checkForCoinCollisions();
+    this.checkCharacterCollisions();
+    this.checkForBottleCollisions();
     this.level.enemies.forEach((enemy) => {
-      this.throwbottles(enemy);
+      this.throwBottlesAtEnemies(enemy);
     });
   }
 
@@ -156,14 +156,14 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemydead(enemy) {
+  handleEnemyDeath(enemy) {
     if (this.character.isAboveGround()) {
-      this.enemykill(enemy);
+      this.killEnemy(enemy);
       return;
     }
     if (!this.characterAlreadyAttacked) {
       this.characterAlreadyAttacked = true;
-      this.characterattacked();
+      this.handleCharacterAttacked();
       setTimeout(() => {
         this.characterAlreadyAttacked = false;
       }, 500);
@@ -173,20 +173,20 @@ class World extends worldDrawer {
   /**
    * Handles character collisions.
    */
-  charactercollision() {
+  checkCharacterCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.enemydead(enemy)
+        this.handleEnemyDeath(enemy)
         return;
       }
-      this.throwbottles(enemy);
+      this.throwBottlesAtEnemies(enemy);
     });
   }
 
   /**
    * Handles character being attacked.
    */
-  characterattacked() {
+  handleCharacterAttacked() {
     world.character.hit();
     world.character.playAnimation(world.character.characterarrays.IMAGES_HURT)
     this.statusbar.setpercentage(world.character.energy);
@@ -197,11 +197,11 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemykill(enemy) {
+  killEnemy(enemy) {
     if (enemy.constructor.name === "Chicken") {
-      this.chickenkill(enemy)
+      this.handleChickenDeath(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
-      this.smallchickenkill(enemy)
+      this.handleSmallChickenDeath(enemy)
     }
 
   }
@@ -211,7 +211,7 @@ class World extends worldDrawer {
  *
  * @param {Enemy} enemy - The enemy instance.
  */
-  smallchickenkill(enemy) {
+  handleSmallChickenDeath(enemy) {
     enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
     this.character.jump();
     setTimeout(() => {
@@ -229,7 +229,7 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  chickenkill(enemy) {
+  handleChickenDeath(enemy) {
     enemy.loadImage(enemy.DEAD_CHICKEN);
     this.character.jump();
     setTimeout(() => {
@@ -247,10 +247,10 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  throwbottles(enemy) {
+  throwBottlesAtEnemies(enemy) {
     this.throwableobject.forEach((bottle) => {
       if (enemy.iscolliding(bottle)) {
-        this.enemiescollision(enemy);
+        this.handleEnemyBottleCollisions(enemy);
       }
     });
   }
@@ -260,13 +260,13 @@ class World extends worldDrawer {
    *abe
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemiescollision(enemy) {
+   handleEnemyBottleCollisions(enemy) {
     if (enemy.constructor.name === "Chicken") {
-      this.chickencollision(enemy)
+      this.handleChickenBottleCollision(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
-      this.smallchickencollision(enemy)
+      this.handleSmallChickenBottleCollision(enemy)
     } else if (enemy.constructor.name === "Endboss") {
-      this.endbosscollision(enemy)
+      this.handleBossBottleCollision(enemy)
     }
   }
 
@@ -275,10 +275,10 @@ class World extends worldDrawer {
    *
    * @param {object} enemy - The enemy instance representing a chicken.
    */
-  chickencollision(enemy) {
+  handleChickenBottleCollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        this.enemybottlecollidement(enemy)
+        this.handleBottleCollisionWithEnemy(enemy, bottle, index)
       }
     });
   }
@@ -289,16 +289,16 @@ class World extends worldDrawer {
    * 
    * @param {Object} enemy - The enemy involved in the collision.
    */
-  enemybottlecollidement(enemy) {
+  handleBottleCollisionWithEnemy(enemy, bottle, index) {
     enemy.loadImage(enemy.DEAD_CHICKEN);
-        bottle.playAnimation(bottle.bottlesplash)
-        setTimeout(() => {
-          bottle.remove(this.ctx);
-          this.throwableobject.splice(index, 1);
-        }, 5);
-        setTimeout(() => {
-          enemy.death()
-        }, 150);
+    bottle.playAnimation(bottle.bottlesplash)
+    setTimeout(() => {
+      bottle.remove(this.ctx);
+      this.throwableobject.splice(index, 1);
+    }, 5);
+    setTimeout(() => {
+      enemy.death()
+    }, 150);
   }
 
   /**
@@ -306,7 +306,7 @@ class World extends worldDrawer {
    *
    * @param {object} enemy - The enemy instance representing a small chicken.
    */
-  smallchickencollision(enemy) {
+  handleSmallChickenBottleCollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
         setInterval(() => {
@@ -316,10 +316,10 @@ class World extends worldDrawer {
         setTimeout(() => {
           bottle.remove(this.ctx);
           this.throwableobject.splice(index, 1);
-        }, 50);
+        }, 600);
         setTimeout(() => {
           enemy.death()
-        }, 10);
+        }, 150);
       }
     });
   }
@@ -329,13 +329,13 @@ class World extends worldDrawer {
   *
   * @param {object} enemy - The enemy instance representing the end boss.
   */
-  endbosscollision(enemy) {
+  handleBossBottleCollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
         bottle.playAnimation(bottle.bottlesplash);
         bottle.remove(this.ctx);
         this.throwableobject.splice(index, 1);
-        this.enemybosscollision(enemy);
+        this.handleBossDamage(enemy);
       }
     });
   }
@@ -345,7 +345,7 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  deadboss(enemy) {
+  handleBossDeath(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
     }, 300);
@@ -360,7 +360,7 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  enemybosscollision(enemy) {
+  handleBossDamage(enemy) {
     enemy.hit();
     enemy.playAnimation(enemy.IMAGES_HURT);
     if (!mute) {
@@ -368,9 +368,9 @@ class World extends worldDrawer {
     }
     world.enemybosshealthbar.setpercentage(enemy.energy);
     if (world.enemybosshealthbar.percentage === 0) {
-      this.deadboss(enemy);
+      this.handleBossDeath(enemy);
     } else {
-      this.bossattack(enemy);
+      this.initiateBossAttack(enemy);
     }
   }
 
@@ -379,14 +379,13 @@ class World extends worldDrawer {
    *
    * @param {Enemy} enemy - The enemy instance.
    */
-  bossattack(enemy) {
-    enemy.stopGames();
+  initiateBossAttack(enemy) {
+    enemy.haltbossanimations();
     setInterval(() => {
       enemy.moveLeft();
     }, 1000 / 60);
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_ATTACK);
-
     }, 400);
   }
 

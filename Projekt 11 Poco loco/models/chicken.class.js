@@ -25,7 +25,7 @@ class Chicken extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.DEAD_CHICKEN);
     this.applyGravity();
-    this.animatechickens();
+    this.startChickenWalkingAnimation();
     this.x = 700 + Math.random() * 700 * 2;
     this.speed = 0.15 + Math.random() * 0.5;
   }
@@ -33,15 +33,15 @@ class Chicken extends MovableObject {
   /**
    * Starts the chicken's walking animation and movement to the left.
    */
-  animatechickens() {
-    this.walkinganimation();
-    this.moveleft();
+  startChickenWalkingAnimation() {
+    this.playChickenWalkingAnimation();
+    this.moveChickenLeft();
   }
 
   /**
    * Plays the walking animation of the chicken at a set interval.
    */
-  walkinganimation() {
+  playChickenWalkingAnimation() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 250);
@@ -50,7 +50,7 @@ class Chicken extends MovableObject {
   /**
    * Moves the chicken to the left at a constant speed.
    */
-  moveleft() {
+  moveChickenLeft() {
     setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);

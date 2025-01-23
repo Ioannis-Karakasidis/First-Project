@@ -45,14 +45,14 @@
           <div>
             <button class="relative-zindex d-none" id="reload" onclick="restartgame()"><img src="img/refresh-3104.png"
                 alt=""></button>
-            <button class="relative-zindex" onclick="fullscreen()">
+            <button class="relative-zindex" onclick="toggleFullscreenMode()">
               <img src="img/icons8-fullscreen-32.png" alt="" />
             </button>
             <button class="relative-zindex d-none" id="mutebutton" onclick="closemusic()">
               <img id="audioicon" src="img/icons8-audio-32.png" alt="" />
             </button>
           </div>
-          <button class="relative-zindex" onclick="showstory()">
+          <button class="relative-zindex" onclick="displayStoryOverlay()">
             <img src="img/icons8-story-32.png" alt="" />
           </button>
         </div>
@@ -70,30 +70,30 @@
         <div></div>
         <div class="buttonscontainer d-none">
           <div class="d-none">
-            <button onclick="closeoverlay()">X</button>
+            <button onclick="closeControlOverlay()">X</button>
           </div>
           <div class="instructions">
             <div class="alignment">
               <div class="upbutton">
-                <button onclick="jump()">
+                <button>
                   <img src="img/upbutton.png" alt="" />
                 </button>
               </div>
-              <button onclick="moveLeft()">
+              <button>
                 <img src="img/leftbutton.png" alt="" />
               </button>
               <button><img src="img/downbutton.png" alt="" /></button>
-              <button onclick="moveRight()">
+              <button>
                 <img src="img/rightbutton.png" alt="" />
               </button>
             </div>
             <div class="buttonscontainer_2">
               <div class="throw-button-container">
-                <button onclick="throwSalsaBottles()">
+                <button>
                   <span class="white">D</span></button><span class="white">To throw salsa bottles</span>
               </div>
               <div class="jump-button-container">
-                <button onclick="jump()">
+                <button>
                   <span class="white">SPACE</span></button><span class="white">To jump</span>
               </div>
             </div>

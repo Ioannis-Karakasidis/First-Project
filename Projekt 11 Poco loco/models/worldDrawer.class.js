@@ -2,7 +2,7 @@ class worldDrawer {
   /**
    * Draws elements before the camera.
    */
-  beforecamera() {
+  drawBeforeCamera() {
     this.addToMap(this.statusbar);
     this.addToMap(this.coinsstatusbar);
     this.addToMap(this.bottlestatusbar);
@@ -12,7 +12,7 @@ class worldDrawer {
   /**
    * Draws elements after the camera.
    */
-  aftercamera() {
+  drawAfterCamera() {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.bottles);
@@ -98,7 +98,7 @@ class worldDrawer {
     if (this.level.backgroundObjects) {
       this.addObjectsToMap(this.level.backgroundObjects);
     }
-    this.camerascene()
+    this.applyCameraTranslation()
     let self = this;
     this.animationFrameId = requestAnimationFrame(function () {
       self.draw();
@@ -108,11 +108,11 @@ class worldDrawer {
   /**
    * Adjusts the canvas context to apply camera translation and renders elements before and after the camera shift.
    */
-  camerascene() {
+  applyCameraTranslation() {
     this.ctx.translate(-this.camera_x, 0);
-    this.beforecamera();
+    this.drawBeforeCamera();
     this.ctx.translate(this.camera_x, 0);
-    this.aftercamera();
+    this.drawAfterCamera();
     this.ctx.translate(-this.camera_x, 0);
   }
 }

@@ -22,8 +22,8 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
-    this.stopintervals();
-    this.initializecharacter();
+    this.stopCharacterIntervals();
+    this.initializeCharacterState();
   }
 
   /**
@@ -41,12 +41,12 @@ class Character extends MovableObject {
   /**
    * Stops any ongoing intervals that control movement, walking, jumping, and snooring.
    */
-  stopintervals() {
-    setStoppableInterval(() => this.animate(), 1000 / 75);
-    setStoppableInterval(() => this.walking(), 50);
-    setStoppableInterval(() => this.jumping(), 250);
+  stopCharacterIntervals() {
+    setStoppableInterval(() => this.animateCharacter(), 1000 / 75);
+    setStoppableInterval(() => this.playCharacterWalkingAnimation(), 50);
+    setStoppableInterval(() => this.playCharacterJumpingAnimation(), 250);
     let indexOfSleepingAnimation = setStoppableInterval(
-      () => this.sleepinganimation(),
+      () => this.handleCharacterSleepingAnimation(),
       500
     );
   }
@@ -54,18 +54,17 @@ class Character extends MovableObject {
   /**
    * Initializes the character's starting position and applies gravity.
    */
-  initializecharacter() {
+  initializeCharacterState() {
     this.x = 120;
     this.currentPosition = 120;
     this.lastMoveTime = Date.now();
     this.applyGravity();
-    this.animate();
   }
 
   /**
    * Moves the character to the right and plays the walking sound.
    */
-  handleMoveRight() {
+  moveCharacterRight() {
     this.moveRight();
     this.otherDirection = false;
     if (this.walking_sound.paused && !mute === true) {
@@ -76,7 +75,7 @@ class Character extends MovableObject {
   /**
    * Moves the character to the left and plays the walking sound.
    */
-  handleMoveLeft() {
+  moveCharacterLeft() {
     this.moveLeft();
     this.otherDirection = true;
     if (this.walking_sound.paused && !mute === true) {
@@ -87,18 +86,18 @@ class Character extends MovableObject {
   /**
    * Updates the character's movement and camera based on user input.
    */
-  updateMovementAndCamera() {
+  updateCharacterMovementAndCamera() {
     this.walking_sound.pause();
     if (
       this.world &&
       this.world.keyboard.RIGHT &&
       this.x < this.world.level.level_end_x
     ) {
-      this.handleMoveRight();
+      this.moveCharacterRight();
       this.snooring_sound.pause();
     }
-    this.leftmovement()
-    this.handleJumpAndCamera();
+    this.moveCharacterLeftIfPossible()
+    this.handleCharacterJumpAndCamera();
   }
 
   /**
@@ -106,22 +105,22 @@ class Character extends MovableObject {
    * Checks if the `LEFT` key is pressed and if the object is within the world boundaries.
    * If both conditions are met, triggers the left movement logic.
    */
-  leftmovement() {
+  moveCharacterLeftIfPossible() {
     if (this.world && this.world.keyboard.LEFT && this.x > 0) {
-      this.handleMoveLeft();
+      this.moveCharacterLeft();
     }
   }
 
   /**
    * Handles character's jumping and updates camera position.
    */
-  handleJumpAndCamera() {
+  handleCharacterJumpAndCamera() {
     if (
       this.world &&
       (this.world.keyboard.SPACE || this.world.keyboard.UP) &&
       !this.isAboveGround()
     ) {
-      this.handleJumpAndCameramute()
+      this.handleCharacterJumpWithMuteControl()
     }
     if (this.world) {
       this.world.camera_x = -this.x + 100;
@@ -133,47 +132,48 @@ class Character extends MovableObject {
    * If the mute state is active, the jumping sound is paused; otherwise, it plays the sound.
    * Additionally, triggers the jump action.
    */
-  handleJumpAndCameramute() {
+  handleCharacterJumpWithMuteControl() {
     if (mute) {
       this.jumping_sound.pause();
     } else {
       this.jumping_sound.play();
     }
-    this.jump();
+    this.playCharacterJumpingAnimation();
+    this.jump()
   }
 
   /**
    * Controls the movement and camera update process.
    */
-  movementandcamera() {
-    this.updateMovementAndCamera();
+  updateMovementAndCameraState() {
+    this.updateCharacterMovementAndCamera();
   }
 
   /**
    * Triggers character animation and updates movement and camera.
    */
-  animate() {
-    this.movementandcamera();
-    this.characteranimation();
+  animateCharacter() {
+    this.updateMovementAndCameraState();
+    this.updateCharacterAnimationState();
   }
 
   /**
    * Handles the animation of the character based on the state (e.g., idle, hurt, death).
    */
-  characteranimation() {
-    this.updateCharacterAnimation();
+  updateCharacterAnimationState() {
+    this.updateCharacterAnimationStateBasedOnHealth();
   }
 
   /**
    * Handles the character's sleeping animation based on time elapsed and movement.
    */
-  sleepinganimation() {
+  handleCharacterSleepingAnimation() {
     const timeElapsed = Date.now() - this.lastMoveTime;
     if (this.x === this.currentPosition) {
       if (timeElapsed >= 0 && timeElapsed < 15000) {
-        this.idleanimation();
+        this.playCharacterIdleAnimation();
       } else if (timeElapsed >= 15000) {
-        this.snooringanimation();
+        this.playCharacterSnooringAnimation();
       }
     } else {
       this.currentPosition = this.x;
@@ -185,14 +185,14 @@ class Character extends MovableObject {
   /**
    * Plays the idle animation for the character when it's not moving.
    */
-  idleanimation() {
+  playCharacterIdleAnimation() {
     this.playAnimation(this.characterarrays.IMAGES_IDLE);
   }
 
   /**
    * Plays the snooring animation when the character is idle for a long period.
    */
-  snooringanimation() {
+  playCharacterSnooringAnimation() {
     if (mute) {
       this.snooring_sound.pause();
     } else {
@@ -204,12 +204,12 @@ class Character extends MovableObject {
   /**
    * Updates the character's animation based on whether it's dead or hurt.
    */
-  updateCharacterAnimation() {
+  updateCharacterAnimationStateBasedOnHealth() {
     setInterval(() => {
       if (this.isDead()) {
-        this.updateCharacterAnimationifdead()
+        this.updateCharacterAnimationOnDeath()
       } else if (this.isHURT()) {
-        this.updateCharacterAnimationelsehurt()
+        this.updateCharacterAnimationOnHurt()
       }
     }, 0);
   }
@@ -218,7 +218,7 @@ class Character extends MovableObject {
    * Updates the character's animation and sound when the character is dead.
    * Plays the death animation and manages the death sound based on the mute state.
    */
-  updateCharacterAnimationifdead() {
+  updateCharacterAnimationOnDeath() {
     this.playAnimation(this.characterarrays.IMAGES_DEATH);
     if (mute) {
       this.death_sound.pause();
@@ -231,7 +231,7 @@ class Character extends MovableObject {
    * Updates the character's animation and sound when the character is hurt.
    * Plays the hurt animation and manages the hurt sound based on the mute state.
    */
-  updateCharacterAnimationelsehurt() {
+  updateCharacterAnimationOnHurt() {
     if (mute) {
       this.hurt_sound.pause();
     } else {
@@ -243,7 +243,7 @@ class Character extends MovableObject {
   /**
    * Plays the jumping animation if the character is in the air.
    */
-  jumping() {
+  playCharacterJumpingAnimation() {
     if (this.isAboveGround()) {
       this.playAnimation(this.characterarrays.IMAGES_JUMPING);
     }
@@ -252,7 +252,7 @@ class Character extends MovableObject {
   /**
    * Plays the walking animation if the character is moving left or right.
    */
-  walking() {
+  playCharacterWalkingAnimation() {
     if (this.world && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
       this.playAnimation(this.characterarrays.IMAGES_WALKING);
     }

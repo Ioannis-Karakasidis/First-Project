@@ -26,7 +26,7 @@ class Smallchicken extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.DEAD_SMALLCHICKEN);
     this.applyGravity();
-    this.animatechickens();
+    this.startChickenAnimations();
     this.speed = 0.15 + Math.random() * 0.5;
   }
 
@@ -34,11 +34,11 @@ class Smallchicken extends MovableObject {
    * Starts the animations for the small chicken.
    * Includes walking animation and movement to the left.
    */
-  animatechickens() {
-    const walkinganimation = setInterval(() => {
+  startChickenAnimations() {
+    setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 250);
-    const moveleftanimation = setInterval(() => {
+    setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);
   }

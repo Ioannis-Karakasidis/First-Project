@@ -11,7 +11,7 @@ let mute = false;
 /**
  * Initializes the game.
  */
-function init() {
+function initializeGame() {
   canvas = document.getElementById("canvas");
   initleve1();
   world = new World(canvas, keyboard);
@@ -35,12 +35,12 @@ function jump() {
 /**
  * Toggles fullscreen mode.
  */
-function fullscreen() {
+function toggleFullscreenMode() {
   let fullscreenElement = document.getElementById("content");
   if (isFullscreen()) {
-    closeFullscreen();
+    exitFullscreen();
   } else {
-    openFullscreen(fullscreenElement);
+    enterFullscreen(fullscreenElement);
   }
 }
 
@@ -65,15 +65,6 @@ function stopSpecificGame(targetIndex) {
 }
 
 /**
- * Moves the character to the left.
- */
-function moveLeft() {
-  if (world.character.x > 0) {
-    world.character.handleMoveLeft();
-  }
-}
-
-/**
  * Checks if the game is in fullscreen mode.
  *
  * @returns {boolean} True if in fullscreen mode, false otherwise.
@@ -91,7 +82,7 @@ function isFullscreen() {
  *
  * @param {HTMLElement} elem - The element to display in fullscreen.
  */
-function openFullscreen(elem) {
+function enterFullscreen(elem) {
   if (elem.requestFullscreen) {
     elem.requestFullscreen();
   } else if (elem.webkitRequestFullscreen) {
@@ -115,7 +106,7 @@ function setStoppableInterval(fn, time) {
 /**
  * Closes the fullscreen mode.
  */
-function closeFullscreen() {
+function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.webkitExitFullscreen) {
@@ -126,20 +117,11 @@ function closeFullscreen() {
 }
 
 /**
- * Moves the character to the right.
- */
-function moveRight() {
-  if (world.character.x < world.level.level_end_x) {
-    world.character.handleMoveRight();
-  }
-}
-
-/**
  * Restarts the game.
  */
 function restartgame() {
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
-  init();
+  initializeGame();
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
@@ -155,7 +137,7 @@ function drawgame() {
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
-  init();
+  initializeGame();
   checkgamestatus();
   document.getElementById("mutebutton").classList.remove("d-none");
 }
@@ -173,21 +155,21 @@ function showcontrolls() {
 /**
  * Shows the story overlay.
  */
-function showstory() {
+function displayStoryOverlay() {
   document.querySelector(".storydiv").classList.remove("d-none");
 }
 
 /**
  * Closes the story overlay.
  */
-function closeinfotext() {
+function closeStoryOverlay() {
   document.querySelector(".storydiv").classList.add("d-none");
 }
 
 /**
  * Closes the control overlay.
  */
-function closeoverlay() {
+function closeControlOverlay() {
   document.querySelector(".buttonscontainer").style = "";
   document.querySelector(".buttonscontainer").classList.add("d-none");
   document.querySelector(".closing:hover").classList.remove("closing:hover");
@@ -209,7 +191,7 @@ function winscreen() {
 /**
  * Handles the boss death event.
  */
-function bossdeath() {
+function handleBossDeath() {
   world.enemyboss.death();
   setTimeout(() => {
     document.querySelector(".gameovercontainer").classList.remove("d-none");
@@ -223,7 +205,7 @@ function bossdeath() {
  */
 function checkgamestatus() {
   if (world.enemybosshealthbar.percentage == 0) {
-    bossdeath();
+    handleBossDeath();
   }
   if (world.character.energy == 0) {
     characterdeath();
@@ -296,13 +278,13 @@ function returntomenu() {
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("canvas").classList.add("d-none");
-  returntomenupart2();
+  finalizeMainMenuReturn();
 }
 
 /**
  * Additional steps to return to the main menu.
  */
-function returntomenupart2() {
+function finalizeMainMenuReturn() {
   document.querySelector(".outro").classList.add("d-none");
   document.querySelector(".intro").classList.remove("d-none");
   document.querySelector(".btn").classList.remove("d-none");
