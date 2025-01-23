@@ -78,6 +78,11 @@ async function portraitmode() {
   document.getElementById("introimg").classList.add("rotatepic");
 }
 
+/**
+ * Adds an event listener to the window resize event to call the `checkorientation` function.
+ * This function will be triggered whenever the window is resized, allowing for any
+ * necessary adjustments based on the new window size or orientation.
+ */
 window.addEventListener("resize", checkorientation);
 
 /**

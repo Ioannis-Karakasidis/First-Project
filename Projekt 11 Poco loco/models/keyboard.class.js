@@ -10,6 +10,10 @@ class Keyboard extends MovableObject {
   SPACE = false;
   D = false;
 
+ /**
+   * Creates an instance of the Keyboard class and sets up event listeners for both 
+   * mobile touch buttons and physical keys.
+   */
   constructor() {
     super();
     this.checkmobile();
@@ -17,6 +21,10 @@ class Keyboard extends MovableObject {
     this.addingkeydowneventlisteners();
   }
 
+  /**
+   * Attaches event listeners for the right mobile button (touchstart and touchend events) 
+   * to track when the button is pressed and released.
+   */
   checkrightbutton() {
     document.getElementById('rightbuttonmobile').addEventListener('touchstart', (e) => {
       if (e.cancelable) e.preventDefault();
@@ -28,6 +36,10 @@ class Keyboard extends MovableObject {
     });
   }
 
+  /**
+   * Attaches event listeners for the left mobile button (touchstart and touchend events) 
+   * to track when the button is pressed and released.
+   */
   checkleftbutton() {
     document.getElementById('leftbuttonmobile').addEventListener('touchstart', (e) => {
       if (e.cancelable) e.preventDefault();
@@ -39,6 +51,10 @@ class Keyboard extends MovableObject {
     });
   }
 
+  /**
+   * Attaches event listeners for the jump mobile button (touchstart and touchend events) 
+   * to track when the button is pressed and released.
+   */
   checkjumpbutton() {
     document.getElementById('upbuttonmobile').addEventListener('touchstart', (e) => {
       if (e.cancelable) e.preventDefault();
@@ -50,6 +66,10 @@ class Keyboard extends MovableObject {
     });
   }
 
+  /**
+   * Attaches event listeners for the secondary jump mobile button (touchstart and touchend events)
+   * to track when the button is pressed and released.
+   */
   checkjumpbuttonpart2() {
     document.getElementById('jump').addEventListener('touchstart', (e) => {
       if (e.cancelable) e.preventDefault();
@@ -61,6 +81,10 @@ class Keyboard extends MovableObject {
     });
   }
 
+  /**
+   * Attaches event listeners for the 'throw salsa' mobile button (touchstart and touchend events)
+   * to track when the button is pressed and released.
+   */
   checkthrowsalsa() {
     document.getElementById('throwsalsa').addEventListener('touchstart', (e) => {
       if (e.cancelable) e.preventDefault();
@@ -68,11 +92,14 @@ class Keyboard extends MovableObject {
     });
     document.getElementById('throwsalsa').addEventListener('touchend', (e) => {
       if (e.cancelable) e.preventDefault();
-      this.D = false; 
+      this.D = false;
     });
   }
 
-
+  /**
+   * Initializes the mobile button checks using a setInterval.
+   * This method repeatedly calls the button check functions at a specified interval (0ms).
+   */
   checkmobile() {
     setInterval(() => {
       this.checkrightbutton();
@@ -80,7 +107,7 @@ class Keyboard extends MovableObject {
       this.checkjumpbutton();
       this.checkjumpbuttonpart2();
       this.checkthrowsalsa();
-    }, 0);
+    }, 0); // The interval time should likely be adjusted to prevent unnecessary calls.
   }
 
   /**
@@ -113,7 +140,6 @@ class Keyboard extends MovableObject {
       }
     });
   }
-
 
   /**
    * Handles the space key down event.
@@ -222,7 +248,4 @@ class Keyboard extends MovableObject {
   upkeyup() {
     keyboard.UP = false;
   }
-
-
-
 }
