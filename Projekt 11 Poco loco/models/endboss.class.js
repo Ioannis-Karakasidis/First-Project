@@ -81,11 +81,9 @@ class Endboss extends MovableObject {
   animated() {
     if (this.i < 4) {
       this.playAnimation(this.IMAGES_WALKING);
-      console.log('walking');
     } else {
       this.playAnimation(this.IMAGES_ALERT);
-      console.log('alert');
-      if (this.i >= 12) { // Reset `i` to loop after `alert` finishes
+      if (this.i >= 12) { 
         this.i = 0;
       }
     }
