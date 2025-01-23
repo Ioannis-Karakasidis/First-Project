@@ -53,7 +53,6 @@ class Endboss extends MovableObject {
     right: 0,
     bottom: 0
   }
-
   energy = 100;
 
   /**
