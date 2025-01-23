@@ -34,10 +34,18 @@ class ThrowableObject extends MovableObject {
 
   }
 
+  /**
+   * Clears the object from the specified canvas context.
+   * 
+   * @param {CanvasRenderingContext2D} ctx - The canvas context to clear.
+   */
   remove(ctx) {
-    ctx.clearRect(this.x, this.y, this.width, this.height);  // Clears the bottle from the canvas
+    ctx.clearRect(this.x, this.y, this.width, this.height);
   }
 
+  /**
+   * Animates the object by playing its bottle rotation animation at a set interval.
+   */
   animate() {
     setInterval(() => {
       this.playAnimation(this.bottlerotation)

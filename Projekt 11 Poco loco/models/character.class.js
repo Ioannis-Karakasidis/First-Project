@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-
   height = 280;
   y = 100;
   speed = 8;
@@ -10,7 +9,6 @@ class Character extends MovableObject {
   hurt_sound = new Audio("audio/mixkit-man-in-pain-2197.wav");
   death_sound = new Audio("audio/male-death-sound-128357.mp3");
   snooring_sound = new Audio("audio/snoring-sound-effect-55854.mp3");
-
   offset = {
     top: 120,
     left: 30,
@@ -99,10 +97,19 @@ class Character extends MovableObject {
       this.handleMoveRight();
       this.snooring_sound.pause();
     }
+    this.leftmovement()
+    this.handleJumpAndCamera();
+  }
+
+  /**
+   * Handles the left movement of the object.
+   * Checks if the `LEFT` key is pressed and if the object is within the world boundaries.
+   * If both conditions are met, triggers the left movement logic.
+   */
+  leftmovement() {
     if (this.world && this.world.keyboard.LEFT && this.x > 0) {
       this.handleMoveLeft();
     }
-    this.handleJumpAndCamera();
   }
 
   /**
@@ -114,16 +121,25 @@ class Character extends MovableObject {
       (this.world.keyboard.SPACE || this.world.keyboard.UP) &&
       !this.isAboveGround()
     ) {
-      if (mute) {
-        this.jumping_sound.pause();
-      } else {
-        this.jumping_sound.play();
-      }
-      this.jump();
+      this.handleJumpAndCameramute()
     }
     if (this.world) {
       this.world.camera_x = -this.x + 100;
     }
+  }
+
+  /**
+   * Handles the jump action and manages the sound behavior based on the mute state.
+   * If the mute state is active, the jumping sound is paused; otherwise, it plays the sound.
+   * Additionally, triggers the jump action.
+   */
+  handleJumpAndCameramute() {
+    if (mute) {
+      this.jumping_sound.pause();
+    } else {
+      this.jumping_sound.play();
+    }
+    this.jump();
   }
 
   /**
@@ -191,22 +207,37 @@ class Character extends MovableObject {
   updateCharacterAnimation() {
     setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.characterarrays.IMAGES_DEATH);
-        if (mute) {
-          this.death_sound.pause();
-        } else {
-          this.death_sound.play();
-        }
+        this.updateCharacterAnimationifdead()
       } else if (this.isHURT()) {
-        if (mute) {
-          this.hurt_sound.pause();
-        } else {
-          this.hurt_sound.play();
-        }
-        this.playAnimation(this.characterarrays.IMAGES_HURT);
+        this.updateCharacterAnimationelsehurt()
       }
     }, 0);
+  }
 
+  /**
+   * Updates the character's animation and sound when the character is dead.
+   * Plays the death animation and manages the death sound based on the mute state.
+   */
+  updateCharacterAnimationifdead() {
+    this.playAnimation(this.characterarrays.IMAGES_DEATH);
+    if (mute) {
+      this.death_sound.pause();
+    } else {
+      this.death_sound.play();
+    }
+  }
+
+  /**
+   * Updates the character's animation and sound when the character is hurt.
+   * Plays the hurt animation and manages the hurt sound based on the mute state.
+   */
+  updateCharacterAnimationelsehurt() {
+    if (mute) {
+      this.hurt_sound.pause();
+    } else {
+      this.hurt_sound.play();
+    }
+    this.playAnimation(this.characterarrays.IMAGES_HURT);
   }
 
   /**

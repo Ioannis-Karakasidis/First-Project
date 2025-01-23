@@ -1,4 +1,3 @@
-
 class level {
   enemies;
   Cloud;

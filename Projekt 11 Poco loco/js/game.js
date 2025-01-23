@@ -280,6 +280,10 @@ function initializeAudioState() {
   }
 }
 
+/**
+ * Adds an event listener to initialize the audio state when the DOM content is fully loaded.
+ */
+
 document.addEventListener("DOMContentLoaded", initializeAudioState);
 
 

@@ -10,10 +10,9 @@ class Bottlestatusbar extends DrawableObject {
   percentage = 0;
 
   /**
- * Initializes a new instance of the game object with specified position, size, and images.
- * 
- * @constructor
- * @extends ParentClass
+ * Initializes a new instance of the class.
+ * Sets up properties such as position, dimensions, and initial percentage value.
+ * Also loads necessary images.
  */
   constructor() {
     super();

@@ -36,15 +36,21 @@ class World extends worldDrawer {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.mute();
+    this.drawgame();
+    this.setWorld();
+    this.run();
+  }
+
+  /**
+   * Toggles the background audio playback based on the mute state.
+   */
+  mute() {
     if (mute) {
       this.background_audio.pause();
     } else {
       this.background_audio.play();
-
     }
-    this.drawgame();
-    this.setWorld();
-    this.run();
   }
 
   /**
@@ -85,16 +91,23 @@ class World extends worldDrawer {
     if (this.bottles.length === 0) {
       return;
     } else {
-      let bottle = new ThrowableObject(
-        this.character.x + 40,
-        this.character.y + 40
-      );
-      this.throwableobject.push(bottle);
-      this.bottles.splice(0, 1);
-      this.bottlestatusbar.setpercentage(
-        this.bottlestatusbar.percentage - 20
-      );
+      this.throwSalsaBottleelse()
     }
+  }
+
+  /**
+   * Throws a salsa bottle by creating a new throwable object and updating the bottle inventory and status bar.
+   */
+  throwSalsaBottleelse() {
+    let bottle = new ThrowableObject(
+      this.character.x + 40,
+      this.character.y + 40
+    );
+    this.throwableobject.push(bottle);
+    this.bottles.splice(0, 1);
+    this.bottlestatusbar.setpercentage(
+      this.bottlestatusbar.percentage - 20
+    );
   }
 
   /**
@@ -227,7 +240,6 @@ class World extends worldDrawer {
         enemy.deadchicken_audio.play();
       }
     }, 100);
-
   }
 
   /**
@@ -259,14 +271,26 @@ class World extends worldDrawer {
   }
 
   /**
- * Handles the collision between a chicken and throwable objects.
- *
- * @param {object} enemy - The enemy instance representing a chicken.
- */
+   * Handles the collision between a chicken and throwable objects.
+   *
+   * @param {object} enemy - The enemy instance representing a chicken.
+   */
   chickencollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        enemy.loadImage(enemy.DEAD_CHICKEN);
+        this.enemybottlecollidement(enemy)
+      }
+    });
+  }
+
+  /**
+   * Handles bottle collision with an enemy, including changing the enemy's image, playing a splash animation, 
+   * removing the bottle, and triggering the enemy's death.
+   * 
+   * @param {Object} enemy - The enemy involved in the collision.
+   */
+  enemybottlecollidement(enemy) {
+    enemy.loadImage(enemy.DEAD_CHICKEN);
         bottle.playAnimation(bottle.bottlesplash)
         setTimeout(() => {
           bottle.remove(this.ctx);
@@ -275,15 +299,13 @@ class World extends worldDrawer {
         setTimeout(() => {
           enemy.death()
         }, 150);
-      }
-    });
   }
 
   /**
-  * Handles the collision between a small chicken and throwable objects.
-  *
-  * @param {object} enemy - The enemy instance representing a small chicken.
-  */
+   * Handles the collision between a small chicken and throwable objects.
+   *
+   * @param {object} enemy - The enemy instance representing a small chicken.
+   */
   smallchickencollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
@@ -294,7 +316,7 @@ class World extends worldDrawer {
         setTimeout(() => {
           bottle.remove(this.ctx);
           this.throwableobject.splice(index, 1);
-        }, 5);
+        }, 50);
         setTimeout(() => {
           enemy.death()
         }, 10);
@@ -317,7 +339,6 @@ class World extends worldDrawer {
       }
     });
   }
-
 
   /**
    * Handles the death of the boss.

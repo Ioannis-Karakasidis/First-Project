@@ -1,7 +1,7 @@
 class worldDrawer {
   /**
-     * Draws elements before the camera.
-     */
+   * Draws elements before the camera.
+   */
   beforecamera() {
     this.addToMap(this.statusbar);
     this.addToMap(this.coinsstatusbar);
@@ -79,8 +79,8 @@ class worldDrawer {
   }
 
   /**
-* Draws the game.
-*/
+   * Draws the game.
+   */
   draw() {
     if (this.showIntro) {
       this.drawIntro(this.introImage);
@@ -98,15 +98,22 @@ class worldDrawer {
     if (this.level.backgroundObjects) {
       this.addObjectsToMap(this.level.backgroundObjects);
     }
+    this.camerascene()
+    let self = this;
+    this.animationFrameId = requestAnimationFrame(function () {
+      self.draw();
+    });
+  }
+
+  /**
+   * Adjusts the canvas context to apply camera translation and renders elements before and after the camera shift.
+   */
+  camerascene() {
     this.ctx.translate(-this.camera_x, 0);
     this.beforecamera();
     this.ctx.translate(this.camera_x, 0);
     this.aftercamera();
     this.ctx.translate(-this.camera_x, 0);
-    let self = this;
-    this.animationFrameId = requestAnimationFrame(function () {
-      self.draw();
-    });
   }
 }
 
