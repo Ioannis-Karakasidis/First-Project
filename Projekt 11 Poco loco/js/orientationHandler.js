@@ -57,15 +57,22 @@ async function landscapemode() {
     document.querySelector('.usefulllinks').style.justifyContent = 'center'
     document.getElementById('help').classList.add('d-none')
     document.querySelector('body').style.height = '100vh';
-    const canvas = document.querySelector('canvas');
-    canvas.style.width = 'height: 59vh;';
-    document.querySelector('.boxalign').style.height = '94%';
-    document.querySelector(".box").style.height = "77%";
-    document.querySelector(".box h1").classList.add("d-none");
-    document.getElementById("impressum").classList.add("d-none");
-    document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
-    document.getElementById("introimg").classList.remove("rotatepic");
+    adjustIntroLayoutForSecondPart()
   }
+}
+
+/**
+ * Adjusts the layout and styles for the second part of the game intro.
+ */
+function adjustIntroLayoutForSecondPart() {
+  const canvas = document.querySelector('canvas');
+  canvas.style.width = 'height: 59vh;';
+  document.querySelector('.boxalign').style.height = '94%';
+  document.querySelector(".box").style.height = "77%";
+  document.querySelector(".box h1").classList.add("d-none");
+  document.getElementById("impressum").classList.add("d-none");
+  document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
+  document.getElementById("introimg").classList.remove("rotatepic");
 }
 
 /**
