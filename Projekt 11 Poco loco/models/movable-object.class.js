@@ -1,6 +1,6 @@
 
 class MovableObject extends DrawableObject {
-  speed = 0.5;
+  speed = 1;
   otherDirection = false;
   speedY = 0.5;
   acceleration = 1;
@@ -8,6 +8,9 @@ class MovableObject extends DrawableObject {
   charactersarray = new Characterarrays();
   deadchicken_audio = new Audio("audio/slap-hurt-pain-sound-effect-262618.mp3");
 
+  /**
+   * Initializes the instance and sets the preload property for the dead chicken audio.
+   */
   constructor() {
     super();
     this.deadchicken_audio.preload = "none";

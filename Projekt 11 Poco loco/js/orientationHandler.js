@@ -41,6 +41,8 @@ async function nonmobilemode() {
   document.getElementById("impressum").classList.remove("d-none");
   document.querySelector('.Instructions').style.display = 'none';
   document.getElementById("introimg").classList.remove("rotatepic");
+  document.querySelector('.usefulllinks').style.justifyContent = 'space-between'
+  document.getElementById('help').classList.remove('d-none')
   document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
 }
 
@@ -52,6 +54,8 @@ async function landscapemode() {
     document.querySelector('.Instructions').style.display = 'flex';
     document.getElementById('content').style = 'height: 97%;width: 85vw;';
     document.querySelector('body').style = '';
+    document.querySelector('.usefulllinks').style.justifyContent = 'center'
+    document.getElementById('help').classList.add('d-none')
     document.querySelector('body').style.height = '100vh';
     const canvas = document.querySelector('canvas');
     canvas.style.width = 'height: 59vh;';

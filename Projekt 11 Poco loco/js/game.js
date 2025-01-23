@@ -234,17 +234,24 @@ function closemusic() {
   const audioIcon = document.getElementById("audioicon");
   const audioSrc = audioIcon.getAttribute("src");
   if (audioSrc === "img/icons8-audio-32.png") {
-    audioIcon.src = "img/icons8-no-audio-32.png";
-    if (world.background_audio) {
-      world.background_audio.pause();
-    }
-    mute = true;
+    muteBackgroundAudio(audioIcon)
   } else if (audioSrc === "img/icons8-no-audio-32.png") {
     audioIcon.src = "img/icons8-audio-32.png";
     world.background_audio.play();
     mute = false;
   }
   localStorage.setItem("muteState", mute);
+}
+
+/**
+ * Mutes the background audio and updates the audio icon to reflect the mute state.
+ */
+function muteBackgroundAudio(audioIcon) {
+  audioIcon.src = "img/icons8-no-audio-32.png";
+  if (world.background_audio) {
+    world.background_audio.pause();
+  }
+  mute = true;
 }
 
 /**

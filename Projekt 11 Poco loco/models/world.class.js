@@ -100,8 +100,8 @@ class World extends worldDrawer {
    */
   throwNewBottle() {
     let bottle = new ThrowableObject(
-      this.character.x + 40,
-      this.character.y + 40
+      this.character.x + 20,
+      this.character.y + 60
     );
     this.throwableobject.push(bottle);
     this.bottles.splice(0, 1);
