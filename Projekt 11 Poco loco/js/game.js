@@ -1,4 +1,3 @@
-let intervalsIds = [];
 let canvas;
 let world;
 let coins;
@@ -7,6 +6,7 @@ let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
 let throwableobject = new ThrowableObject();
 let mute = false;
+let intervalsIds = [];
 
 /**
  * Initializes the game.
@@ -57,10 +57,14 @@ function stopGame() {
  *
  * @param {number} targetIndex - The index of the interval to stop.
  */
-function stopSpecificGame(targetIndex) {
-  if (intervalsIds[targetIndex]) {
-    clearInterval(intervalsIds[targetIndex]);
-    intervalsIds[targetIndex] = null;
+function stopSpecificGame(targetIntervalId) {
+  const index = intervalsIds.indexOf(targetIntervalId); // Find the index of the target ID
+
+  if (index !== -1) { // If the ID exists in the array
+    clearInterval(intervalsIds[index]); // Clear the interval
+    intervalsIds[index] = null; // Remove the interval from the array
+  } else {
+    console.warn('Interval ID not found:', targetIntervalId);
   }
 }
 
@@ -99,9 +103,11 @@ function enterFullscreen(elem) {
  * @param {number} time - The interval time in milliseconds.
  */
 function setStoppableInterval(fn, time) {
-  let id = setInterval(fn, time);
+  let id = setInterval(fn, time); 
   intervalsIds.push(id);
+  return id; 
 }
+
 
 /**
  * Closes the fullscreen mode.

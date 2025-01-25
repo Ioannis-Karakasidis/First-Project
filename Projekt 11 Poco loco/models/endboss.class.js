@@ -40,13 +40,13 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
+  world;
   i = 0
   Win = ["img/9_intro_outro_screens/win/won_2.png"];
   GAME_OVER = ["img/9_intro_outro_screens/game_over/game over.png"];
   win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
   gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
   animationInterval = null;
-  intervalsIdss = [];
   offset = {
     top: 0,
     left: 0,
@@ -54,7 +54,6 @@ class Endboss extends MovableObject {
     bottom: 0
   }
   energy = 100;
-
   /**
    * Creates a new Endboss instance and initializes it.
    * Loads images, sets position, and starts animations.
@@ -66,59 +65,52 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_ATTACK);
-    this.animationInterval = this.setStoppableInterval(() => this.updateAnimationState(), 300);
+    this.animationInterval = setStoppableInterval(() => this.animated(), 300)
+    this.bossdistance = setStoppableInterval(() => this.checkfordistance(), 300)
     this.x = 2200;
     this.y = 80;
     this.height = 400;
     this.width = 300;
-    this.animate()
+    this.isseen = false;
+    this.hasMoved = false;
+    this.animate();
   }
 
   /**
-   * Animates the Endboss by cycling through the walking images.
+   * Checks if the character is within a certain distance of the enemy boss 
+   * and updates the enemy's visibility state accordingly.
    */
-  updateAnimationState() {
-    if (this.i < 4) {
-      this.playAnimation(this.IMAGES_WALKING);
+  checkfordistance() {
+    if (Math.abs(world.character.x - world.enemyboss.x) < 550) {
+      this.isseen = true;
+    } 
+  }
+
+  /**
+   * Animates the enemy boss's behavior based on its visibility and movement state. 
+   * Plays an alert animation when first seen, then performs an attack sequence.
+   * Otherwise, the enemy continues its walking animation.
+   */
+  animated() {
+    if (this.isseen && !this.hasMoved) {
+      this.triggerAlertAndAttack()
     } else {
-      this.playAnimation(this.IMAGES_ALERT);
-      if (this.i >= 12) { 
-        this.i = 0;
-      }
+      this.playAnimation(this.IMAGES_WALKING)
     }
-    this.i++;
-  }
-  
-  /**
-   * Stops the game and clears all intervals related to the Endboss.
-   */
-  haltbossanimations() {
-    this.intervalsIdss.forEach(clearInterval);
-    this.intervalsIdss = [];
   }
 
   /**
-   * Sets a stoppable interval and adds it to the intervals list.
-   * 
-   * @param {Function} fn - The function to execute at each interval.
-   * @param {number} time - The time in milliseconds between function executions.
-   * @returns {number} The interval ID.
+   * Triggers the alert animation followed by the attack sequence, adjusting the enemy's position.
    */
-  setStoppableInterval(fn, time) {
-    let id = setInterval(fn, time);
-    this.intervalsIdss.push(id);
-    return id;
-  }
-
-  /**
-  * Stops a specific interval in the game.
-  *
-  * @param {number} targetIndex - The index of the interval to stop.
-  */
-  stopSpecificGame(targetIndex) {
-    if (intervalsIds[targetIndex]) {
-      clearInterval(intervalsIds[targetIndex]);
-      intervalsIds[targetIndex] = null;
-    }
+  triggerAlertAndAttack() {
+    this.playAnimation(this.IMAGES_ALERT);
+      setTimeout(() => {
+        this.playAnimation(this.IMAGES_ATTACK)
+        this.x -= 200;
+        setTimeout(() => {
+          this.x += 200;
+          this.hasMoved = true;  
+        }, 100); 
+      }, 500); 
   }
 }

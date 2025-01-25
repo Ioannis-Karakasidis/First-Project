@@ -109,11 +109,12 @@ class worldDrawer {
    * Adjusts the canvas context to apply camera translation and renders elements before and after the camera shift.
    */
   applyCameraTranslation() {
+    this.drawAfterCamera();
     this.ctx.translate(-this.camera_x, 0);
     this.drawBeforeCamera();
     this.ctx.translate(this.camera_x, 0);
-    this.drawAfterCamera();
     this.ctx.translate(-this.camera_x, 0);
+
   }
 }
 

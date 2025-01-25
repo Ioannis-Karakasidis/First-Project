@@ -23,6 +23,7 @@ class World extends worldDrawer {
     "audio/sonido-ambiente-desierto-ambience-sound-desert-217122.mp3"
   );
   characterAlreadyAttacked = false;
+  i = 5
 
   /**
    * Creates an instance of World.
@@ -40,6 +41,7 @@ class World extends worldDrawer {
     this.drawgame();
     this.initializeWorld();
     this.startGameLoop();
+    this.isStopped = false;
   }
 
   /**
@@ -260,7 +262,7 @@ class World extends worldDrawer {
    *abe
    * @param {Enemy} enemy - The enemy instance.
    */
-   handleEnemyBottleCollisions(enemy) {
+  handleEnemyBottleCollisions(enemy) {
     if (enemy.constructor.name === "Chicken") {
       this.handleChickenBottleCollision(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
@@ -309,19 +311,40 @@ class World extends worldDrawer {
   handleSmallChickenBottleCollision(enemy) {
     this.throwableobject.forEach((bottle, index) => {
       if (enemy.iscolliding(bottle)) {
-        setInterval(() => {
-          enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
-        }, 0);
-        bottle.playAnimation(bottle.bottlesplash)
-        setTimeout(() => {
-          bottle.remove(this.ctx);
-          this.throwableobject.splice(index, 1);
-        }, 600);
-        setTimeout(() => {
-          enemy.death()
-        }, 150);
+        this.handleBottleImpactWithEnemy(enemy, bottle, index)
       }
     });
+  }
+
+  /**
+   * Handles the impact of a bottle with an enemy, triggering the bottle's animation and enemy's death.
+   * @param {Object} enemy - The enemy object that is impacted by the bottle.
+   * @param {Object} bottle - The bottle object that causes the impact.
+   * @param {number} index - The index of the bottle in the throwable object array.
+   */
+  handleBottleImpactWithEnemy(enemy, bottle, index) {
+    console.log('worked');
+    setInterval(() => {
+      enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
+    }, 0);
+    bottle.playAnimation(bottle.bottlesplash)
+    this.bottleremoval(bottle, enemy, index)
+  }
+
+  /**
+   * Removes the bottle and triggers the enemy's death after a delay.
+   * @param {Object} bottle - The bottle object to remove from the scene.
+   * @param {Object} enemy - The enemy object to be destroyed.
+   * @param {number} index - The index of the bottle in the throwable object array.
+   */
+  bottleremoval(bottle, enemy, index) {    
+    setTimeout(() => {
+      bottle.remove(this.ctx);
+      this.throwableobject.splice(index, 1);
+    }, 600);
+    setTimeout(() => {
+      enemy.death()
+    }, 150);
   }
 
   /**
@@ -348,10 +371,10 @@ class World extends worldDrawer {
   handleBossDeath(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
-    }, 300);
+    }, 60);
     setTimeout(() => {
       enemy.death();
-    }, 800);
+    }, 500);
     this.isEndbossHit = false;
   }
 
@@ -363,10 +386,7 @@ class World extends worldDrawer {
   handleBossDamage(enemy) {
     enemy.hit();
     enemy.playAnimation(enemy.IMAGES_HURT);
-    if (!mute) {
-      enemy.deadchicken_audio.play();
-    }
-    world.enemybosshealthbar.setpercentage(enemy.energy);
+    this.resetBossState(enemy)
     if (world.enemybosshealthbar.percentage === 0) {
       this.handleBossDeath(enemy);
     } else {
@@ -375,12 +395,21 @@ class World extends worldDrawer {
   }
 
   /**
+   * Handles the boss's recovery or reset behavior, playing the appropriate sound and updating the health bar.
+   */
+  resetBossState(enemy) {
+    if (!mute) {
+      enemy.deadchicken_audio.play();
+    }
+    world.enemybosshealthbar.setpercentage(enemy.energy);
+  }
+
+  /**
    * Handles the boss attack.
    *
    * @param {Enemy} enemy - The enemy instance.
    */
   initiateBossAttack(enemy) {
-    enemy.haltbossanimations();
     setInterval(() => {
       enemy.moveLeft();
     }, 1000 / 60);
