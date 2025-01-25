@@ -116,6 +116,54 @@ class worldDrawer {
     this.ctx.translate(-this.camera_x, 0);
 
   }
+
+  /**
+   * Handles collisions with the boss.
+   *
+   * @param {Enemy} enemy - The enemy instance.
+   */
+  handleBossDamage(enemy) {
+    enemy.hit();
+    enemy.speed += 0.4
+    enemy.playAnimation(enemy.IMAGES_HURT);
+    this.resetBossState(enemy)
+    if (world.enemybosshealthbar.percentage === 0) {
+      this.handleBossDeath(enemy);
+    } else {
+      this.initiateBossAttack(enemy);
+    }
+  }
+
+  /**
+   * Handles the boss's recovery or reset behavior, playing the appropriate sound and updating the health bar.
+   */
+  resetBossState(enemy) {
+    if (!mute) {
+      enemy.deadchicken_audio.play();
+    }
+    world.enemybosshealthbar.setpercentage(enemy.energy);
+  }
+
+  /**
+   * Handles the boss attack.
+   *
+   * @param {Enemy} enemy - The enemy instance.
+   */
+  initiateBossAttack(enemy) {
+    setInterval(() => {
+      enemy.moveLeft();
+    }, 1000 / 60);
+    setInterval(() => {
+      enemy.playAnimation(enemy.IMAGES_ATTACK);
+    }, 400);
+  }
+
+  /**
+   * Clears the canvas.
+   */
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
 }
 
 

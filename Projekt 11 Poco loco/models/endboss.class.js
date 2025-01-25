@@ -83,7 +83,7 @@ class Endboss extends MovableObject {
   checkfordistance() {
     if (Math.abs(world.character.x - world.enemyboss.x) < 550) {
       this.isseen = true;
-    } 
+    }
   }
 
   /**
@@ -104,13 +104,13 @@ class Endboss extends MovableObject {
    */
   triggerAlertAndAttack() {
     this.playAnimation(this.IMAGES_ALERT);
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_WALKING)
+      this.speed += 5;
       setTimeout(() => {
-        this.playAnimation(this.IMAGES_ATTACK)
-        this.x -= 200;
-        setTimeout(() => {
-          this.x += 200;
-          this.hasMoved = true;  
-        }, 100); 
-      }, 500); 
+        this.hasMoved = true;
+        this.speed = 0.15
+      }, 200);
+    }, 500);
   }
 }
