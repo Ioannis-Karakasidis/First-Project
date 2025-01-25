@@ -377,6 +377,4 @@ class World extends worldDrawer {
     }, 500);
     this.isEndbossHit = false;
   }
-
-  
 }
