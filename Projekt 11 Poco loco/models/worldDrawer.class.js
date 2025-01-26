@@ -48,7 +48,7 @@ class worldDrawer {
   }
 
   /**
-   * Flips an image horizontally.
+   * Flips an image.
    *
    * @param {MovableObject} mo - The movable object.
    */

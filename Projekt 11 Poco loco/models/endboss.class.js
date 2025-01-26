@@ -54,7 +54,7 @@ class Endboss extends MovableObject {
     bottom: 0
   }
   energy = 100;
-  
+
   /**
    * Creates a new Endboss instance and initializes it.
    * Loads images, sets position, and starts animations.
