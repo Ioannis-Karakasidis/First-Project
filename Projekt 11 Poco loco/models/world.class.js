@@ -74,7 +74,7 @@ class World extends worldDrawer {
     }, 0);
     setInterval(() => {
       this.checkForThrowables();
-    }, 100);
+    }, 200);
   }
 
   /**
@@ -323,7 +323,6 @@ class World extends worldDrawer {
    * @param {number} index - The index of the bottle in the throwable object array.
    */
   handleBottleImpactWithEnemy(enemy, bottle, index) {
-    console.log('worked');
     setInterval(() => {
       enemy.loadImage(enemy.DEAD_SMALLCHICKEN);
     }, 0);

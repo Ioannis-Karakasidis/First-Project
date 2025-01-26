@@ -124,7 +124,7 @@ class worldDrawer {
    */
   handleBossDamage(enemy) {
     enemy.hit();
-    enemy.speed += 0.4
+    enemy.speed += 0.2;
     enemy.playAnimation(enemy.IMAGES_HURT);
     this.resetBossState(enemy)
     if (world.enemybosshealthbar.percentage === 0) {
