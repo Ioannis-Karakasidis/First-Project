@@ -99,11 +99,16 @@ window.addEventListener("resize", checkorientation);
 /**
  * Displays the game over screen.
  */
-function gameoverpart1() {
+function gameover() {
+  world.background_audio.pause();
   document.getElementById("outroimg").src = "img/9_intro_outro_screens/game_over/game_over.png";
-  world.character.snooring_sound.pause();
   document.querySelector('.outro').style.zIndex = '99';
   document.querySelector(".outro").style.position = "absolute";
   document.getElementById("outroimg").classList.remove("d-none");
+  setTimeout(() => {
+    document.querySelector(".outro").classList.remove("d-none");
+    world.clearAllIntervals();
+  }, 0);
+  document.querySelector(".gameovercontainer").classList.remove("d-none");
 }
 

@@ -103,11 +103,10 @@ function enterFullscreen(elem) {
  * @param {number} time - The interval time in milliseconds.
  */
 function setStoppableInterval(fn, time) {
-  let id = setInterval(fn, time); 
+  let id = setInterval(fn, time);
   intervalsIds.push(id);
-  return id; 
+  return id;
 }
-
 
 /**
  * Closes the fullscreen mode.
@@ -222,15 +221,10 @@ function checkgamestatus() {
  * Handles the character death event.
  */
 function characterdeath() {
-  world.background_audio.pause();
+  gameover();
   world.character.death_sound.play();
-  gameoverpart1();
   world.character.death();
-  setTimeout(() => {
-    document.querySelector(".outro").classList.remove("d-none");
-    world.clearAllIntervals();
-  }, 1500);
-  document.querySelector(".gameovercontainer").classList.remove("d-none");
+
 }
 
 /**

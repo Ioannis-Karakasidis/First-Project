@@ -107,6 +107,9 @@ class World extends worldDrawer {
     );
     this.throwableobject.push(bottle);
     this.bottles.splice(0, 1);
+    if (world.bottles.length === 0) {
+      gameover()
+    }
     this.bottlestatusbar.setpercentage(
       this.bottlestatusbar.percentage - 20
     );
@@ -336,7 +339,7 @@ class World extends worldDrawer {
    * @param {Object} enemy - The enemy object to be destroyed.
    * @param {number} index - The index of the bottle in the throwable object array.
    */
-  bottleremoval(bottle, enemy, index) {    
+  bottleremoval(bottle, enemy, index) {
     setTimeout(() => {
       bottle.remove(this.ctx);
       this.throwableobject.splice(index, 1);

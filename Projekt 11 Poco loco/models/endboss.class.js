@@ -75,6 +75,15 @@ class Endboss extends MovableObject {
     this.isseen = false;
     this.hasMoved = false;
     this.animate();
+    this.checkbounds();
+  }
+
+  checkbounds() {
+    setInterval(() => {
+      if (this.x < -400) {
+        gameover();
+      }
+    }, 0);
   }
 
   /**
