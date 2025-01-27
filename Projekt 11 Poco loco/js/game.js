@@ -248,7 +248,7 @@ function closemusic() {
  */
 function muteBackgroundAudio(audioIcon) {
   audioIcon.src = "img/icons8-no-audio-32.png";
-  if (world.background_audio) {
+  if (mute = true) {
     world.background_audio.pause();
   }
   mute = true;
