@@ -75,6 +75,19 @@ class Endboss extends MovableObject {
     this.isseen = false;
     this.hasMoved = false;
     this.animate();
+    this.checkOutOfBounds()
+  }
+
+  /**
+   * Continuously checks if the object's x-coordinate goes out of bounds.
+   * If the x-coordinate is less than or equal to -440, the game is over.
+   */
+  checkOutOfBounds() {
+    setInterval(() => {
+      if (this.x <= -440) {
+        gameover()
+      }
+    }, 0);
   }
 
   /**

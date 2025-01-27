@@ -74,7 +74,7 @@ class World extends worldDrawer {
     }, 0);
     setInterval(() => {
       this.checkForThrowables();
-    }, 150);
+    }, 170);
   }
 
   /**
@@ -121,7 +121,7 @@ class World extends worldDrawer {
       if (world.bottles.length === 0 && this.level.bottles.length === 0 && this.enemyboss.energy !== 0) {
         gameover()
       }
-    }, 1500);
+    }, 10000);
     this.bottlestatusbar.setpercentage(
       this.bottlestatusbar.percentage - 20
     );

@@ -124,6 +124,7 @@ function exitFullscreen() {
  * Restarts the game.
  */
 function restartgame() {
+  updatemobilevariable()
   world.ctx.clearRect(0, 0, canvas.width, canvas.height);
   initializeGame();
   document.querySelector(".gameovercontainer").classList.add("d-none");
@@ -134,12 +135,22 @@ function restartgame() {
 }
 
 /**
- * Draws the game on the canvas.
+ * Displays the instructions for mobile users when the `mobilestart` flag is true.
+ * 
+ * This function checks the `mobilestart` variable, and if it is `true`,
+ * it updates the `.Instructions` element's display style to make it visible.
  */
-function drawgame() {
+function updatemobilevariable() {
   if (mobilestart === true) {
     document.querySelector('.Instructions').style.display = 'flex'
   }
+}
+
+/**
+ * Draws the game on the canvas.
+ */
+function drawgame() {
+  updatemobilevariable()
   document.getElementById('reload').classList.remove('d-none');
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
