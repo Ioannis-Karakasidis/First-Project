@@ -105,6 +105,16 @@ class World extends worldDrawer {
       this.character.x + 20,
       this.character.y + 60
     );
+    this.throwAndUpdateBottle(bottle)
+  }
+
+  /**
+   * Throws a bottle, updates the inventory, and checks if all bottles have been thrown.
+   * Reduces the bottle status bar by 20%.
+   * 
+   * @param {Object} bottle - The bottle object to be thrown.
+   */
+  throwAndUpdateBottle(bottle) {
     this.throwableobject.push(bottle);
     this.bottles.splice(0, 1);
     if (world.bottles.length === 0) {
