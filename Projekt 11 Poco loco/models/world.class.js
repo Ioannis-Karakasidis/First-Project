@@ -217,8 +217,24 @@ class World extends worldDrawer {
       this.handleChickenDeath(enemy)
     } else if (enemy.constructor.name === "Smallchicken") {
       this.handleSmallChickenDeath(enemy)
+    } else if (enemy.constructor.name === "Endboss") {
+      this.characterdead();
     }
+  }
 
+  /**
+   * Handles the character's death sequence.
+   * 
+   * - Triggers the character's `death()` method after a short delay.
+   * - Updates the status bar to reflect zero energy after the character dies.
+   */
+  handleCharacterDeath() {
+    setTimeout(() => {
+      this.character.death();
+    }, 40);
+    setTimeout(() => {
+      this.statusbar.setpercentage(this.character.energy = 0);
+    }, 200);
   }
 
   /**
