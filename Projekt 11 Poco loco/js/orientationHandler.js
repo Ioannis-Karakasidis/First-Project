@@ -27,6 +27,7 @@ async function checkemulator(currentWidth, currentHeight) {
     }
   } else {
     await nonmobilemode();
+    
   }
 }
 
@@ -34,7 +35,7 @@ async function checkemulator(currentWidth, currentHeight) {
  * Adjusts the layout for non-mobile mode.
  */
 async function nonmobilemode() {
-  document.getElementById('canvas').style.height = 'unset';
+  mobilestart = false;
   document.querySelector('body').style = '';
   document.querySelector('.box').style.height = 'calc(100vh - 41px)';
   document.querySelector(".box h1").classList.remove('d-none');
@@ -51,7 +52,7 @@ async function nonmobilemode() {
  */
 async function landscapemode() {
   if (document.querySelector('.Instructions') && document.getElementById('content')) {
-    document.querySelector('.Instructions').style.display = 'flex';
+    mobilestart = true;
     document.getElementById('content').style = 'height: 97%;width: 85vw;';
     document.querySelector('body').style = '';
     document.querySelector('.usefulllinks').style.justifyContent = 'center'
@@ -79,6 +80,7 @@ function adjustIntroLayoutForSecondPart() {
  * Adjusts the layout for portrait mode.
  */
 async function portraitmode() {
+  mobilestart = false;
   document.querySelector('.box h1').style.display = 'none'
   document.getElementById('content').style = 'height: 97%';
   document.querySelector('.Instructions').style.display = 'none';

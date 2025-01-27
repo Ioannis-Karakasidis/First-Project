@@ -31,7 +31,6 @@ class ThrowableObject extends MovableObject {
     this.width = 110;
     this.throw();
     this.animate()
-
   }
 
   /**
@@ -45,7 +44,7 @@ class ThrowableObject extends MovableObject {
 
   /**
    * Animates the object by playing its bottle rotation animation at a set interval.
- */
+   */
   animate() {
     setInterval(() => {
       this.playAnimation(this.bottlerotation)
@@ -59,7 +58,7 @@ class ThrowableObject extends MovableObject {
     this.speedY = 5;
     this.applyGravity();
     setInterval(() => {
-      this.x += 5;
+      this.x += 5
     }, 10);
   }
 }

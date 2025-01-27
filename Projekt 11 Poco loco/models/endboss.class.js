@@ -75,18 +75,6 @@ class Endboss extends MovableObject {
     this.isseen = false;
     this.hasMoved = false;
     this.animate();
-    this.monitorBounds();
-  }
-
-  /**
-   * Continuously checks if the object is out of bounds and triggers the game over event if necessary.
-   */
-  monitorBounds() {
-    setInterval(() => {
-      if (this.x < -400) {
-        gameover();
-      }
-    }, 0);
   }
 
   /**

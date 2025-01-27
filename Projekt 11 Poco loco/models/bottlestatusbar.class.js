@@ -10,10 +10,10 @@ class Bottlestatusbar extends DrawableObject {
   percentage = 0;
 
   /**
- * Initializes a new instance of the class.
- * Sets up properties such as position, dimensions, and initial percentage value.
- * Also loads necessary images.
- */
+   * Initializes a new instance of the class.
+   * Sets up properties such as position, dimensions, and initial percentage value.
+   * Also loads necessary images.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);

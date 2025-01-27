@@ -23,7 +23,7 @@ class Character extends MovableObject {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadingimages();
     this.stopCharacterIntervals();
-    this.initializeCharacterState();    
+    this.initializeCharacterState();
   }
 
   /**
@@ -91,7 +91,7 @@ class Character extends MovableObject {
     if (
       this.world &&
       this.world.keyboard.RIGHT &&
-      this.x < this.world.level.level_end_x
+      this.x < world.enemyboss.x
     ) {
       this.moveCharacterRight();
       this.snooring_sound.pause();

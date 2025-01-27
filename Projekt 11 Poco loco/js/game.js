@@ -4,9 +4,9 @@ let coins;
 let keyboard = new Keyboard();
 let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
-let throwableobject = new ThrowableObject();
 let mute = false;
 let intervalsIds = [];
+let mobilestart = false;
 
 /**
  * Initializes the game.
@@ -59,7 +59,6 @@ function stopGame() {
  */
 function stopSpecificGame(targetIntervalId) {
   const index = intervalsIds.indexOf(targetIntervalId); // Find the index of the target ID
-
   if (index !== -1) { // If the ID exists in the array
     clearInterval(intervalsIds[index]); // Clear the interval
     intervalsIds[index] = null; // Remove the interval from the array
@@ -138,6 +137,9 @@ function restartgame() {
  * Draws the game on the canvas.
  */
 function drawgame() {
+  if (mobilestart === true) {
+    document.querySelector('.Instructions').style.display = 'flex'
+  }
   document.getElementById('reload').classList.remove('d-none');
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");
@@ -280,6 +282,7 @@ document.addEventListener("DOMContentLoaded", initializeAudioState);
  * Returns to the main menu.
  */
 function returntomenu() {
+  document.querySelector('.Instructions').style.display = 'none'
   document.getElementById('start').style.display = 'flex';
   world.clearAllIntervals();
   document.querySelector(".gameovercontainer").classList.add("d-none");
