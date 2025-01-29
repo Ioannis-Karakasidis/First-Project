@@ -27,7 +27,7 @@ async function checkemulator(currentWidth, currentHeight) {
     }
   } else {
     await nonmobilemode();
-    
+
   }
 }
 
@@ -103,6 +103,7 @@ window.addEventListener("resize", checkorientation);
  */
 function gameover() {
   world.background_audio.pause();
+  gameover_audio.play();
   document.getElementById("outroimg").src = "img/9_intro_outro_screens/game_over/game_over.png";
   document.querySelector('.outro').style.zIndex = '99';
   document.querySelector(".outro").style.position = "absolute";

@@ -6,6 +6,8 @@ let lastWidth = window.innerWidth;
 let lastHeight = window.innerHeight;
 let mute = false;
 let intervalsIds = [];
+let win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
+let gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
 let mobilestart = false;
 
 /**
@@ -18,7 +20,6 @@ function initializeGame() {
   world = new World(canvas, keyboard);
   setStoppableInterval(checkgamestatus, 40);
 }
-
 
 /**
  * Throws salsa bottles in the game.
@@ -134,7 +135,7 @@ function restartgame() {
     world.clearAllIntervals();
     world = null;
   }
-  restartGameWithCooldown(restartButton); 
+  restartGameWithCooldown(restartButton);
 }
 
 /**
@@ -152,8 +153,6 @@ function restartGameWithCooldown(restartButton) {
   document.getElementById("canvas").classList.remove("d-none");
   document.getElementById("start").style.display = "none";
 }
-
-
 
 /**
  * Displays the instructions for mobile users when the `mobilestart` flag is true.
@@ -218,6 +217,7 @@ function closeControlOverlay() {
  * Displays the win screen.
  */
 function winscreen() {
+  win_audio.play();
   document.getElementById("outroimg").src = "img/9_intro_outro_screens/win/win_2.png";
   setTimeout(() => {
     world.clearAllIntervals();
@@ -308,7 +308,6 @@ function initializeAudioState() {
  */
 
 document.addEventListener("DOMContentLoaded", initializeAudioState);
-
 
 /**
  * Returns to the main menu.
