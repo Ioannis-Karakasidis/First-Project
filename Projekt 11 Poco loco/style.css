@@ -245,16 +245,36 @@ button img {
   background-color: unset;
 }
 
+.key {
+  display: inline-block;
+  font-size: 31px;
+  font-family: monospace;
+  color: white;
+  background: #1F2326;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  min-width: 40px;
+}
+
+.key:active {
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
 .Instructions {
   display: none;
   justify-content: space-around;
   width: 100%;
+  align-items: center;
 }
 
 .instructions {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  align-items: center;
 }
 
 .closing {
