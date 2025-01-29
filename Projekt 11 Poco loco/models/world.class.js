@@ -42,6 +42,7 @@ class World extends worldDrawer {
     this.initializeWorld();
     this.startGameLoop();
     this.isStopped = false;
+    this.lastThrowTime = 0; 
   }
 
   /**
@@ -74,17 +75,17 @@ class World extends worldDrawer {
     }, 0);
     setInterval(() => {
       this.checkForThrowables();
-    }, 170);
+    }, 100);
   }
 
   /**
    * Checks if the player is throwing objects.
    */
   checkForThrowables() {
-    if (this.keyboard.D) {
-      setTimeout(() => {
-        this.throwBottleIfAvailable(); 
-      }, 500);
+    const currentTime = Date.now();
+    if (this.keyboard.D && (currentTime - this.lastThrowTime >= 500)) {
+      this.throwBottleIfAvailable();
+      this.lastThrowTime = currentTime; 
     }
   }
 
