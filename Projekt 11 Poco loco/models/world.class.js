@@ -82,7 +82,9 @@ class World extends worldDrawer {
    */
   checkForThrowables() {
     if (this.keyboard.D) {
-      this.throwBottleIfAvailable();
+      setTimeout(() => {
+        this.throwBottleIfAvailable(); 
+      }, 500);
     }
   }
 
@@ -384,7 +386,7 @@ class World extends worldDrawer {
   handleBossDeath(enemy) {
     setInterval(() => {
       enemy.playAnimation(enemy.IMAGES_DEAD);
-    }, 60);
+    }, 150);
     setTimeout(() => {
       enemy.death();
     }, 500);

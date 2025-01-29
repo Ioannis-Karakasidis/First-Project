@@ -12,11 +12,13 @@ let mobilestart = false;
  * Initializes the game.
  */
 function initializeGame() {
+  if (world) return;
   canvas = document.getElementById("canvas");
   initleve1();
   world = new World(canvas, keyboard);
   setStoppableInterval(checkgamestatus, 40);
 }
+
 
 /**
  * Throws salsa bottles in the game.
@@ -124,15 +126,34 @@ function exitFullscreen() {
  * Restarts the game.
  */
 function restartgame() {
-  updatemobilevariable()
-  world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let restartButton = document.getElementById("restartButton");
+  if (restartButton) restartButton.disabled = true;
+  stopGame();
+  updatemobilevariable();
+  if (world) {
+    world.clearAllIntervals();
+    world = null;
+  }
+  restartGameWithCooldown(restartButton); 
+}
+
+/**
+ * Restarts the game and prevents multiple rapid restarts.  
+ * Disables the restart button temporarily to avoid spam clicks.
+ */
+function restartGameWithCooldown(restartButton) {
   initializeGame();
+  setTimeout(() => {
+    if (restartButton) restartButton.disabled = false;
+  }, 1000);
   document.querySelector(".gameovercontainer").classList.add("d-none");
   document.querySelector(".intro").classList.add("d-none");
   document.querySelector(".outro").classList.add("d-none");
   document.getElementById("canvas").classList.remove("d-none");
   document.getElementById("start").style.display = "none";
 }
+
+
 
 /**
  * Displays the instructions for mobile users when the `mobilestart` flag is true.

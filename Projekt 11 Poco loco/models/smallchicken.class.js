@@ -1,6 +1,7 @@
 class Smallchicken extends MovableObject {
-  height = 100;
-  y = 350;
+  height = 70;
+  width = 60
+  y = 380;
   offset = {
     top: 0,
     left: 0,

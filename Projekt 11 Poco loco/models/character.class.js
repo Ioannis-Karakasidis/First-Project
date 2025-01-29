@@ -42,7 +42,7 @@ class Character extends MovableObject {
    * Stops any ongoing intervals that control movement, walking, jumping, and snooring.
    */
   stopCharacterIntervals() {
-    setStoppableInterval(() => this.animateCharacter(), 1000 / 75);
+    setStoppableInterval(() => this.animateCharacter(), 1000 / 60);
     setStoppableInterval(() => this.playCharacterWalkingAnimation(), 50);
     setStoppableInterval(() => this.playCharacterJumpingAnimation(), 250);
     let indexOfSleepingAnimation = setStoppableInterval(
