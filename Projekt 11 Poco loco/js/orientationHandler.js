@@ -19,7 +19,7 @@ function checkorientation() {
  * @param {number} currentHeight - The current window height.
  */
 async function checkemulator(currentWidth, currentHeight) {
-  if (mobile()) {
+  if (isMobileDevice()) {
     if (currentWidth > currentHeight) {
       await landscapemode();
     } else {
@@ -97,6 +97,9 @@ async function portraitmode() {
  * necessary adjustments based on the new window size or orientation.
  */
 window.addEventListener("resize", checkorientation);
+window.addEventListener("orientationchange", () => {
+  setTimeout(checkorientation, 200); // Small delay for better accuracy
+});
 
 /**
  * Displays the game over screen.

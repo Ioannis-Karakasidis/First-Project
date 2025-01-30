@@ -9,6 +9,7 @@ let intervalsIds = [];
 let win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
 let gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
 let mobilestart = false;
+let devicetoolbar = false
 
 /**
  * Initializes the game.
@@ -341,20 +342,12 @@ function finalizeMainMenuReturn() {
 }
 
 /**
- * Toggles the device rotation.
- */
-function togglerotation() {
-  deviceToggled = true;
-}
-
-/**
  * Detects if the current device is in mobile emulator mode.
  * Accounts for both portrait and landscape orientations.
  * @returns {boolean} True if in mobile emulator mode, false otherwise.
  */
-function mobile() {
-  isMobileUserAgent = window.navigator.maxTouchPoints === 1
-  return isMobileUserAgent;
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
 
