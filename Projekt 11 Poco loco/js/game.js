@@ -171,7 +171,8 @@ function updatemobilevariable() {
  * Draws the game on the canvas.
  */
 function drawgame() {
-  updatemobilevariable()
+  updatemobilevariable()  
+  document.querySelector(".box").style.height = "70%";
   document.getElementById('reload').classList.remove('d-none');
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");

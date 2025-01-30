@@ -36,6 +36,7 @@ async function checkemulator(currentWidth, currentHeight) {
  */
 async function nonmobilemode() {
   mobilestart = false;
+  document.querySelector('.mobilealign').style.justifyContent = 'center'
   document.querySelector('body').style = '';
   document.querySelector('.box').style.height = 'calc(100vh - 41px)';
   document.querySelector(".box h1").classList.remove('d-none');
@@ -53,8 +54,11 @@ async function nonmobilemode() {
 async function landscapemode() {
   if (document.querySelector('.Instructions') && document.getElementById('content')) {
     mobilestart = true;
-    document.getElementById('content').style = 'height: 97%;width: 85vw;';
+    document.getElementById('content').style = 'height: 100%;width: 85vw;';
     document.querySelector('body').style = '';
+    document.querySelector('body').style.justifyContent = 'flex-start';
+    document.querySelector('.mobilealign').style.justifyContent = 'unset';
+    document.querySelector('.mobilealign').style.height = 'inherit';
     document.querySelector('.usefulllinks').style.justifyContent = 'center'
     document.getElementById('help').classList.add('d-none')
     document.querySelector('body').style.height = '100vh';
@@ -69,7 +73,7 @@ function adjustIntroLayoutForSecondPart() {
   const canvas = document.querySelector('canvas');
   canvas.style.width = 'height: 59vh;';
   document.querySelector('.boxalign').style.height = '94%';
-  document.querySelector(".box").style.height = "77%";
+  document.querySelector(".box").style.height = "90%";
   document.querySelector(".box h1").classList.add("d-none");
   document.getElementById("impressum").classList.add("d-none");
   document.getElementById("introimg").src = "img/9_intro_outro_screens/start/startscreen_2.png";
