@@ -9,7 +9,6 @@ let intervalsIds = [];
 let win_audio = new Audio("audio/mixkit-retro-game-notification-212.wav");
 let gameover_audio = new Audio("audio/mixkit-retro-arcade-lose-2027.wav");
 let mobilestart = false;
-let devicetoolbar = false
 
 /**
  * Initializes the game.
@@ -171,8 +170,10 @@ function updatemobilevariable() {
  * Draws the game on the canvas.
  */
 function drawgame() {
-  updatemobilevariable()  
-  document.querySelector(".box").style.height = "70%";
+  updatemobilevariable()
+  if (isMobileDevice()) {
+    document.querySelector(".box").style.height = "70%";
+  }
   document.getElementById('reload').classList.remove('d-none');
   document.querySelector(".intro").classList.add("d-none");
   document.getElementById("start").classList.add("d-none");

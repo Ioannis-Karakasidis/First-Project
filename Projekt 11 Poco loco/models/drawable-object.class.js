@@ -1,11 +1,11 @@
 class DrawableObject {
-  img;
-  imageCache = {};
-  currentimage = 0;
   x = 120;
   y = 200;
   height = 150;
   width = 100;
+  img;
+  imageCache = {};
+  currentimage = 0;
   energy = 100;
   percentage = 100;
 
@@ -44,6 +44,10 @@ class DrawableObject {
     try {
       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     } catch (error) {
+      console.log('could not load,',error.src);
+      console.log(this.img);
+      
+      
     }
   }
 

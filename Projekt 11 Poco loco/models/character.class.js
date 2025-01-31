@@ -91,7 +91,7 @@ class Character extends MovableObject {
     if (
       this.world &&
       this.world.keyboard.RIGHT &&
-      this.x < world.enemyboss.x
+      this.x < world.enemyboss.x - 70
     ) {
       this.moveCharacterRight();
       this.snooring_sound.pause();
