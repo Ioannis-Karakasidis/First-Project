@@ -19,13 +19,13 @@ class Coins extends DrawableObject {
     this.loadImages(this.coinanimation);
     this.x = 500 + Math.random() * 700;
     this.y = 100 + Math.random() * 250;
-    this.animateCoin();
+    this.animateCoin()
   }
 
   /**
    * Starts the coin's animation, alternating between coin images at a set interval.
    */
   animateCoin() {
-      this.playAnimation(this.coinanimation);
+    this.playAnimation(this.coinanimation);
   }
 }
