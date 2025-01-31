@@ -1,5 +1,8 @@
 class Coins extends DrawableObject {
-  coinanimation = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+  coinanimation = [
+    'img/8_coin/coin_1.png',
+    'img/8_coin/coin_2.png',
+  ];
   offset = {
     top: 30,
     left: 30,
@@ -23,8 +26,6 @@ class Coins extends DrawableObject {
    * Starts the coin's animation, alternating between coin images at a set interval.
    */
   animateCoin() {
-    setInterval(() => {
       this.playAnimation(this.coinanimation);
-    }, 400);
   }
 }

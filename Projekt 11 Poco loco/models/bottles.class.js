@@ -20,8 +20,6 @@ class Bottle extends DrawableObject {
     this.loadImages(this.bottleanimation);
     this.x = 500 + Math.random() * 700;
     this.y = 300;
-    setInterval(() => {
-      this.playAnimation(this.bottleanimation);
-    }, 400);
+    this.playAnimation(this.bottleanimation);
   }
 }

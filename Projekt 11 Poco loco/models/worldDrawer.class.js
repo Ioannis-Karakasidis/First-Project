@@ -81,18 +81,18 @@ class worldDrawer {
   /**
    * Draws the game.
    */
-  draw() {
+  drawgame() {
     if (this.showIntro) {
       this.drawIntro(this.introImage);
     } else {
-      this.drawgame();
+      this.drawcanva();
     }
   }
 
   /**
    * Draws the game elements.
    */
-  drawgame() {
+  drawcanva() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     if (this.level.backgroundObjects) {
@@ -101,7 +101,7 @@ class worldDrawer {
     this.applyCameraTranslation()
     let self = this;
     this.animationFrameId = requestAnimationFrame(function () {
-      self.draw();
+      self.drawcanva();
     });
   }
 

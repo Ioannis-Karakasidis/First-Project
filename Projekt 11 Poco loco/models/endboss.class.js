@@ -73,6 +73,7 @@ class Endboss extends MovableObject {
     this.isseen = false;
     this.hasMoved = false;
     this.animate();
+    this.animated();
     this.checkOutOfBounds()
   }
 
